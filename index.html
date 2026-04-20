@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anmol Tanwar — Graduate Structural Engineer GIStructE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0f0f0f;
+    --paper: #f4f1ec;
+    --warm: #e8e3d9;
+    --accent: #b5813a;
+    --accent-light: #d4a55a;
+    --mid: #7a7670;
+    --border: #d6d0c6;
+    --dark: #1a1814;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 12.5px;
+    line-height: 1.7;
+    cursor: none;
+    overflow-x: hidden;
+  }
+
+  /* Cursor */
+  #cursor {
+    position: fixed; width: 6px; height: 6px;
+    background: var(--accent); border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background 0.2s;
+  }
+  #cursor.big { width: 36px; height: 36px; background: transparent; border: 1px solid var(--accent); }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 52px;
+    background: rgba(244,241,236,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  nav.scrolled { border-color: var(--border); }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; font-weight: 300; letter-spacing: 0.14em;
+    text-transform: uppercase; text-decoration: none; color: var(--ink);
+  }
+  .nav-logo span { color: var(--accent); font-style: italic; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--mid);
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-badge {
+    font-size: 9px; letter-spacing: 0.14em; color: var(--accent);
+    border: 1px solid var(--accent); padding: 4px 10px; text-transform: uppercase;
+  }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh; display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .hero-left {
+    padding: 140px 52px 72px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    position: relative;
+    border-right: 1px solid var(--border);
+  }
+  .hero-left::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(15,15,15,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15,15,15,0.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 24px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--accent); }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 7vw, 96px);
+    font-weight: 300; line-height: 0.88;
+    letter-spacing: -0.02em; margin-bottom: 36px;
+  }
+  .hero-name em { font-style: italic; color: var(--accent); display: block; }
+  .hero-desc {
+    font-size: 11.5px; color: #555; line-height: 2;
+    max-width: 380px; margin-bottom: 44px;
+    padding-left: 16px; border-left: 2px solid var(--accent);
+  }
+  .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 12px 28px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.25s; border: none; cursor: none;
+  }
+  .btn-solid { background: var(--ink); color: var(--paper); }
+  .btn-solid:hover { background: var(--accent); }
+  .btn-outline { border: 1px solid var(--ink); color: var(--ink); background: transparent; }
+  .btn-outline:hover { background: var(--ink); color: var(--paper); }
+
+  .hero-right {
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 140px 52px 72px;
+    background: var(--dark);
+    position: relative; overflow: hidden;
+  }
+  .hero-right::before {
+    content: 'STRUCTURAL\AENGINEERING';
+    position: absolute; top: 60px; right: -20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(80px, 10vw, 140px);
+    font-weight: 300; color: rgba(255,255,255,0.04);
+    line-height: 0.9; white-space: pre; text-align: right;
+    letter-spacing: -0.04em;
+    pointer-events: none;
+  }
+  .credentials-list {
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .cred-item {
+    display: flex; align-items: flex-start; gap: 20px;
+    padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .cred-item:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
+  .cred-num { font-size: 9px; color: var(--accent); letter-spacing: 0.14em; min-width: 24px; }
+  .cred-text { }
+  .cred-title { font-size: 11px; color: rgba(255,255,255,0.85); letter-spacing: 0.06em; }
+  .cred-sub { font-size: 10px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+  .hero-award {
+    margin-top: 40px;
+    padding: 20px 24px;
+    border: 1px solid rgba(181,129,58,0.35);
+    background: rgba(181,129,58,0.07);
+  }
+  .award-label { font-size: 9px; letter-spacing: 0.22em; color: var(--accent); text-transform: uppercase; margin-bottom: 6px; }
+  .award-text { font-size: 11px; color: rgba(255,255,255,0.7); line-height: 1.7; }
+
+  /* STATS */
+  .stats-bar {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    border-bottom: 1px solid var(--border);
+  }
+  .stat {
+    padding: 32px 40px; border-right: 1px solid var(--border);
+    transition: background 0.25s;
+  }
+  .stat:last-child { border-right: none; }
+  .stat:hover { background: var(--warm); }
+  .stat-n {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px; font-weight: 300; line-height: 1; color: var(--ink);
+  }
+  .stat-l { font-size: 9.5px; letter-spacing: 0.16em; color: var(--mid); text-transform: uppercase; margin-top: 4px; }
+
+  /* SECTION WRAPPER */
+  section { padding: 88px 52px; }
+  .sec-header {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 56px;
+  }
+  .sec-n { font-size: 9px; letter-spacing: 0.22em; color: var(--accent); }
+  .sec-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px; font-weight: 300; letter-spacing: -0.01em;
+  }
+  .sec-rule { flex: 1; height: 1px; background: var(--border); }
+
+  /* PROJECTS */
+  #projects { border-bottom: 1px solid var(--border); padding-bottom: 0; }
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--border);
+  }
+  .proj {
+    background: var(--paper); padding: 36px 32px 44px;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+  }
+  .proj:hover { background: var(--dark); }
+  .proj-sector {
+    display: inline-block;
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 14px;
+  }
+  .proj-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 400; line-height: 1.2;
+    margin-bottom: 12px; transition: color 0.3s;
+  }
+  .proj:hover .proj-name { color: #fff; }
+  .proj-meta {
+    font-size: 10px; color: var(--mid);
+    margin-bottom: 12px; letter-spacing: 0.08em;
+    transition: color 0.3s;
+  }
+  .proj:hover .proj-meta { color: rgba(255,255,255,0.4); }
+  .proj-desc {
+    font-size: 11px; color: #555; line-height: 1.85;
+    transition: color 0.3s;
+  }
+  .proj:hover .proj-desc { color: rgba(255,255,255,0.62); }
+  .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+  .ptag {
+    font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+    border: 1px solid var(--border); padding: 3px 9px; color: var(--mid);
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .proj:hover .ptag { border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.4); }
+  .proj-arrow {
+    position: absolute; bottom: 24px; right: 24px;
+    font-size: 16px; color: var(--accent); opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .proj:hover .proj-arrow { opacity: 1; transform: none; }
+  .proj-value {
+    display: inline-block; margin-bottom: 10px;
+    font-size: 9px; color: var(--accent); letter-spacing: 0.14em;
+    font-weight: 400;
+  }
+
+  /* ABOUT */
+  #about {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; border-bottom: 1px solid var(--border);
+  }
+  .about-text p { font-size: 12px; color: #444; line-height: 1.95; margin-bottom: 18px; }
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+  .skill-group { }
+  .sg-title {
+    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 14px;
+    padding-bottom: 8px; border-bottom: 1px solid var(--border);
+  }
+  .sg-list { list-style: none; }
+  .sg-list li {
+    font-size: 11px; color: var(--mid); padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .sg-list li::before { content: '—'; color: var(--accent); font-size: 10px; }
+
+  /* EXPERIENCE */
+  #experience { border-bottom: 1px solid var(--border); }
+  .timeline { display: flex; flex-direction: column; }
+  .tl-item {
+    display: grid; grid-template-columns: 220px 1fr;
+    gap: 48px; padding: 40px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .tl-item:last-child { border-bottom: none; }
+  .tl-left { }
+  .tl-period { font-size: 10px; color: var(--accent); letter-spacing: 0.12em; margin-bottom: 6px; }
+  .tl-org {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: var(--ink);
+  }
+  .tl-loc { font-size: 10px; color: var(--mid); margin-top: 3px; }
+  .tl-right { }
+  .tl-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 400; margin-bottom: 10px;
+  }
+  .tl-badge {
+    display: inline-block; font-size: 9px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--accent);
+    border: 1px solid rgba(181,129,58,0.35);
+    padding: 3px 9px; margin-bottom: 14px;
+  }
+  .tl-desc { font-size: 11.5px; color: #4a4a4a; line-height: 1.9; }
+  .tl-projects { margin-top: 16px; }
+  .tl-proj-label { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mid); margin-bottom: 8px; }
+  .tl-proj-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tl-proj-tag {
+    font-size: 9.5px; background: var(--warm);
+    padding: 4px 12px; color: var(--ink); letter-spacing: 0.06em;
+  }
+
+  /* EDUCATION */
+  #education { border-bottom: 1px solid var(--border); }
+  .edu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+  .edu-card {
+    background: var(--paper); padding: 36px 30px;
+    transition: background 0.25s;
+  }
+  .edu-card:hover { background: var(--warm); }
+  .edu-degree {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-weight: 400; line-height: 1.25; margin-bottom: 10px;
+  }
+  .edu-uni { font-size: 11px; color: var(--ink); margin-bottom: 4px; }
+  .edu-year { font-size: 10px; color: var(--accent); letter-spacing: 0.12em; margin-bottom: 12px; }
+  .edu-gpa { font-size: 10px; color: var(--mid); margin-bottom: 12px; }
+  .edu-highlight {
+    font-size: 10.5px; color: #555; line-height: 1.8;
+    border-top: 1px solid var(--border); padding-top: 12px; margin-top: 12px;
+  }
+
+  /* LEADERSHIP */
+  #leadership { border-bottom: 1px solid var(--border); }
+  .lead-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
+  .lead-card { background: var(--paper); padding: 36px 32px; }
+  .lead-org { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .lead-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 400; margin-bottom: 6px;
+  }
+  .lead-period { font-size: 10px; color: var(--mid); margin-bottom: 14px; }
+  .lead-desc { font-size: 11px; color: #555; line-height: 1.85; }
+
+  /* AWARDS */
+  .awards-strip { display:grid; grid-template-columns:repeat(3,1fr); border-bottom:1px solid var(--border); }
+  .award-card {
+    padding: 44px 52px; border-right: 1px solid var(--border);
+    background: var(--dark);
+  }
+  .award-card:last-child { border-right: none; background: var(--paper); }
+  .award-icon { font-size: 28px; margin-bottom: 18px; }
+  .award-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 300; color: #fff; margin-bottom: 10px;
+  }
+  .award-card:last-child .award-title { color: var(--ink); }
+  .award-body { font-size: 11px; color: rgba(255,255,255,0.55); line-height: 1.85; }
+  .award-card:last-child .award-body { color: #555; }
+  .award-year { font-size: 9px; color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 14px; }
+
+  /* CONTACT */
+  #contact { padding: 88px 52px; }
+  .contact-head {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 54px); font-weight: 300;
+    line-height: 1.05; letter-spacing: -0.01em;
+  }
+  .contact-head em { font-style: italic; color: var(--accent); }
+  .contact-sub { font-size: 11.5px; color: #555; margin-top: 20px; line-height: 1.9; max-width: 380px; }
+  .contact-links { display: flex; flex-direction: column; }
+  .contact-link {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 0; border-bottom: 1px solid var(--border);
+    text-decoration: none; color: var(--ink);
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .contact-link:first-child { border-top: 1px solid var(--border); }
+  .contact-link:hover { color: var(--accent); }
+  .contact-link .arrow { transition: transform 0.2s; }
+  .contact-link:hover .arrow { transform: translate(4px, -4px); }
+
+  /* FOOTER */
+  footer {
+    padding: 24px 52px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--border);
+    font-size: 9.5px; color: var(--mid); letter-spacing: 0.14em; text-transform: uppercase;
+  }
+
+  /* Animations */
+  .fade { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .fade.in { opacity: 1; transform: none; }
+
+  @media (max-width: 960px) {
+    nav { padding: 18px 24px; }
+    .nav-links, .nav-badge { display: none; }
+    #hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 120px 24px 48px; }
+    .hero-right { display: none; }
+    section { padding: 64px 24px; }
+    .stats-bar { grid-template-columns: 1fr 1fr; }
+    .stat { padding: 24px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    #about, #contact { padding: 88px 52px; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .tl-item { grid-template-columns: 1fr; gap: 8px; }
+    .edu-grid { grid-template-columns: 1fr; }
+    .lead-grid { grid-template-columns: 1fr; }
+    .awards-strip { display:grid; grid-template-columns:repeat(3,1fr); border-bottom:1px solid var(--border); } .awards-strip .award-card { border-right:none; }
+    .award-card { border-right: none; border-bottom: 1px solid var(--border); }
+    footer { flex-direction: column; gap: 6px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#">Anmol <span>Tanwar</span></a>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="page-istructe.html">IStructE</a></li>
+  </ul>
+  <span class="nav-badge">GIStructE · MIStructE in Progress</span>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Graduate Structural Engineer</p>
+    <h1 class="hero-name">Anmol<em>Tanwar</em></h1>
+    <p class="hero-desc">
+      GIStructE with 2+ years of UK experience delivering technically demanding structural projects across NHS healthcare, commercial, and residential sectors in Greater Manchester. Available for structural engineer role.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-solid">View Projects</a>
+      <a href="mailto:anmoltanwar12@outlook.com" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div style="display:flex;align-items:center;gap:18px;margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="width:72px;height:72px;border-radius:50%;border:2px solid rgba(181,129,58,0.5);overflow:hidden;flex-shrink:0;background:#2a2620;display:flex;align-items:center;justify-content:center;">
+        <img src="your-photo.jpg" alt="Anmol Tanwar"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'font-family:Cormorant Garamond,serif;font-size:26px;font-weight:300;color:rgba(181,129,58,0.8);\'>AT</span>'"
+          style="width:100%;height:100%;object-fit:cover;object-position:top;">
+      </div>
+      <div>
+        <p style="font-family:Cormorant Garamond,serif;font-size:17px;font-weight:300;color:rgba(255,255,255,0.88);letter-spacing:0.04em;">Anmol Tanwar</p>
+        <p style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(181,129,58,0.8);margin-top:4px;">GIStructE</p>
+      </div>
+    </div>
+    <div class="credentials-list">
+      <div class="cred-item">
+        <span class="cred-num">01</span>
+        <div class="cred-text">
+          <p class="cred-title">Tekla Structural Designer · STAAD Pro · ETABS · Midas Gen</p>
+          <p class="cred-sub">FEM Software Expertise</p>
+        </div>
+      </div>
+      <div class="cred-item">
+        <span class="cred-num">02</span>
+        <div class="cred-text">
+          <p class="cred-title">BS-EN Eurocodes · British Standards · Indian Standards</p>
+          <p class="cred-sub">Design Code Proficiency</p>
+        </div>
+      </div>
+      <div class="cred-item">
+        <span class="cred-num">03</span>
+        <div class="cred-text">
+          <p class="cred-title">RIBA Stage 1–5 · NHS Live Environments · Temporary Works</p>
+          <p class="cred-sub">Project Delivery</p>
+        </div>
+      </div>
+      <div class="cred-item">
+        <span class="cred-num">04</span>
+        <div class="cred-text">
+          <p class="cred-title">Python · MATLAB · AutoCAD · BIM Workflows</p>
+          <p class="cred-sub">Computational & Digital Tools</p>
+        </div>
+      </div>
+      <div class="cred-item">
+        <span class="cred-num">05</span>
+        <div class="cred-text">
+          <p class="cred-title">IStructE Chair, NW Young Members Group · CROSS UK Volunteer</p>
+          <p class="cred-sub">Professional Leadership</p>
+        </div>
+      </div>
+    </div><!-- /credentials-list -->
+    <div class="hero-award">
+      <p class="award-label">🏆 Recognition</p>
+      <p class="award-text">Invited to IStructE Hot Pot Supper &amp; received prize from Mohamed Al-Dah, President of the Institution of Structural Engineers, following a technical presentation at the Young Members Presentation Event — November 2024.</p>
+    </div>
+    <div class="hero-award" style="margin-top:12px;">
+      <p class="award-label">⭐ Recent Achievement</p>
+      <p class="award-text">IStructE Chartership Examination — Passed — April 2026</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat fade"><div class="stat-n">2+</div><div class="stat-l">Years UK Experience</div></div>
+  <div class="stat fade" style="transition-delay:.08s"><div class="stat-n">£15M+</div><div class="stat-l">Project Value Delivered</div></div>
+  <div class="stat fade" style="transition-delay:.16s"><div class="stat-n">10+</div><div class="stat-l">Major Projects</div></div>
+  <div class="stat fade" style="transition-delay:.24s"><div class="stat-n">5</div><div class="stat-l">FEM Tools</div></div>
+  <div class="stat fade" style="transition-delay:.32s"><div class="stat-n">NHS</div><div class="stat-l">Healthcare Specialist</div></div>
+</div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sec-header">
+    <span class="sec-n">01</span>
+    <h2 class="sec-title">Selected Projects</h2>
+    <div class="sec-rule"></div>
+  </div>
+    <div class="projects-grid">
+
+    <div class="proj fade" onclick="location.href='project-eco-resort.html'" style="cursor:pointer;">
+      <div style="width:100%;aspect-ratio:1/1;overflow:hidden;background:var(--warm);margin:-36px -32px 22px;display:flex;align-items:center;justify-content:center;">
+        <img src="Eco-resort-main.jpg" alt="Eco Resort"
+          onerror="this.style.display='none'"
+          style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+      <span class="proj-sector">Seismic · India</span>
+      <h3 class="proj-name">Eco Resort — Seismic Zone V Structure</h3>
+      <p class="proj-meta">Rishikesh, India · 2022 · Stage 5</p>
+      <p class="proj-desc">10,000 m² hotel in the Himalayas on sloped terrain in Seismic Zone V. Designed 8m counterfort retaining wall, RC frame with special shear walls, full STAAD.Pro modelling validated by hand.</p>
+      <div class="proj-tags"><span class="ptag">Seismic Design</span><span class="ptag">STAAD Pro</span><span class="ptag">Retaining Wall</span><span class="ptag">IS Codes</span></div>
+      <span class="proj-arrow">↗</span>
+    </div>
+
+    <div class="proj fade" onclick="location.href='project-wythenshawe.html'" style="cursor:pointer;transition-delay:0.08s">
+      <div style="width:100%;aspect-ratio:1/1;overflow:hidden;background:var(--warm);margin:-36px -32px 22px;display:flex;align-items:center;justify-content:center;">
+        <img src="Wythenshawe-hospital-main.jpg" alt="Wythenshawe Hospital"
+          onerror="this.style.display='none'"
+          style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+      <span class="proj-sector">Healthcare · NHS</span>
+      <span class="proj-value">≈ £15M GBP</span>
+      <h3 class="proj-name">Wythenshawe Hospital — Maternity Refurbishment</h3>
+      <p class="proj-meta">Manchester, UK · 2023–Ongoing · Stage 1–5</p>
+      <p class="proj-desc">RAAC roof replacement across four phases, temporary modular buildings on raft foundations, steel-framed corridors, chimney demolition, and civil drainage.</p>
+      <div class="proj-tags"><span class="ptag">RAAC</span><span class="ptag">Steel Frame</span><span class="ptag">Timber Roof</span><span class="ptag">Eurocode</span></div>
+      <span class="proj-arrow">↗</span>
+    </div>
+
+    <div class="proj fade" onclick="location.href='project-mri-gantry.html'" style="cursor:pointer;transition-delay:0.16s">
+      <div style="width:100%;aspect-ratio:1/1;overflow:hidden;background:var(--warm);margin:-36px -32px 22px;display:flex;align-items:center;justify-content:center;">
+        <img src="MRI-Ed-North-Main.jpg" alt="MRI Eduction North"
+          onerror="this.style.display='none'"
+          style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+      <span class="proj-sector">Healthcare · NHS</span>
+      <h3 class="proj-name">MRI Eduction North — Steel Gantry & Staircase</h3>
+      <p class="proj-meta">Manchester Royal Infirmary · 2025–Ongoing · Stage 4</p>
+      <p class="proj-desc">New external staircase and steel grillage platform. Minipile foundations coordinated around 750mm drain at 3.6m depth. Victorian masonry assessment.</p>
+      <div class="proj-tags"><span class="ptag">Minipiles</span><span class="ptag">Steel Gantry</span><span class="ptag">Masonry</span></div>
+      <span class="proj-arrow">↗</span>
+    </div>
+
+    <div class="proj fade" onclick="location.href='project-raac.html'" style="cursor:pointer;">
+      <div style="width:100%;aspect-ratio:1/1;overflow:hidden;background:var(--warm);margin:-36px -32px 22px;display:flex;align-items:center;justify-content:center;">
+        <img src="RAAC-survey-Main.jpg" alt="RAAC Projects"
+          onerror="this.style.display='none'"
+          style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+      <span class="proj-sector">Healthcare · RAAC</span>
+      <h3 class="proj-name">RAAC Survey & Remediation — North West NHS</h3>
+      <p class="proj-meta">Multiple NHS Hospitals · 2023–Ongoing</p>
+      <p class="proj-desc">All phases of RAAC identification, intrusive investigation, emergency propping, steel/timber remedials, and roof replacement. Currently leading surveys as main engineer.</p>
+      <div class="proj-tags"><span class="ptag">RAAC</span><span class="ptag">Structural Surveys</span><span class="ptag">Remedial Design</span></div>
+      <span class="proj-arrow">↗</span>
+    </div>
+
+    <div class="proj fade" onclick="location.href='project-delhi.html'" style="cursor:pointer;transition-delay:0.08s">
+      <div style="width:100%;aspect-ratio:1/1;overflow:hidden;background:var(--warm);margin:-36px -32px 22px;display:flex;align-items:center;justify-content:center;">
+        <img src="23-Storey-Residential-Main.jpg" alt="23-Storey Building"
+          onerror="this.style.display='none'"
+          style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+      <span class="proj-sector">Seismic · India</span>
+      <h3 class="proj-name">23-Storey Residential & IT Building — Seismic Assessment</h3>
+      <p class="proj-meta">New Delhi / Noida, India · 2022</p>
+      <p class="proj-desc">Modelled two high-rise buildings in ETABS and STAAD Pro. Response spectrum analysis identified shear centre offset. Proposed remedial slab additions and designed raft foundations using FE analysis.</p>
+      <div class="proj-tags"><span class="ptag">ETABS</span><span class="ptag">Response Spectrum</span><span class="ptag">Raft FE Analysis</span></div>
+      <span class="proj-arrow">↗</span>
+    </div>
+
+    <div class="proj fade" onclick="location.href='project-bebby-house.html'" style="cursor:pointer;transition-delay:0.16s">
+      <div style="width:100%;aspect-ratio:1/1;overflow:hidden;background:var(--warm);margin:-36px -32px 22px;display:flex;align-items:center;justify-content:center;">
+        <img src="Beeby-House-Main.jpg" alt="Bebby House"
+          onerror="this.style.display='none'"
+          style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+      <span class="proj-sector">Academic · Award-Winning</span>
+      <h3 class="proj-name">Bebby House — Precast Elliptical Office Building</h3>
+      <p class="proj-meta">University of Manchester · 2022 · Team Leader</p>
+      <p class="proj-desc">Led 6-member team designing a 6-storey elliptical precast office building. Midas Gen analysis. Won Best Structural Design award at MSc graduation. Score: 84.2/100.</p>
+      <div class="proj-tags"><span class="ptag">Midas Gen</span><span class="ptag">Precast</span><span class="ptag">Raft Foundation</span><span class="ptag">Team Lead</span></div>
+      <span class="proj-arrow">↗</span>
+    </div>
+
+    <div class="proj fade" onclick="location.href='project-withington.html'" style="cursor:pointer;">
+      <div style="width:100%;aspect-ratio:1/1;overflow:hidden;background:var(--warm);margin:-36px -32px 22px;display:flex;align-items:center;justify-content:center;">
+        <img src="Withington-CDC-Main.jpg" alt="Withington CDC"
+          onerror="this.style.display='none'"
+          style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+      <span class="proj-sector">Commercial · New Build</span>
+      <h3 class="proj-name">Withington CDC — Composite Steel Frame</h3>
+      <p class="proj-meta">Manchester · 2024–Ongoing · Stage 4–5</p>
+      <p class="proj-desc">Two-storey composite steel frame on pile foundations. Python script automating Tekla load post-processing — reducing engineer time from hours to 15 minutes.</p>
+      <div class="proj-tags"><span class="ptag">Python Automation</span><span class="ptag">Composite</span><span class="ptag">Pile Foundations</span></div>
+      <span class="proj-arrow">↗</span>
+    </div>
+
+    <div class="proj fade" onclick="location.href='project-chatwood.html'" style="cursor:pointer;transition-delay:0.08s">
+      <div style="width:100%;aspect-ratio:1/1;overflow:hidden;background:var(--warm);margin:-36px -32px 22px;display:flex;align-items:center;justify-content:center;">
+        <img src="21-Chatwoodroad-Main.jpg" alt="21 Chatwood Road"
+          onerror="this.style.display='none'"
+          style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+      <span class="proj-sector">Residential · Remediation</span>
+      <h3 class="proj-name">21 Chatwood Road — Subsidence & Underpinning</h3>
+      <p class="proj-meta">Manchester · 2025 · Completed</p>
+      <p class="proj-desc">Victorian brick masonry terraced house with tree-root subsidence. Piled and mass concrete underpinning options developed. Mass concrete taken to full detailed design with NBS spec.</p>
+      <div class="proj-tags"><span class="ptag">Underpinning</span><span class="ptag">Masonry</span><span class="ptag">NBS Spec</span></div>
+      <span class="proj-arrow">↗</span>
+    </div>
+
+    <div class="proj fade" onclick="location.href='project-mri-plantroom.html'" style="cursor:pointer;transition-delay:0.16s">
+      <div style="width:100%;aspect-ratio:1/1;overflow:hidden;background:var(--warm);margin:-36px -32px 22px;display:flex;align-items:center;justify-content:center;">
+        <img src="MRI-Plantroom-main.jpg" alt="MRI Plantroom"
+          onerror="this.style.display='none'"
+          style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+      <span class="proj-sector">Healthcare · NHS</span>
+      <h3 class="proj-name">MRI Plantroom 2, 3 & 5 Refurbishment</h3>
+      <p class="proj-meta">Manchester Royal Infirmary · 2025–Ongoing · Stage 4</p>
+      <p class="proj-desc">RAAC in steel-framed plantrooms. Structural frame assessment, natural frequency checks for MRI compatibility, RAAC replacement strategy and chiller upgrade design.</p>
+      <div class="proj-tags"><span class="ptag">Tekla TSD</span><span class="ptag">Steel Design</span><span class="ptag">RAAC</span></div>
+      <span class="proj-arrow">↗</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div>
+    <div class="sec-header">
+      <span class="sec-n">02</span>
+      <h2 class="sec-title">About</h2>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="about-text fade">
+      <div style="margin-bottom:28px;overflow:hidden;">
+        <img src="anmol-professional.jpg" alt="Anmol Tanwar"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+          style="width:50%;height:auto;display:block;margin:0;">
+        <div style="display:none;width:50%;height:100px;background:var(--warm);align-items:center;justify-content:center;margin:0;">
+          <span style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);">Add photo → anmol-professional.jpg</span>
+        </div>
+      </div>
+      <p>I am a Graduate Structural Engineer (GIStructE) with over two years of UK consultancy experience at CCS Consulting, Manchester, where I have delivered structural designs from concept to construction across NHS healthcare, commercial, and residential sectors.</p>
+      <p>My work spans concrete, steel, timber, and masonry design to BS-EN Eurocodes and British Standards, with specialist experience in RAAC survey and remediation across live NHS hospitals in North West England — one of the most technically and logistically demanding environments in the industry.</p>
+      <p>Beyond engineering design, I develop Python automation tools to streamline workflows, and I actively contribute to the profession as Chair of the IStructE Northwest Young Members Group and as a CROSS UK Safety Report volunteer.</p>
+      <p>I am actively progressing toward MIStructE chartership and am open to roles that combine structural engineering rigour with innovative, high-impact projects.</p>
+    </div>
+  </div>
+  <div class="fade" style="transition-delay:.15s">
+    <div class="sec-header" style="margin-top: 0;">
+      <span class="sec-n">&nbsp;</span>
+      <h2 class="sec-title" style="font-size:22px;">Technical Skills</h2>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <p class="sg-title">Structural Software</p>
+        <ul class="sg-list">
+          <li>Tekla Structural Designer</li>
+          <li>STAAD Pro</li>
+          <li>ETABS</li>
+          <li>Midas Gen</li>
+          <li>Ansys / Robot (exposure)</li>
+          <li>Tekla Tedds</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <p class="sg-title">Design Codes</p>
+        <ul class="sg-list">
+          <li>BS-EN Eurocodes</li>
+          <li>British Standards</li>
+          <li>Indian Standards (IS)</li>
+          <li>RIBA Stage 1–5</li>
+          <li>NBS Specifications</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <p class="sg-title">BIM & CAD</p>
+        <ul class="sg-list">
+          <li>AutoCAD (Proficient)</li>
+          <li>Revit Structure</li>
+          <li>BIM360 / ACC</li>
+          <li>Dynamo (Awareness)</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <p class="sg-title">Computational</p>
+        <ul class="sg-list">
+          <li>Python (Working)</li>
+          <li>MATLAB (Proficient)</li>
+          <li>LabVIEW / NI myRIO</li>
+          <li>MS Excel / VBA</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="sec-header">
+    <span class="sec-n">03</span>
+    <h2 class="sec-title">Experience</h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="timeline">
+
+    <div class="tl-item fade">
+      <div class="tl-left">
+        <p class="tl-period">Jan 2024 – Jan 2026</p>
+        <p class="tl-org">CCS Consulting</p>
+        <p class="tl-loc">Manchester, UK</p>
+      </div>
+      <div class="tl-right">
+        <h3 class="tl-role">Graduate Structural Engineer</h3>
+        <span class="tl-badge">GIStructE</span>
+        <p class="tl-desc">Delivered structural design from RIBA Stage 1 to Stage 5 across NHS hospitals, industrial, and residential projects in Greater Manchester — working within live operational facilities throughout all construction phases. Produced designs in concrete, steel, timber, and masonry to Eurocodes. Conducted embodied carbon calculations, produced engineering reports, attended design team meetings and site visits. Developed Python automation tools to streamline engineering workflows and delivered internal CPD sessions.</p>
+        <div class="tl-projects">
+          <p class="tl-proj-label">Key Projects</p>
+          <div class="tl-proj-list">
+            <span class="tl-proj-tag">Wythenshawe Hospital</span>
+            <span class="tl-proj-tag">Manchester Royal Infirmary</span>
+            <span class="tl-proj-tag">North Manchester General</span>
+            <span class="tl-proj-tag">Withington CDC</span>
+            <span class="tl-proj-tag">TGH 12-14 Extension</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item fade">
+      <div class="tl-left">
+        <p class="tl-period">Aug – Dec 2023</p>
+        <p class="tl-org">CCS Consulting</p>
+        <p class="tl-loc">Manchester, UK</p>
+      </div>
+      <div class="tl-right">
+        <h3 class="tl-role">Intern Structural Engineer</h3>
+        <span class="tl-badge">Internship</span>
+        <p class="tl-desc">Conducted structural surveys of existing and listed buildings, performed hand calculations to BS-EN Eurocodes for concrete, steel, timber, and masonry. Prepared drawings across RIBA Stages 1–5 in AutoCAD, assisted with technical report writing, and produced stability calculations for temporary demountable structures.</p>
+      </div>
+    </div>
+
+    <div class="tl-item fade">
+      <div class="tl-left">
+        <p class="tl-period">Jan – Jul 2022</p>
+        <p class="tl-org">P.C. Ragtah & Associates</p>
+        <p class="tl-loc">India</p>
+      </div>
+      <div class="tl-right">
+        <h3 class="tl-role">Intern Structural Engineer</h3>
+        <span class="tl-badge">Internship</span>
+        <p class="tl-desc">Modelled and analysed structures using STAAD Pro and ETABS, assisting with design of RC foundations, retaining walls, beams, columns, slabs, and staircases. Prepared Stage 4 and Stage 5 design and construction documents.</p>
+      </div>
+    </div>
+
+    <div class="tl-item fade">
+      <div class="tl-left">
+        <p class="tl-period">Jun – Jul 2018</p>
+        <p class="tl-org">Municipal Corporation of Delhi</p>
+        <p class="tl-loc">Delhi, India</p>
+      </div>
+      <div class="tl-right">
+        <h3 class="tl-role">Quality Check Trainee</h3>
+        <span class="tl-badge">Training</span>
+        <p class="tl-desc">Conducted material testing on an active 100-bed construction site, verifying compliance of concrete and structural materials against Indian Standard codes.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="sec-header">
+    <span class="sec-n">04</span>
+    <h2 class="sec-title">Education</h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card fade">
+      <h3 class="edu-degree">MSc Structural Engineering</h3>
+      <p class="edu-uni">The University of Manchester</p>
+      <p class="edu-year">2022 – 2023 · United Kingdom</p>
+      <p class="edu-gpa">GPA: 2.59 / 4.00</p>
+      <p class="edu-highlight">Dynamic behaviour of steel and concrete structures, earthquake and fire engineering. Dynamic study on Merchants Bridge using NI myRIO and LabVIEW/MATLAB — scored 77.5/100. Concrete Centre competition — scored 84.2/100. Won Best Structural Design Award.</p>
+    </div>
+    <div class="edu-card fade" style="transition-delay:.1s">
+      <h3 class="edu-degree">B.Tech Civil Engineering</h3>
+      <p class="edu-uni">SGT University, India</p>
+      <p class="edu-year">2018 – 2022 · India</p>
+      <p class="edu-gpa">GPA: 3.15 / 4.00</p>
+      <p class="edu-highlight">Structural analysis and design of concrete and steel structures, sustainable development. Major project: 6-month industrial training and design of G+4 residential building. Experimented with Abaqus FE software under loading conditions.</p>
+    </div>
+    <div class="edu-card fade" style="transition-delay:.2s">
+      <h3 class="edu-degree">Diploma in Civil Engineering</h3>
+      <p class="edu-uni">Chhotu Ram Rural Institute of Technology</p>
+      <p class="edu-year">2015 – 2018 · India</p>
+      <p class="edu-gpa">GPA: 3.20 / 4.00</p>
+      <p class="edu-highlight">Foundation in civil engineering principles and construction practice.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section id="leadership">
+  <div class="sec-header">
+    <span class="sec-n">05</span>
+    <h2 class="sec-title">Leadership & Volunteering</h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="lead-grid">
+    <div class="lead-card fade">
+      <p class="lead-org">IStructE — Institution of Structural Engineers</p>
+      <h3 class="lead-role">Chair, Northwest Young Members Group</h3>
+      <p class="lead-period">January 2026 – Present</p>
+      <p class="lead-desc">Setting strategic direction and fostering professional development for emerging structural engineers across the Northwest region. Chairing monthly committee meetings, planning and coordinating professional events and site visits, managing logistics and regional communications.</p>
+    </div>
+    <div class="lead-card fade" style="transition-delay:.1s">
+      <p class="lead-org">IStructE — Institution of Structural Engineers</p>
+      <h3 class="lead-role">Vice Chair, Northwest Young Members Group</h3>
+      <p class="lead-period">January – December 2025</p>
+      <p class="lead-desc">Collaborated with Prof. Jonathan Hayes at the University of Salford to contribute to development of a structural behaviour course for undergraduate and postgraduate students. Supported delivery of professional events and site visits.</p>
+    </div>
+    <div class="lead-card fade">
+      <p class="lead-org">CROSS UK</p>
+      <h3 class="lead-role">Early Career Volunteer</h3>
+      <p class="lead-period">April 2026 – Present</p>
+      <p class="lead-desc">Attending expert panel quarterly meetings and contributing to the production of CROSS Safety Reports. Preparing communication materials and presentation to expert panels to improve structural safety awareness across the profession.</p>
+    </div>
+    <div class="lead-card fade" style="transition-delay:.1s">
+      <p class="lead-org">University of Manchester / IStructE YMG</p>
+      <h3 class="lead-role">Student Representative</h3>
+      <p class="lead-period">2022 – Present</p>
+      <p class="lead-desc">Served as MSc Structural Engineering Student Representative at the University of Manchester. Led a 6-member team in the Concrete Centre Design Competition.</p>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<div class="awards-strip">
+
+  <!-- Award 1: IStructE Prize — dark background, photo full natural size -->
+  <div class="award-card fade">
+    <div class="award-icon">🏆</div>
+    <div style="margin-bottom:18px;overflow:hidden;">
+      <img src="istruct-event.jpg" alt="IStructE Prize Presentation"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+        style="width:100%;height:auto;display:block;opacity:0.9;">
+      <div style="display:none;width:100%;height:100px;background:rgba(255,255,255,0.04);align-items:center;justify-content:center;">
+        <span style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.2);">Add photo → istruct-event.jpg</span>
+      </div>
+    </div>
+    <h3 class="award-title">IStructE Young Members Presentation — Prize Winner</h3>
+    <p class="award-body">Recognised for the quality of a technical paper at the Institution of Structural Engineers Young Members Presentation event. Invited to attend the IStructE Hot Pot Supper and received a prize of recognition from Mohamed Al-Dah, President of the Institution of Structural Engineers.</p>
+    <p class="award-year">November 2024</p>
+  </div>
+
+  <!-- Award 2: Best Structural Design — light background, photo no dark overlay -->
+  <div class="award-card fade" style="transition-delay:.1s;background:var(--paper);">
+    <div class="award-icon" style="color:var(--accent)">★</div>
+    <div style="margin-bottom:16px;overflow:hidden;">
+      <img src="best-design-award.jpg" alt="Best Structural Design Award"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+        style="width:100%;height:auto;display:block;">
+      <div style="display:none;width:100%;height:100px;background:var(--warm);align-items:center;justify-content:center;">
+        <span style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--mid);">Add photo → best-design-award.jpg</span>
+      </div>
+    </div>
+    <h3 class="award-title" style="color:var(--ink);">Best Structural Design — University of Manchester</h3>
+    <p class="award-body" style="color:#555;">Awarded Best Structural Design during MSc Structural Engineering at The University of Manchester for leading a 6-member interdisciplinary team to design a 6-storey precast elliptical office building. Concrete Centre competition score: 84.2/100.</p>
+    <p class="award-year" style="color:var(--accent)">2023</p>
+  </div>
+
+  <!-- Award 3: IStructE Chartership — light background, no photo -->
+  <div class="award-card fade" style="transition-delay:.2s;background:var(--paper);">
+    <div class="award-icon" style="color:var(--accent)">📋</div>
+    <h3 class="award-title" style="color:var(--ink);">IStructE Chartership Examination — Passed</h3>
+    <p class="award-body" style="color:#555;">Passed the IStructE Chartered Membership (MIStructE) examination, demonstrating technical competence, professional experience, and commitment to the highest standards in structural engineering practice.</p>
+    <p class="award-year" style="color:var(--accent)">April 2026</p>
+  </div>
+
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="fade" style="transition-delay:.15s">
+    <div class="contact-links">
+      <a href="mailto:anmoltanwar12@outlook.com" class="contact-link">anmoltanwar12@outlook.com <span class="arrow">↗</span></a>
+      <a href="https://www.linkedin.com/in/anmol-tanwar/" target="_blank" class="contact-link">
+        LinkedIn Profile <span class="arrow">↗</span>
+      </a>
+      <a href="tel:+917011035039" class="contact-link">
+        +91 70110 35039 <span class="arrow">↗</span>
+      </a>
+      <a href="Anmol_Tanwar_CV.pdf" download="Anmol_Tanwar_CV.pdf" class="contact-link">Download CV (PDF) <span class="arrow">↓</span></a>
+      <a href="Anmol_Tanwar_Portfolio.pdf" download="Anmol_Tanwar_Portfolio.pdf" class="contact-link">Download Portfolio (PDF) <span class="arrow">↓</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Anmol Tanwar GIStructE</span>
+  <span>Graduate Structural Engineer · Manchester, UK</span>
+  <span>MIStructE in Progress</span>
+</footer>
+<script>
+  const c=document.getElementById('cursor');
+  document.addEventListener('mousemove',e=>{c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';});
+  document.querySelectorAll('a,button,.proj,.stat,.edu-card,.lead-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>c.classList.add('big'));
+    el.addEventListener('mouseleave',()=>c.classList.remove('big'));
+  });
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40);});
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:0.08,rootMargin:'0px 0px -20px 0px'});
+  document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
+  window.addEventListener('load',()=>{document.querySelectorAll('.fade').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight)el.classList.add('in');});});
+</script>
+</body>
+</html>
