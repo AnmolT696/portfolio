@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contribution to IStructE — Anmol Tanwar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--ink:#0f0f0f;--paper:#f4f1ec;--warm:#e8e3d9;--accent:#b5813a;--accent-light:#d4a55a;--mid:#7a7670;--border:#d6d0c6;--dark:#1a1814;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);font-family:'DM Mono',monospace;font-size:12.5px;line-height:1.7;overflow-x:hidden;cursor:none;}
+  #cursor{position:fixed;width:6px;height:6px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
+  #cursor.big{width:32px;height:32px;background:transparent;border:1px solid var(--accent);}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:22px 52px;background:rgba(244,241,236,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;color:var(--ink);}
+  .nav-logo span{color:var(--accent);font-style:italic;}
+  .nav-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--mid);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;transition:color .2s;}
+  .nav-back:hover{color:var(--ink);}
+  .nav-back::before{content:'←';font-size:12px;}
+
+  /* HERO */
+  .page-hero{margin-top:65px;background:var(--dark);padding:64px 52px 56px;position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.06);}
+  .page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(181,129,58,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(181,129,58,0.05) 1px,transparent 1px);background-size:52px 52px;}
+  .hero-tag{font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:12px;margin-bottom:18px;position:relative;z-index:1;}
+  .hero-tag::before{content:'';display:block;width:28px;height:1px;background:var(--accent);}
+  .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,72px);font-weight:300;color:#fff;line-height:0.92;letter-spacing:-0.01em;position:relative;z-index:1;}
+  .hero-title em{color:var(--accent-light);font-style:italic;display:block;}
+  .hero-sub{font-size:11.5px;color:rgba(255,255,255,0.5);margin-top:20px;max-width:520px;line-height:1.9;position:relative;z-index:1;padding-left:16px;border-left:2px solid rgba(181,129,58,0.4);}
+
+  /* ROLES STRIP */
+  .roles-strip{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--border);}
+  .role-cell{padding:32px 40px;border-right:1px solid var(--border);}
+  .role-cell:last-child{border-right:none;}
+  .rc-icon{font-size:22px;margin-bottom:12px;}
+  .rc-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;margin-bottom:6px;}
+  .rc-period{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
+  .rc-desc{font-size:11px;color:var(--mid);line-height:1.8;}
+
+  /* SUMMARY */
+  .summary-section{padding:64px 52px;border-bottom:1px solid var(--border);max-width:860px;}
+  .section-label{font-size:8.5px;letter-spacing:0.28em;text-transform:uppercase;color:var(--accent);margin-bottom:18px;display:flex;align-items:center;gap:12px;}
+  .section-label::after{content:'';flex:1;height:1px;background:var(--border);}
+  .summary-section p{font-size:12.5px;color:#444;line-height:2;margin-bottom:16px;}
+
+  /* PHOTO GRID */
+  .photos-section{padding:64px 52px;border-bottom:1px solid var(--border);}
+  .photo-grid-istructe{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-top:20px;}
+  /* toggle between 10 and 15 photos — default show all */
+  .photo-cell{position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--warm);cursor:pointer;}
+  .photo-cell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;}
+  .photo-cell:hover img{transform:scale(1.05);}
+  .photo-cell .ph-lbl{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:var(--warm);font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);text-align:center;padding:6px;}
+  .photo-cell .ph-icon{font-size:18px;opacity:0.3;}
+
+
+  /* LIGHTBOX */
+  #lightbox{display:none;position:fixed;inset:0;z-index:9000;background:rgba(10,8,6,0.97);align-items:center;justify-content:center;flex-direction:column;}
+  #lightbox.open{display:flex;}
+  #lightbox img{max-width:88vw;max-height:80vh;object-fit:contain;display:block;border:1px solid rgba(255,255,255,0.07);}
+  #lb-caption{margin-top:14px;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.4);}
+  #lb-close{position:fixed;top:24px;right:32px;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.35);cursor:pointer;background:none;border:none;font-family:'DM Mono',monospace;transition:color .2s;}
+  #lb-close:hover{color:var(--accent);}
+  #lb-prev,#lb-next{position:fixed;top:50%;transform:translateY(-50%);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);cursor:pointer;background:none;border:none;font-family:'DM Mono',monospace;transition:color .2s;padding:14px;}
+  #lb-prev{left:20px;} #lb-next{right:20px;}
+  #lb-prev:hover,#lb-next:hover{color:var(--accent);}
+  #lb-counter{position:fixed;bottom:24px;font-size:9px;letter-spacing:0.2em;color:rgba(255,255,255,0.25);}
+
+  footer{padding:20px 52px;display:flex;justify-content:space-between;border-top:1px solid var(--border);font-size:9.5px;color:var(--mid);letter-spacing:0.14em;text-transform:uppercase;}
+  .fade{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+  .fade.in{opacity:1;transform:none;}
+  @media(max-width:900px){
+    nav{padding:18px 24px;} .page-hero{padding:48px 24px;}
+    .roles-strip{grid-template-columns:1fr;} .role-cell{border-right:none;border-bottom:1px solid var(--border);}
+    .summary-section,.photos-section{padding:48px 24px;}
+    .photo-grid-istructe{grid-template-columns:repeat(3,1fr);}
+    footer{flex-direction:column;gap:6px;text-align:center;}
+  }
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<nav>
+  <a class="nav-logo" href="index.html">Anmol <span>Tanwar</span></a>
+  <a class="nav-back" href="index.html">Back to Portfolio</a>
+</nav>
+
+<div class="page-hero">
+  <p class="hero-tag">Professional Body · Institution of Structural Engineers</p>
+  <h1 class="hero-title">Contribution to<em>IStructE</em></h1>
+  <p class="hero-sub">Active member and leader within the Institution of Structural Engineers, contributing to professional development, safety reporting, and community building for the next generation of structural engineers.</p>
+</div>
+
+<div class="roles-strip">
+  <div class="role-cell fade">
+    <div class="rc-icon">🪑</div>
+    <h3 class="rc-title">Chair — NW Young Members Group</h3>
+    <p class="rc-period">January 2026 – Present</p>
+    <p class="rc-desc">Setting strategic direction and fostering professional development for emerging structural engineers across the Northwest region. Chairing monthly committee meetings, planning professional events and site visits, managing regional communications.</p>
+  </div>
+  <div class="role-cell fade" style="transition-delay:.08s">
+    <div class="rc-icon">📋</div>
+    <h3 class="rc-title">Vice Chair — NW Young Members Group</h3>
+    <p class="rc-period">January – December 2025</p>
+    <p class="rc-desc">Collaborated with Prof. Jonathan Hayes at University of Salford to contribute to a structural behaviour course for undergraduate and postgraduate students. Supported delivery of professional events and site visits.</p>
+  </div>
+  <div class="role-cell fade" style="transition-delay:.16s">
+    <div class="rc-icon">🏆</div>
+    <h3 class="rc-title">Young Members Presentation — Prize Winner</h3>
+    <p class="rc-period">November 2024</p>
+    <p class="rc-desc">Recognised for the quality of a technical paper at the IStructE Young Members Presentation event. Invited to the IStructE Hot Pot Supper and received a prize from Mohamed Al-Dah, President of the Institution of Structural Engineers.</p>
+  </div>
+</div>
+
+<div class="summary-section fade">
+  <p class="section-label">Summary</p>
+  <p>My involvement with the Institution of Structural Engineers goes beyond membership — it is an active commitment to the profession and to the development of the next generation of structural engineers across the Northwest of England.</p>
+  <p>As Chair of the Northwest Young Members Group since January 2026, I lead a regional committee that organises professional development events, site visits to live construction projects, technical presentations, and networking opportunities for early-career engineers. This role involves chairing monthly meetings, setting the strategic agenda, and maintaining strong engagement with IStructE's national leadership.</p>
+  <p>In 2024 I delivered a technical presentation at the IStructE Young Members Presentation event, which was recognised with a prize from Mohamed Al-Dah, President of the Institution, and an invitation to the IStructE Hot Pot Supper — a prestigious gathering of the institution's senior membership and leadership.</p>
+  <p>I have also organised site visits for the Northwest YMG group, including a visit to the Withington CDC project, giving members direct exposure to live composite steel frame construction at Stage 4–5.</p>
+</div>
+
+<div class="photos-section fade" style="transition-delay:.1s">
+  <p class="section-label">Gallery</p>
+
+  <div class="photo-grid-istructe" id="photo-grid">
+    <div class="photo-cell" data-index="1" title="IStructE 1">
+      <img src="IStructE-1.jpg" alt="IStructE activity 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="ph-lbl"><span class="ph-icon">📷</span><span>Add: IStructE-1.jpg</span></div>
+    </div>
+    <div class="photo-cell" data-index="2" title="IStructE 2">
+      <img src="IStructE-2.jpg" alt="IStructE activity 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="ph-lbl"><span class="ph-icon">📷</span><span>Add: IStructE-2.jpg</span></div>
+    </div>
+    <div class="photo-cell" data-index="3" title="IStructE 3">
+      <img src="IStructE-3.jpg" alt="IStructE activity 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="ph-lbl"><span class="ph-icon">📷</span><span>Add: IStructE-3.jpg</span></div>
+    </div>
+    <div class="photo-cell" data-index="4" title="IStructE 4">
+      <img src="IStructE-4.jpg" alt="IStructE activity 4" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="ph-lbl"><span class="ph-icon">📷</span><span>Add: IStructE-4.jpg</span></div>
+    </div>
+    <div class="photo-cell" data-index="5" title="IStructE 5">
+      <img src="IStructE-5.jpg" alt="IStructE activity 5" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="ph-lbl"><span class="ph-icon">📷</span><span>Add: IStructE-5.jpg</span></div>
+    </div>
+    <div class="photo-cell" data-index="6" title="IStructE 6">
+      <img src="IStructE-6.jpg" alt="IStructE activity 6" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="ph-lbl"><span class="ph-icon">📷</span><span>Add: IStructE-6.jpg</span></div>
+    </div>
+    <div class="photo-cell" data-index="7" title="IStructE 7">
+      <img src="IStructE-7.jpg" alt="IStructE activity 7" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="ph-lbl"><span class="ph-icon">📷</span><span>Add: IStructE-7.jpg</span></div>
+    </div>
+    <div class="photo-cell" data-index="8" title="IStructE 8">
+      <img src="IStructE-8.jpg" alt="IStructE activity 8" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="ph-lbl"><span class="ph-icon">📷</span><span>Add: IStructE-8.jpg</span></div>
+    </div>
+    <div class="photo-cell" data-index="9" title="IStructE 9">
+      <img src="IStructE-9.jpg" alt="IStructE activity 9" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="ph-lbl"><span class="ph-icon">📷</span><span>Add: IStructE-9.jpg</span></div>
+    </div>
+    <div class="photo-cell" data-index="10" title="IStructE 10">
+      <img src="IStructE-10.jpg" alt="IStructE activity 10" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="ph-lbl"><span class="ph-icon">📷</span><span>Add: IStructE-10.jpg</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div id="lightbox">
+  <button id="lb-close">✕ Close</button>
+  <button id="lb-prev">← Prev</button>
+  <img id="lb-img" src="" alt="">
+  <p id="lb-caption"></p>
+  <button id="lb-next">Next →</button>
+  <p id="lb-counter"></p>
+</div>
+
+<footer>
+  <span>© 2026 Anmol Tanwar GIStructE</span>
+  <span>Contribution to IStructE</span>
+</footer>
+
+<script>
+  const c=document.getElementById('cursor');
+  document.addEventListener('mousemove',e=>{c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';});
+  document.querySelectorAll('a,.photo-cell').forEach(el=>{el.addEventListener('mouseenter',()=>c.classList.add('big'));el.addEventListener('mouseleave',()=>c.classList.remove('big'));});
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:0.08});
+  document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
+  window.addEventListener('load',()=>{document.querySelectorAll('.fade').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight)el.classList.add('in');});});
+
+
+  // Lightbox
+  const lb=document.getElementById('lightbox'),lbI=document.getElementById('lb-img'),lbC=document.getElementById('lb-caption'),lbCt=document.getElementById('lb-counter');
+  let lbArr=[],lbN=0;
+  function buildLb(){
+    lbArr=[];
+    document.querySelectorAll('.photo-cell').forEach(cell=>{
+      const img=cell.querySelector('img');
+      if(img)lbArr.push({s:img.src,c:img.alt||''});
+    });
+  }
+  function lbOpen(i){lbN=i;const it=lbArr[i];lbI.src=it.s;lbI.alt=it.c;lbC.textContent=it.c;lbCt.textContent=(i+1)+' / '+lbArr.length;lb.classList.add('open');document.body.style.overflow='hidden';}
+  function lbClose(){lb.classList.remove('open');document.body.style.overflow='';lbI.src='';}
+  function lbMv(d){lbN=(lbN+d+lbArr.length)%lbArr.length;lbOpen(lbN);}
+  document.querySelectorAll('.photo-cell').forEach((cell,i)=>{
+    const img=cell.querySelector('img');
+    if(img)cell.addEventListener('click',()=>{buildLb();const idx=lbArr.findIndex(x=>x.s===img.src);lbOpen(idx>=0?idx:0);});
+  });
+  document.getElementById('lb-close').addEventListener('click',lbClose);
+  document.getElementById('lb-prev').addEventListener('click',()=>lbMv(-1));
+  document.getElementById('lb-next').addEventListener('click',()=>lbMv(1));
+  lb.addEventListener('click',e=>{if(e.target===lb)lbClose();});
+  document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')lbClose();if(e.key==='ArrowLeft')lbMv(-1);if(e.key==='ArrowRight')lbMv(1);});
+  buildLb();
+</script>
+</body>
+</html>
