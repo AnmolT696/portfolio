@@ -148,7 +148,7 @@
   },
   {
     "id": "mri-plantroom",
-    "active": false,
+    "active": true,
     "order": 9,
     "sector": "Healthcare · NHS",
     "value": "",
