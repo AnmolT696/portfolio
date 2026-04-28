@@ -544,10 +544,13 @@
           return '<span class="ptag">' + esc(t) + '</span>';
         }).join('');
         var valueHtml = p.value ? '<span class="proj-value">' + esc(p.value) + '</span>' : '';
+        var imageHtml = p.image
+          ? '<div style="width:100%;aspect-ratio:1/1;overflow:hidden;background:var(--warm);margin:-36px -32px 22px;display:flex;align-items:center;justify-content:center;">'
+            + '<img src="' + esc(p.image) + '" alt="' + esc(p.imageAlt) + '" onerror="this.parentElement.style.display=\'none\'" style="width:100%;height:100%;object-fit:cover;display:block;">'
+            + '</div>'
+          : '';
         return '<div class="proj fade" onclick="location.href=\'' + esc(p.url) + '\'" style="cursor:pointer;' + (delay ? 'transition-delay:' + delay + 's' : '') + '">'
-          + '<div style="width:100%;aspect-ratio:1/1;overflow:hidden;background:var(--warm);margin:-36px -32px 22px;display:flex;align-items:center;justify-content:center;">'
-          + '<img src="' + esc(p.image) + '" alt="' + esc(p.imageAlt) + '" onerror="this.style.display=\'none\'" style="width:100%;height:100%;object-fit:cover;display:block;">'
-          + '</div>'
+          + imageHtml
           + '<span class="proj-sector">' + esc(p.sector) + '</span>'
           + valueHtml
           + '<h3 class="proj-name">' + esc(p.name) + '</h3>'
