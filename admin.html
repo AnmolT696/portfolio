@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Anmol Tanwar Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #0f0f0f; --paper: #f4f1ec; --warm: #e8e3d9;
+    --accent: #b5813a; --accent-light: #d4a55a; --mid: #7a7670;
+    --border: #d6d0c6; --dark: #1a1814;
+  }
+  body { background: var(--paper); color: var(--ink); font-family: 'DM Mono', monospace; font-size: 12.5px; line-height: 1.7; }
+
+  /* HEADER */
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 52px; border-bottom: 1px solid var(--border);
+    background: rgba(244,241,236,0.96); position: sticky; top: 0; z-index: 10;
+  }
+  .logo { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 300; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--ink); }
+  .logo span { color: var(--accent); font-style: italic; }
+  .header-right { display: flex; align-items: center; gap: 16px; }
+  .badge-admin { font-size: 9px; letter-spacing: 0.14em; color: var(--accent); border: 1px solid var(--accent); padding: 4px 10px; text-transform: uppercase; }
+  .back-link { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--mid); transition: color 0.2s; }
+  .back-link:hover { color: var(--ink); }
+
+  /* MAIN LAYOUT */
+  main { max-width: 1100px; margin: 0 auto; padding: 52px; }
+
+  /* SETUP PANEL */
+  .setup-panel {
+    border: 1px solid var(--border); padding: 32px 36px; margin-bottom: 48px;
+    background: var(--warm);
+  }
+  .setup-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; margin-bottom: 8px; }
+  .setup-sub { font-size: 11px; color: var(--mid); line-height: 1.9; margin-bottom: 24px; }
+  .setup-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .field-group { display: flex; flex-direction: column; gap: 6px; }
+  .field-group label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
+  .field-group input {
+    background: var(--paper); border: 1px solid var(--border); padding: 10px 14px;
+    font-family: 'DM Mono', monospace; font-size: 11px; color: var(--ink);
+    outline: none; width: 100%;
+  }
+  .field-group input:focus { border-color: var(--accent); }
+  .field-group input[type="password"] { letter-spacing: 0.1em; }
+  .setup-note { font-size: 10px; color: var(--mid); line-height: 1.8; padding: 12px 16px; border-left: 2px solid var(--accent); margin-bottom: 20px; }
+  .setup-note a { color: var(--accent); }
+  .btn-connect {
+    padding: 12px 28px; font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    background: var(--ink); color: var(--paper); border: none; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-connect:hover { background: var(--accent); }
+  .btn-connect:disabled { background: var(--mid); cursor: not-allowed; }
+
+  /* STATUS BAR */
+  .status-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 32px; padding: 16px 20px; border: 1px solid var(--border);
+  }
+  .status-left { display: flex; align-items: center; gap: 16px; }
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--mid); }
+  .status-dot.connected { background: #5a9a5a; }
+  .status-dot.error { background: #c0392b; }
+  .status-text { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mid); }
+  .counter-pill {
+    font-size: 10px; letter-spacing: 0.12em; color: var(--accent);
+    border: 1px solid rgba(181,129,58,0.4); padding: 4px 12px;
+  }
+  .counter-pill.at-limit { background: rgba(181,129,58,0.1); }
+
+  /* SECTION HEADER */
+  .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+  .section-num { font-size: 9px; letter-spacing: 0.22em; color: var(--accent); }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; }
+  .section-rule { flex: 1; height: 1px; background: var(--border); }
+
+  /* PROJECTS GRID */
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--border); margin-bottom: 48px;
+  }
+  .proj-card {
+    background: var(--paper); padding: 28px 24px;
+    position: relative; cursor: pointer;
+    transition: background 0.2s; user-select: none;
+  }
+  .proj-card:hover { background: var(--warm); }
+  .proj-card.active { background: var(--dark); }
+  .proj-card.active:hover { background: #232019; }
+
+  /* Toggle indicator */
+  .proj-toggle {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .toggle-track {
+    width: 32px; height: 18px; border-radius: 9px;
+    background: var(--border); position: relative;
+    transition: background 0.2s; flex-shrink: 0;
+  }
+  .proj-card.active .toggle-track { background: var(--accent); }
+  .toggle-thumb {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--mid); position: absolute;
+    top: 3px; left: 3px; transition: left 0.2s, background 0.2s;
+  }
+  .proj-card.active .toggle-thumb { left: 17px; background: #fff; }
+  .toggle-label { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mid); }
+  .proj-card.active .toggle-label { color: var(--accent); }
+
+  .proj-sector { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; display: block; }
+  .proj-card.active .proj-sector { color: var(--accent-light); }
+  .proj-name { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 400; line-height: 1.25; margin-bottom: 8px; color: var(--ink); transition: color 0.2s; }
+  .proj-card.active .proj-name { color: #fff; }
+  .proj-meta { font-size: 10px; color: var(--mid); letter-spacing: 0.06em; }
+  .proj-card.active .proj-meta { color: rgba(255,255,255,0.35); }
+  .proj-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
+  .ptag { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid var(--border); padding: 2px 7px; color: var(--mid); }
+  .proj-card.active .ptag { border-color: rgba(255,255,255,0.12); color: rgba(255,255,255,0.35); }
+
+  /* ORDER badge */
+  .order-badge {
+    position: absolute; top: 14px; right: 14px;
+    font-size: 9px; letter-spacing: 0.12em; width: 24px; height: 24px;
+    border: 1px solid var(--border); display: flex; align-items: center; justify-content:center;
+    color: var(--mid);
+  }
+  .proj-card.active .order-badge { border-color: rgba(181,129,58,0.4); color: var(--accent); }
+
+  /* ADD PROJECT CARD */
+  .add-card {
+    background: var(--paper); padding: 28px 24px;
+    border: 1px dashed var(--border); cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 10px; min-height: 180px; transition: border-color 0.2s;
+  }
+  .add-card:hover { border-color: var(--accent); }
+  .add-icon { font-size: 24px; color: var(--border); }
+  .add-card:hover .add-icon { color: var(--accent); }
+  .add-text { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); }
+
+  /* ADD FORM */
+  .add-form-wrap { display: none; margin-bottom: 48px; border: 1px solid var(--accent); padding: 32px 36px; background: var(--warm); }
+  .add-form-wrap.open { display: block; }
+  .add-form-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; margin-bottom: 24px; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+  .form-grid.full { grid-template-columns: 1fr; }
+  .fg { display: flex; flex-direction: column; gap: 6px; }
+  .fg label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
+  .fg input, .fg textarea {
+    background: var(--paper); border: 1px solid var(--border); padding: 10px 14px;
+    font-family: 'DM Mono', monospace; font-size: 11px; color: var(--ink);
+    outline: none; width: 100%; resize: vertical;
+  }
+  .fg input:focus, .fg textarea:focus { border-color: var(--accent); }
+  .form-actions { display: flex; gap: 12px; margin-top: 20px; }
+  .btn-add { padding: 10px 24px; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; background: var(--ink); color: var(--paper); border: none; cursor: pointer; transition: background 0.2s; }
+  .btn-add:hover { background: var(--accent); }
+  .btn-cancel { padding: 10px 24px; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; background: transparent; color: var(--mid); border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; }
+  .btn-cancel:hover { border-color: var(--ink); color: var(--ink); }
+
+  /* SAVE FOOTER */
+  .save-footer {
+    position: sticky; bottom: 0;
+    background: rgba(244,241,236,0.96); border-top: 1px solid var(--border);
+    padding: 20px 52px; display: flex; align-items: center; justify-content: space-between;
+    backdrop-filter: blur(12px);
+  }
+  .save-info { font-size: 11px; color: var(--mid); }
+  .save-info strong { color: var(--ink); }
+  .save-actions { display: flex; gap: 12px; align-items: center; }
+  .btn-save {
+    padding: 12px 32px; font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    background: var(--ink); color: var(--paper); border: none; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-save:hover { background: var(--accent); }
+  .btn-save:disabled { background: var(--mid); cursor: not-allowed; }
+  .save-status { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); }
+  .save-status.ok { color: #5a9a5a; }
+  .save-status.err { color: #c0392b; }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 80px; right: 32px;
+    background: var(--dark); color: rgba(255,255,255,0.85);
+    padding: 14px 20px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    border-left: 2px solid var(--accent);
+  }
+  .toast.show { opacity: 1; }
+
+  @media (max-width: 860px) {
+    header { padding: 18px 24px; }
+    main { padding: 32px 24px; }
+    .projects-grid { grid-template-columns: 1fr 1fr; }
+    .setup-fields, .form-grid { grid-template-columns: 1fr; }
+    .save-footer { padding: 16px 24px; flex-direction: column; gap: 12px; align-items: flex-start; }
+  }
+  @media (max-width: 560px) {
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">Anmol <span>Tanwar</span></a>
+  <div class="header-right">
+    <span class="badge-admin">Admin Panel</span>
+    <a class="back-link" href="index.html">← Back to site</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- GITHUB SETUP -->
+  <div class="setup-panel" id="setup-panel">
+    <h2 class="setup-title">Connect to GitHub</h2>
+    <p class="setup-sub">Enter your GitHub details once. Your token is stored only in your browser (localStorage) and never sent anywhere except directly to GitHub's API.</p>
+    <div class="setup-fields">
+      <div class="field-group">
+        <label>GitHub Username</label>
+        <input type="text" id="gh-user" placeholder="e.g. anmoltanwar" />
+      </div>
+      <div class="field-group">
+        <label>Repository Name</label>
+        <input type="text" id="gh-repo" placeholder="e.g. portfolio" />
+      </div>
+      <div class="field-group">
+        <label>Branch</label>
+        <input type="text" id="gh-branch" placeholder="main" value="main" />
+      </div>
+      <div class="field-group">
+        <label>Personal Access Token</label>
+        <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxx" />
+      </div>
+    </div>
+    <p class="setup-note">
+      Create a token at <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a>.
+      Select <strong>Classic token</strong> → scope: <strong>repo</strong> (full control).
+      The token is saved in your browser and used only to update <code>projects.json</code> in your repo.
+    </p>
+    <button class="btn-connect" id="btn-connect" onclick="connectGitHub()">Connect & Load Projects</button>
+  </div>
+
+  <!-- STATUS BAR -->
+  <div class="status-bar" id="status-bar" style="display:none;">
+    <div class="status-left">
+      <div class="status-dot" id="status-dot"></div>
+      <span class="status-text" id="status-text">Not connected</span>
+    </div>
+    <div style="display:flex;gap:12px;align-items:center;">
+      <span class="counter-pill" id="counter-pill">0 / 9 active</span>
+      <button onclick="disconnectGitHub()" style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;background:transparent;border:1px solid var(--border);padding:4px 10px;color:var(--mid);cursor:pointer;">Disconnect</button>
+    </div>
+  </div>
+
+  <!-- SECTION HEADING -->
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Manage Projects</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <!-- ADD NEW PROJECT FORM -->
+  <div class="add-form-wrap" id="add-form-wrap">
+    <h3 class="add-form-title">Add New Project</h3>
+    <div class="form-grid">
+      <div class="fg"><label>Project ID (no spaces)</label><input type="text" id="nf-id" placeholder="project-name" /></div>
+      <div class="fg"><label>Sector / Category</label><input type="text" id="nf-sector" placeholder="Healthcare · NHS" /></div>
+      <div class="fg"><label>Project Name</label><input type="text" id="nf-name" placeholder="Hospital Refurbishment" /></div>
+      <div class="fg"><label>Value (optional)</label><input type="text" id="nf-value" placeholder="≈ £2M GBP" /></div>
+      <div class="fg"><label>Meta (location · year · stage)</label><input type="text" id="nf-meta" placeholder="Manchester · 2025 · Stage 4" /></div>
+      <div class="fg"><label>Page URL</label><input type="text" id="nf-url" placeholder="project-name.html" /></div>
+      <div class="fg"><label>Image Filename</label><input type="text" id="nf-image" placeholder="project-main.jpg" /></div>
+      <div class="fg"><label>Image Alt Text</label><input type="text" id="nf-alt" placeholder="Project photo" /></div>
+    </div>
+    <div class="form-grid full">
+      <div class="fg"><label>Description</label><textarea id="nf-desc" rows="3" placeholder="Short project description..."></textarea></div>
+      <div class="fg"><label>Tags (comma-separated)</label><input type="text" id="nf-tags" placeholder="RAAC, Steel Frame, Eurocode" /></div>
+    </div>
+    <div class="form-actions">
+      <button class="btn-add" onclick="addProject()">Add Project</button>
+      <button class="btn-cancel" onclick="closeAddForm()">Cancel</button>
+    </div>
+  </div>
+
+  <!-- PROJECTS GRID -->
+  <div class="projects-grid" id="projects-grid">
+    <div style="grid-column:1/-1;padding:48px;text-align:center;color:var(--mid);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;background:var(--paper);">
+      Connect to GitHub above to load your projects
+    </div>
+  </div>
+
+  <!-- ADD CARD (rendered by JS after load) -->
+
+</main>
+
+<!-- SAVE FOOTER -->
+<div class="save-footer">
+  <p class="save-info" id="save-info">Connect to GitHub to start editing</p>
+  <div class="save-actions">
+    <span class="save-status" id="save-status"></span>
+    <button class="btn-save" id="btn-save" onclick="saveProjects()" disabled>Save to GitHub</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── STATE ──────────────────────────────────────────────────────────────────
+let projects = [];
+let ghConfig = {};
+let fileSha = '';
+let isDirty = false;
+const MAX_ACTIVE = 9;
+
+// ─── INIT ────────────────────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('gh_config');
+  if (saved) {
+    ghConfig = JSON.parse(saved);
+    document.getElementById('gh-user').value = ghConfig.user || '';
+    document.getElementById('gh-repo').value = ghConfig.repo || '';
+    document.getElementById('gh-branch').value = ghConfig.branch || 'main';
+    document.getElementById('gh-token').value = ghConfig.token || '';
+    connectGitHub(true);
+  }
+});
+
+// ─── GITHUB CONNECTION ───────────────────────────────────────────────────────
+async function connectGitHub(silent = false) {
+  const user   = document.getElementById('gh-user').value.trim();
+  const repo   = document.getElementById('gh-repo').value.trim();
+  const branch = document.getElementById('gh-branch').value.trim() || 'main';
+  const token  = document.getElementById('gh-token').value.trim();
+
+  if (!user || !repo || !token) { showToast('Please fill in all GitHub fields'); return; }
+
+  ghConfig = { user, repo, branch, token };
+  localStorage.setItem('gh_config', JSON.stringify(ghConfig));
+
+  setStatus('loading', 'Connecting...');
+  document.getElementById('btn-connect').disabled = true;
+
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/${user}/${repo}/contents/projects.json?ref=${branch}`,
+      { headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' } }
+    );
+
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.message || `HTTP ${res.status}`);
+    }
+
+    const data = await res.json();
+    fileSha = data.sha;
+    projects = JSON.parse(atob(data.content.replace(/\n/g, '')));
+
+    document.getElementById('setup-panel').style.display = 'none';
+    document.getElementById('status-bar').style.display = 'flex';
+    setStatus('connected', `Connected to ${user}/${repo} (${branch})`);
+    document.getElementById('btn-save').disabled = false;
+    renderGrid();
+    if (!silent) showToast('Connected — projects loaded');
+  } catch (e) {
+    setStatus('error', `Error: ${e.message}`);
+    document.getElementById('btn-connect').disabled = false;
+    document.getElementById('setup-panel').style.display = 'block';
+    showToast(`Could not connect: ${e.message}`);
+  }
+}
+
+function disconnectGitHub() {
+  localStorage.removeItem('gh_config');
+  projects = []; fileSha = ''; ghConfig = {};
+  document.getElementById('setup-panel').style.display = 'block';
+  document.getElementById('status-bar').style.display = 'none';
+  document.getElementById('btn-save').disabled = true;
+  setStatus('idle', 'Not connected');
+  document.getElementById('projects-grid').innerHTML = `
+    <div style="grid-column:1/-1;padding:48px;text-align:center;color:var(--mid);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;background:var(--paper);">
+      Connect to GitHub above to load your projects
+    </div>`;
+  updateCounter();
+}
+
+// ─── RENDER GRID ─────────────────────────────────────────────────────────────
+function renderGrid() {
+  const grid = document.getElementById('projects-grid');
+  const activeProjs = projects.filter(p => p.active);
+  let order = 1;
+
+  grid.innerHTML = projects.map((p, idx) => {
+    const ord = p.active ? order++ : '';
+    return `
+    <div class="proj-card ${p.active ? 'active' : ''}" onclick="toggleProject(${idx})" id="card-${idx}">
+      ${p.active ? `<div class="order-badge">${ord}</div>` : ''}
+      <div class="proj-toggle">
+        <div class="toggle-track"><div class="toggle-thumb"></div></div>
+        <span class="toggle-label">${p.active ? 'Visible' : 'Hidden'}</span>
+      </div>
+      <span class="proj-sector">${esc(p.sector)}</span>
+      <h3 class="proj-name">${esc(p.name)}</h3>
+      <p class="proj-meta">${esc(p.meta)}</p>
+      <div class="proj-tags">${(p.tags||[]).map(t => `<span class="ptag">${esc(t)}</span>`).join('')}</div>
+    </div>`;
+  }).join('');
+
+  // Add the "+ Add Project" card at the end
+  grid.innerHTML += `
+    <div class="add-card" onclick="openAddForm()">
+      <span class="add-icon">+</span>
+      <span class="add-text">Add New Project</span>
+    </div>`;
+
+  updateCounter();
+  updateSaveInfo();
+}
+
+function toggleProject(idx) {
+  const activeCount = projects.filter(p => p.active).length;
+  if (!projects[idx].active && activeCount >= MAX_ACTIVE) {
+    showToast(`Max ${MAX_ACTIVE} projects can be shown. Deactivate one first.`);
+    return;
+  }
+  projects[idx].active = !projects[idx].active;
+  isDirty = true;
+  renderGrid();
+}
+
+function updateCounter() {
+  const count = projects.filter(p => p.active).length;
+  const pill = document.getElementById('counter-pill');
+  if (!pill) return;
+  pill.textContent = `${count} / ${MAX_ACTIVE} active`;
+  pill.className = 'counter-pill' + (count >= MAX_ACTIVE ? ' at-limit' : '');
+}
+
+function updateSaveInfo() {
+  const count = projects.filter(p => p.active).length;
+  document.getElementById('save-info').innerHTML =
+    `<strong>${count}</strong> of <strong>${MAX_ACTIVE}</strong> project slots used · ${projects.length} total projects`;
+}
+
+// ─── ADD NEW PROJECT ─────────────────────────────────────────────────────────
+function openAddForm() {
+  document.getElementById('add-form-wrap').classList.add('open');
+  document.getElementById('add-form-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function closeAddForm() {
+  document.getElementById('add-form-wrap').classList.remove('open');
+  ['nf-id','nf-sector','nf-name','nf-value','nf-meta','nf-url','nf-image','nf-alt','nf-desc','nf-tags']
+    .forEach(id => document.getElementById(id).value = '');
+}
+
+function addProject() {
+  const id = document.getElementById('nf-id').value.trim();
+  const name = document.getElementById('nf-name').value.trim();
+  if (!id || !name) { showToast('ID and Name are required'); return; }
+  if (projects.find(p => p.id === id)) { showToast('A project with this ID already exists'); return; }
+
+  const tags = document.getElementById('nf-tags').value.split(',').map(t => t.trim()).filter(Boolean);
+  const activeCount = projects.filter(p => p.active).length;
+
+  projects.push({
+    id,
+    active: activeCount < MAX_ACTIVE,
+    order: projects.length + 1,
+    sector: document.getElementById('nf-sector').value.trim(),
+    value: document.getElementById('nf-value').value.trim(),
+    name,
+    meta: document.getElementById('nf-meta').value.trim(),
+    desc: document.getElementById('nf-desc').value.trim(),
+    tags,
+    image: document.getElementById('nf-image').value.trim(),
+    imageAlt: document.getElementById('nf-alt').value.trim(),
+    url: document.getElementById('nf-url').value.trim()
+  });
+
+  isDirty = true;
+  closeAddForm();
+  renderGrid();
+  showToast(`"${name}" added`);
+}
+
+// ─── SAVE TO GITHUB ──────────────────────────────────────────────────────────
+async function saveProjects() {
+  const btn = document.getElementById('btn-save');
+  const status = document.getElementById('save-status');
+  btn.disabled = true;
+  btn.textContent = 'Saving...';
+  status.textContent = '';
+  status.className = 'save-status';
+
+  try {
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(projects, null, 2))));
+    const body = {
+      message: `Admin: update featured projects (${new Date().toISOString().slice(0,10)})`,
+      content,
+      sha: fileSha,
+      branch: ghConfig.branch
+    };
+
+    const res = await fetch(
+      `https://api.github.com/repos/${ghConfig.user}/${ghConfig.repo}/contents/projects.json`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: `token ${ghConfig.token}`,
+          Accept: 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      }
+    );
+
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.message || `HTTP ${res.status}`);
+    }
+
+    const data = await res.json();
+    fileSha = data.content.sha;
+    isDirty = false;
+    status.textContent = '✓ Saved';
+    status.className = 'save-status ok';
+    showToast('projects.json saved to GitHub');
+  } catch (e) {
+    status.textContent = `✗ ${e.message}`;
+    status.className = 'save-status err';
+    showToast(`Save failed: ${e.message}`);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Save to GitHub';
+  }
+}
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+function setStatus(type, text) {
+  const dot = document.getElementById('status-dot');
+  const txt = document.getElementById('status-text');
+  dot.className = 'status-dot' + (type === 'connected' ? ' connected' : type === 'error' ? ' error' : '');
+  txt.textContent = text;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function esc(str) {
+  return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+window.addEventListener('beforeunload', e => {
+  if (isDirty) {
+    e.preventDefault();
+    e.returnValue = '';
+  }
+});
+</script>
+</body>
+</html>
