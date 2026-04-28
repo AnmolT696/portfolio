@@ -508,7 +508,9 @@ async function saveProjects() {
   try {
     const jsonStr = JSON.stringify(projects, null, 2);
     const bytes = new TextEncoder().encode(jsonStr);
-    const content = btoa(String.fromCharCode(...bytes));
+    let binary = '';
+    for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+    const content = btoa(binary);
     const body = {
       message: `Admin: update featured projects (${new Date().toISOString().slice(0,10)})`,
       content,
