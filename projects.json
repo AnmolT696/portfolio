@@ -130,7 +130,7 @@
   },
   {
     "id": "chatwood",
-    "active": true,
+    "active": false,
     "order": 8,
     "sector": "Residential · Remediation",
     "value": "",
