@@ -1,0 +1,408 @@
+{
+  "meta": {
+    "name": "Anmol Tanwar",
+    "title": "Anmol Tanwar — Structural Engineer GIStructE",
+    "navBadge": "GIStructE · MIStructE in Progress",
+    "footerLeft": "© 2026 Anmol Tanwar GIStructE",
+    "footerMid": "Graduate Structural Engineer · Manchester, UK",
+    "footerRight": "MIStructE in Progress"
+  },
+
+  "hero": {
+    "eyebrow": "Graduate Structural Engineer",
+    "firstName": "Anmol",
+    "lastName": "Tanwar",
+    "desc": "Structural engineer with 2+ years of UK experience delivering technically demanding structural projects across NHS healthcare, commercial, and residential sectors in Greater Manchester. Available for structural engineer role.",
+    "ctaPrimary": { "label": "View Projects", "href": "#projects" },
+    "ctaSecondary": { "label": "Get in Touch", "href": "mailto:anmoltanwar12@outlook.com" },
+    "photo": "your-photo.jpg",
+    "credentials": [
+      { "num": "01", "title": "Tekla Structural Designer · STAAD Pro · ETABS · Midas Gen", "sub": "FEM Software Expertise" },
+      { "num": "02", "title": "BS-EN Eurocodes · British Standards · Indian Standards", "sub": "Design Code Proficiency" },
+      { "num": "03", "title": "RIBA Stage 1–5 · NHS Live Environments · Temporary Works", "sub": "Project Delivery" },
+      { "num": "04", "title": "Python · MATLAB · AutoCAD · BIM Workflows", "sub": "Computational & Digital Tools" },
+      { "num": "05", "title": "IStructE Chair, NW Young Members Group · CROSS UK Volunteer", "sub": "Professional Leadership" }
+    ],
+    "awards": [
+      { "label": "🏆 Recognition", "text": "Invited to IStructE Hot Pot Supper & received prize from Mohamed Al-Dah, President of the Institution of Structural Engineers, following a technical presentation at the Young Members Presentation Event — November 2024." },
+      { "label": "⭐ Recent Achievement", "text": "IStructE Chartership Examination — Passed — April 2026" }
+    ]
+  },
+
+  "stats": [
+    { "n": "2+",    "label": "Years UK Experience" },
+    { "n": "£15M+", "label": "Project Value Delivered" },
+    { "n": "10+",   "label": "Major Projects" },
+    { "n": "5",     "label": "FEM Tools" },
+    { "n": "NHS",   "label": "Healthcare Specialist" }
+  ],
+
+  "about": {
+    "photo": "anmol-professional.jpg",
+    "paragraphs": [
+      "I am a Graduate Structural Engineer (GIStructE) with over two years of UK consultancy experience at CCS Consulting, Manchester, where I have delivered structural designs from concept to construction across NHS healthcare, commercial, and residential sectors.",
+      "My work spans concrete, steel, timber, and masonry design to BS-EN Eurocodes and British Standards, with specialist experience in RAAC survey and remediation across live NHS hospitals in North West England — one of the most technically and logistically demanding environments in the industry.",
+      "Beyond engineering design, I develop Python automation tools to streamline workflows, and I actively contribute to the profession as Chair of the IStructE Northwest Young Members Group and as a CROSS UK Safety Report volunteer.",
+      "I am actively progressing toward MIStructE chartership and am open to roles that combine structural engineering rigour with innovative, high-impact projects."
+    ],
+    "skills": [
+      { "group": "Structural Software", "items": ["Tekla Structural Designer","STAAD Pro","ETABS","Midas Gen","Ansys / Robot (exposure)","Tekla Tedds"] },
+      { "group": "Design Codes",        "items": ["BS-EN Eurocodes","British Standards","Indian Standards (IS)","RIBA Stage 1–5","NBS Specifications"] },
+      { "group": "BIM & CAD",           "items": ["AutoCAD (Proficient)","Revit Structure","BIM360 / ACC","Dynamo (Awareness)"] },
+      { "group": "Computational",       "items": ["Python (Working)","MATLAB (Proficient)","LabVIEW / NI myRIO","MS Excel / VBA"] }
+    ]
+  },
+
+  "experience": [
+    {
+      "period": "Jan 2024 – Jan 2026", "org": "CCS Consulting", "location": "Manchester, UK",
+      "role": "Graduate Structural Engineer", "badge": "GIStructE",
+      "desc": "Delivered structural design from RIBA Stage 1 to Stage 5 across NHS hospitals, industrial, and residential projects in Greater Manchester — working within live operational facilities throughout all construction phases. Produced designs in concrete, steel, timber, and masonry to Eurocodes. Conducted embodied carbon calculations, produced engineering reports, attended design team meetings and site visits. Developed Python automation tools to streamline engineering workflows and delivered internal CPD sessions.",
+      "projects": ["Wythenshawe Hospital","Manchester Royal Infirmary","North Manchester General","Withington CDC","TGH 12-14 Extension"]
+    },
+    {
+      "period": "Aug – Dec 2023", "org": "CCS Consulting", "location": "Manchester, UK",
+      "role": "Intern Structural Engineer", "badge": "Internship",
+      "desc": "Conducted structural surveys of existing and listed buildings, performed hand calculations to BS-EN Eurocodes for concrete, steel, timber, and masonry. Prepared drawings across RIBA Stages 1–5 in AutoCAD, assisted with technical report writing, and produced stability calculations for temporary demountable structures.",
+      "projects": []
+    },
+    {
+      "period": "Jan – Jul 2022", "org": "P.C. Ragtah & Associates", "location": "India",
+      "role": "Intern Structural Engineer", "badge": "Internship",
+      "desc": "Modelled and analysed structures using STAAD Pro and ETABS, assisting with design of RC foundations, retaining walls, beams, columns, slabs, and staircases. Prepared Stage 4 and Stage 5 design and construction documents.",
+      "projects": []
+    },
+    {
+      "period": "Jun – Jul 2018", "org": "Municipal Corporation of Delhi", "location": "Delhi, India",
+      "role": "Quality Check Trainee", "badge": "Training",
+      "desc": "Conducted material testing on an active 100-bed construction site, verifying compliance of concrete and structural materials against Indian Standard codes.",
+      "projects": []
+    }
+  ],
+
+  "education": [
+    { "degree": "MSc Structural Engineering", "uni": "The University of Manchester", "year": "2022 – 2023 · United Kingdom", "gpa": "GPA: 2.59 / 4.00", "highlight": "Dynamic behaviour of steel and concrete structures, earthquake and fire engineering. Dynamic study on Merchants Bridge using NI myRIO and LabVIEW/MATLAB — scored 77.5/100. Concrete Centre competition — scored 84.2/100. Won Best Structural Design Award." },
+    { "degree": "B.Tech Civil Engineering", "uni": "SGT University, India", "year": "2018 – 2022 · India", "gpa": "GPA: 3.15 / 4.00", "highlight": "Structural analysis and design of concrete and steel structures, sustainable development. Major project: 6-month industrial training and design of G+4 residential building." },
+    { "degree": "Diploma in Civil Engineering", "uni": "Chhotu Ram Rural Institute of Technology", "year": "2015 – 2018 · India", "gpa": "GPA: 3.20 / 4.00", "highlight": "Foundation in civil engineering principles and construction practice." }
+  ],
+
+  "leadership": [
+    { "org": "IStructE — Institution of Structural Engineers", "role": "Chair, Northwest Young Members Group", "period": "January 2026 – Present", "desc": "Setting strategic direction and fostering professional development for emerging structural engineers across the Northwest region. Chairing monthly committee meetings, planning and coordinating professional events and site visits, managing logistics and regional communications." },
+    { "org": "IStructE — Institution of Structural Engineers", "role": "Vice Chair, Northwest Young Members Group", "period": "January – December 2025", "desc": "Collaborated with Prof. Jonathan Hayes at the University of Salford to contribute to development of a structural behaviour course for undergraduate and postgraduate students. Supported delivery of professional events and site visits." },
+    { "org": "CROSS UK", "role": "Early Career Volunteer", "period": "April 2026 – Present", "desc": "Attending expert panel quarterly meetings and contributing to the production of CROSS Safety Reports. Preparing communication materials and presentation to expert panels to improve structural safety awareness across the profession." },
+    { "org": "University of Manchester / IStructE YMG", "role": "Student Representative", "period": "2022 – Present", "desc": "Served as MSc Structural Engineering Student Representative at the University of Manchester. Led a 6-member team in the Concrete Centre Design Competition." }
+  ],
+
+  "awards": [
+    { "icon": "🏆", "photo": "istruct-event.png",     "title": "IStructE Young Members Presentation — Prize Winner", "body": "Recognised for the quality of a technical paper at the Institution of Structural Engineers Young Members Presentation event. Invited to attend the IStructE Hot Pot Supper and received a prize of recognition from Mohamed Al-Dah, President of the Institution of Structural Engineers.", "year": "November 2024", "dark": true  },
+    { "icon": "★",  "photo": "best-design-award.jpg", "title": "Best Structural Design — University of Manchester",   "body": "Awarded Best Structural Design during MSc Structural Engineering at The University of Manchester for leading a 6-member interdisciplinary team to design a 6-storey precast elliptical office building. Concrete Centre competition score: 84.2/100.", "year": "2023", "dark": false },
+    { "icon": "📋", "photo": "",                       "title": "IStructE Chartership Examination — Passed",           "body": "Passed the IStructE Chartered Membership (MIStructE) examination, demonstrating technical competence, professional experience, and commitment to the highest standards in structural engineering practice.", "year": "April 2026", "dark": false }
+  ],
+
+  "contact": {
+    "links": [
+      { "label": "anmoltanwar12@outlook.com", "href": "mailto:anmoltanwar12@outlook.com",          "arrow": "↗" },
+      { "label": "LinkedIn Profile",           "href": "https://www.linkedin.com/in/anmol-tanwar/", "arrow": "↗" },
+      { "label": "+91 70110 35039",            "href": "tel:+917011035039",                         "arrow": "↗" },
+      { "label": "Download CV (PDF)",          "href": "Anmol_Tanwar_CV.pdf",                       "arrow": "↓", "download": "Anmol_Tanwar_CV.pdf" },
+      { "label": "Download Portfolio (PDF)",   "href": "Anmol_Tanwar_Portfolio.pdf",                "arrow": "↓", "download": "Anmol_Tanwar_Portfolio.pdf" }
+    ]
+  },
+
+  "projects": [
+    {
+      "id": "eco-resort", "active": true, "order": 1,
+      "sector": "Seismic · India", "value": "",
+      "name": "Eco Resort — Seismic Zone V Structure",
+      "meta": "Rishikesh, India · 2022 · Stage 5",
+      "desc": "10,000 m² hotel in the Himalayas on sloped terrain in Seismic Zone V. Designed 8m counterfort retaining wall, RC frame with special shear walls, full STAAD.Pro modelling validated by hand.",
+      "tags": ["Seismic Design","STAAD Pro","Retaining Wall","IS Codes"],
+      "image": "Eco-resort-main.jpg", "imageAlt": "Eco Resort",
+      "url": "project-page.html?id=eco-resort",
+      "prev": "", "next": "wythenshawe",
+      "page": {
+        "sectorTag": "Seismic · India · Zone V",
+        "heroTitle": "Eco Resort —",
+        "heroSubtitle": "Seismic Zone V Structure",
+        "metaLocation": "Rishikesh, Uttarakhand, India",
+        "metaYear": "2022",
+        "metaStatus": "Completed",
+        "metaEmployer": "CCS Consulting",
+        "metaClient": "Private Developer",
+        "metaContractor": "—",
+        "summaryParagraphs": [
+          "A 10,000 m² luxury eco-resort situated on steeply sloped terrain in Rishikesh, Uttarakhand — classified as Seismic Zone V under IS 1893. The project demanded a fully integrated seismic and geotechnical design strategy to safely accommodate the hotel programme on a challenging hillside site.",
+          "An 8m-tall counterfort retaining wall was designed to manage the significant level change across the site. Both STAAD.Pro finite-element modelling and independent hand calculations were completed to validate the design, ensuring compliance with IS 456 and IS 1893 load combinations.",
+          "The hotel superstructure adopts a reinforced concrete moment frame with special shear walls positioned to resist lateral seismic forces. Shear wall placement was optimised to minimise torsional irregularity in plan. A full response spectrum analysis was carried out using the IS 1893 design spectrum for Zone V."
+        ],
+        "photos": [
+          { "src": "Eco-resort-1.jpg", "alt": "Eco Resort photo 1" },
+          { "src": "Eco-resort-2.jpg", "alt": "Eco Resort photo 2" },
+          { "src": "Eco-resort-3.jpg", "alt": "Eco Resort photo 3" }
+        ]
+      }
+    },
+    {
+      "id": "wythenshawe", "active": true, "order": 2,
+      "sector": "Healthcare · NHS", "value": "≈ £15M GBP",
+      "name": "Wythenshawe Hospital — Maternity Refurbishment",
+      "meta": "Manchester, UK · 2023–Ongoing · Stage 1–5",
+      "desc": "RAAC roof replacement across four phases, temporary modular buildings on raft foundations, steel-framed corridors, chimney demolition, and civil drainage.",
+      "tags": ["RAAC","Steel Frame","Timber Roof","Eurocode"],
+      "image": "Wythenshawe-hospital-main.jpg", "imageAlt": "Wythenshawe Hospital",
+      "url": "project-page.html?id=wythenshawe",
+      "prev": "eco-resort", "next": "mri-gantry",
+      "page": {
+        "sectorTag": "Healthcare · NHS · RIBA Stage 1–5",
+        "heroTitle": "Wythenshawe Hospital —",
+        "heroSubtitle": "Maternity Refurbishment",
+        "metaLocation": "Wythenshawe, Manchester, UK",
+        "metaYear": "2023–Ongoing",
+        "metaStatus": "Ongoing",
+        "metaEmployer": "CCS Consulting",
+        "metaClient": "MFT NHS Trust",
+        "metaContractor": "Various",
+        "summaryParagraphs": [
+          "A large-scale phased refurbishment of the maternity unit at Wythenshawe Hospital, delivered across four construction phases to maintain live clinical operations throughout. The project encompasses RAAC roof replacement, modular temporary accommodation, new steel-framed link corridors, chimney demolition, and associated civil drainage works.",
+          "Extensive RAAC planks were identified across the maternity wing roofs. Phased replacement was designed using a new timber roof structure, minimising impact on live wards below. Temporary propping strategies were developed for each phase to maintain structural integrity during the works.",
+          "Two-storey modular accommodation units were designed on new raft foundations to provide swing space for displaced clinical functions during construction. New steel-framed link corridors were designed to maintain hospital connectivity between phases, and a redundant chimney stack was assessed for staged demolition."
+        ],
+        "photos": [
+          { "src": "Wythenshawe-hospital-1.jpg", "alt": "Wythenshawe Hospital photo 1" },
+          { "src": "Wythenshawe-hospital-2.jpg", "alt": "Wythenshawe Hospital photo 2" },
+          { "src": "Wythenshawe-hospital-3.jpg", "alt": "Wythenshawe Hospital photo 3" }
+        ]
+      }
+    },
+    {
+      "id": "mri-gantry", "active": true, "order": 3,
+      "sector": "Healthcare · NHS", "value": "",
+      "name": "MRI Eduction North — Steel Gantry & Staircase",
+      "meta": "Manchester Royal Infirmary · 2025–Ongoing · Stage 4",
+      "desc": "New external staircase and steel grillage platform. Minipile foundations coordinated around 750mm drain at 3.6m depth. Victorian masonry assessment.",
+      "tags": ["Minipiles","Steel Gantry","Masonry"],
+      "image": "MRI-Ed-North-Main.jpg", "imageAlt": "MRI Eduction North",
+      "url": "project-page.html?id=mri-gantry",
+      "prev": "wythenshawe", "next": "raac",
+      "page": {
+        "sectorTag": "Healthcare · NHS · RIBA Stage 4",
+        "heroTitle": "MRI Education North —",
+        "heroSubtitle": "Steel Gantry & Staircase",
+        "metaLocation": "Manchester Royal Infirmary, UK",
+        "metaYear": "2025–Ongoing",
+        "metaStatus": "Ongoing",
+        "metaEmployer": "CCS Consulting",
+        "metaClient": "MFT NHS Trust",
+        "metaContractor": "TBC",
+        "summaryParagraphs": [
+          "Design of a new external steel gantry platform and escape staircase serving the MRI Education North building at Manchester Royal Infirmary. The project required careful coordination of minipile foundations around a 750mm diameter drain at 3.6m depth, and structural assessment of the existing Victorian masonry building interface.",
+          "A new steel grillage platform and escape staircase were designed to serve the upper floors of the existing building. The steel arrangement was developed to avoid conflict with live clinical areas and minimise work at height during construction.",
+          "Standard pad foundations were ruled out due to the existing 750mm diameter drain at shallow depth. Minipile foundations were designed and coordinated with the drainage team to thread safely between services. The existing Victorian masonry façade was assessed for its ability to accept new structural loads from the gantry connections."
+        ],
+        "photos": [
+          { "src": "MRI-Ed-North-1.jpg", "alt": "MRI Education North photo 1" },
+          { "src": "MRI-Ed-North-2.jpg", "alt": "MRI Education North photo 2" },
+          { "src": "MRI-Ed-North-3.jpg", "alt": "MRI Education North photo 3" }
+        ]
+      }
+    },
+    {
+      "id": "raac", "active": true, "order": 4,
+      "sector": "Healthcare · RAAC", "value": "",
+      "name": "RAAC Survey & Remediation — North West NHS",
+      "meta": "Multiple NHS Hospitals · 2023–Ongoing",
+      "desc": "All phases of RAAC identification, intrusive investigation, emergency propping, steel/timber remedials, and roof replacement. Currently leading surveys as main engineer.",
+      "tags": ["RAAC","Structural Surveys","Remedial Design"],
+      "image": "RAAC-survey-Main.jpg", "imageAlt": "RAAC Projects",
+      "url": "project-page.html?id=raac",
+      "prev": "mri-gantry", "next": "delhi",
+      "page": {
+        "sectorTag": "Healthcare · NHS · RAAC Remediation",
+        "heroTitle": "RAAC Survey & Remediation —",
+        "heroSubtitle": "North West NHS Hospitals",
+        "metaLocation": "Multiple Sites, North West England",
+        "metaYear": "2023–Ongoing",
+        "metaStatus": "Ongoing",
+        "metaEmployer": "CCS Consulting",
+        "metaClient": "Multiple NHS Trusts",
+        "metaContractor": "Various",
+        "summaryParagraphs": [
+          "Leading RAAC survey and remediation work across multiple NHS hospital sites in the North West of England. Responsibilities span all project phases from initial identification and intrusive investigation through to emergency propping, remedial design, and full roof replacement.",
+          "Conducted intrusive and non-intrusive structural surveys to identify and map RAAC plank locations across hospital roofs. Produced condition assessments and risk ratings for Trust facilities teams, and prioritised panels for emergency intervention. Where immediate risk was identified, emergency temporary propping schemes were developed and issued for installation.",
+          "Designed steel and timber remedial schemes for RAAC replacement, including new roof structures spanning between existing steel frames. Full specification and drawing packages were produced for contractor procurement. All work coordinated with live ward operations to maintain clinical services throughout."
+        ],
+        "photos": [
+          { "src": "RAAC-survey-1.jpg", "alt": "RAAC survey photo 1" },
+          { "src": "RAAC-survey-2.jpg", "alt": "RAAC survey photo 2" },
+          { "src": "RAAC-survey-3.jpg", "alt": "RAAC survey photo 3" }
+        ]
+      }
+    },
+    {
+      "id": "delhi", "active": true, "order": 5,
+      "sector": "Seismic · India", "value": "",
+      "name": "23-Storey Residential — Seismic Assessment",
+      "meta": "New Delhi / Noida, India · 2022",
+      "desc": "Modelled two high-rise buildings in ETABS and STAAD Pro. Response spectrum analysis identified shear centre offset. Proposed remedial slab additions and designed raft foundations using FE analysis.",
+      "tags": ["ETABS","Response Spectrum","Raft FE Analysis"],
+      "image": "23-Storey-Residential-Main.jpg", "imageAlt": "23-Storey Building",
+      "url": "project-page.html?id=delhi",
+      "prev": "raac", "next": "bebby-house",
+      "page": {
+        "sectorTag": "Seismic · India · Zone IV",
+        "heroTitle": "23-Storey Residential —",
+        "heroSubtitle": "Seismic Assessment",
+        "metaLocation": "New Delhi / Noida, India",
+        "metaYear": "2022",
+        "metaStatus": "Completed",
+        "metaEmployer": "P.C. Ragtah & Associates",
+        "metaClient": "Private Developer",
+        "metaContractor": "—",
+        "summaryParagraphs": [
+          "Seismic assessment of two 23-storey residential towers in Noida, India (Seismic Zone IV). Full 3D structural models were built in ETABS and STAAD Pro, with response spectrum analysis revealing a critical shear centre offset requiring remedial intervention.",
+          "Complete 3D models of both towers were constructed in ETABS and STAAD Pro, capturing the full floor-by-floor geometry and structural member layout. Dynamic response spectrum analysis to IS 1893 was conducted for both towers, revealing a significant offset between centre of mass and centre of stiffness, generating torsional irregularity and amplified lateral demands.",
+          "Remedial slab additions were proposed to re-centre the stiffness distribution and reduce torsional response. Raft foundation design was completed using FE plate analysis, with punching shear and settlement checks carried out to verify structural adequacy."
+        ],
+        "photos": [
+          { "src": "23-Storey-Residential-1.jpg", "alt": "23-Storey Residential photo 1" },
+          { "src": "23-Storey-Residential-2.jpg", "alt": "23-Storey Residential photo 2" },
+          { "src": "23-Storey-Residential-3.jpg", "alt": "23-Storey Residential photo 3" }
+        ]
+      }
+    },
+    {
+      "id": "bebby-house", "active": true, "order": 6,
+      "sector": "Academic · Award-Winning", "value": "",
+      "name": "Bebby House — Precast Elliptical Office Building",
+      "meta": "University of Manchester · 2022 · Team Leader",
+      "desc": "Led 6-member team designing a 6-storey elliptical precast office building. Midas Gen analysis. Won Best Structural Design award at MSc graduation. Score: 84.2/100.",
+      "tags": ["Midas Gen","Precast","Raft Foundation","Team Lead"],
+      "image": "Beeby-House-Main.jpg", "imageAlt": "Bebby House",
+      "url": "project-page.html?id=bebby-house",
+      "prev": "delhi", "next": "withington",
+      "page": {
+        "sectorTag": "Academic · Award-Winning · Precast Concrete",
+        "heroTitle": "Bebby House —",
+        "heroSubtitle": "Precast Elliptical Office Building",
+        "metaLocation": "Manchester",
+        "metaYear": "2022",
+        "metaStatus": "University Project",
+        "metaEmployer": "University of Manchester",
+        "metaClient": "—",
+        "metaContractor": "—",
+        "summaryParagraphs": [
+          "As part of the second semester of the MSc Structural Engineering programme, I led a six-member team tasked with designing a multi-storey building through several key stages: conceptual design presentation to the MSc cohort, conceptual design submission, detailed design development and presentation, and a final submission comprising a comprehensive design report and five AutoCAD drawings.",
+          "The proposed structure was an elliptical building measuring 81 m in length, 25 m in width, and six storeys in height, situated on a brownfield site in the Northwest of England. I led the team with a focus on effective communication and regular coordination meetings to ensure all submission deadlines were met. I also developed a conceptual design for a basement foundation utilising in-situ concrete and CFA piles, in collaboration with a sub-team of three members.",
+          "I took responsibility for the structural analysis using Midas Gen, supervised the drafting work, and designed the foundations, retaining walls, and shear cores through hand calculations, ensuring accuracy and efficient workload distribution across the team. Our design incorporated a raft foundation and precast construction system to expedite the build programme and reduce overall costs. The project culminated in the receipt of the Best Structural Design award at the university graduation ceremony. Structural summary: longest span 8.15 m; raft foundation 800 mm thick; precast L and T beams supporting 200 mm thick hollow core slabs; precast columns up to 650×650 mm in C40/50 concrete; shear cores 300 mm thick with openings."
+        ],
+        "photos": [
+          { "src": "Beeby-House-1.jpg", "alt": "Beeby-House 1" },
+          { "src": "Beeby-House-2.jpg", "alt": "Beeby-House 2" },
+          { "src": "Beeby-House-3.jpg", "alt": "Beeby-House 3" },
+          { "src": "Beeby-House-4.jpg", "alt": "Beeby-House 4" },
+          { "src": "Beeby-House-5.jpg", "alt": "Beeby-House 5" },
+          { "src": "Beeby-House-6.jpg", "alt": "Beeby-House 6" },
+          { "src": "Beeby-House-7.jpg", "alt": "Beeby-House 7" },
+          { "src": "Beeby-House-8.jpg", "alt": "Beeby-House 8" },
+          { "src": "Beeby-House-9.jpg", "alt": "Beeby-House 9" }
+        ]
+      }
+    },
+    {
+      "id": "withington", "active": true, "order": 7,
+      "sector": "Commercial · New Build", "value": "",
+      "name": "Withington CDC — Composite Steel Frame",
+      "meta": "Manchester · 2024–Ongoing · Stage 4–5",
+      "desc": "Two-storey composite steel frame on pile foundations. Python script automating Tekla load post-processing — reducing engineer time from hours to 15 minutes.",
+      "tags": ["Python Automation","Composite","Pile Foundations"],
+      "image": "Withington-CDC-Main.jpg", "imageAlt": "Withington CDC",
+      "url": "project-page.html?id=withington",
+      "prev": "bebby-house", "next": "chatwood",
+      "page": {
+        "sectorTag": "Commercial · New Build · RIBA Stage 4–5",
+        "heroTitle": "Withington CDC —",
+        "heroSubtitle": "Composite Steel Frame",
+        "metaLocation": "Withington, Manchester, UK",
+        "metaYear": "2024–Ongoing",
+        "metaStatus": "Ongoing",
+        "metaEmployer": "CCS Consulting",
+        "metaClient": "NHS / Community Diagnostics",
+        "metaContractor": "TBC",
+        "summaryParagraphs": [
+          "Design of a two-storey composite steel-framed Community Diagnostics Centre on pile foundations in Withington, Manchester. The project included development of a Python automation script for Tekla Structural Designer load post-processing, reducing repetitive engineer work from several hours to 15 minutes.",
+          "The primary structure comprises a two-storey composite steel frame, with composite deck floors designed to maximise span efficiency and reduce steel tonnage. Column and beam sizes were optimised through iterative Tekla Structural Designer analysis. Ground conditions required a piled foundation solution, with pile caps coordinated around the building grid to suit column positions and service routes.",
+          "A Python script was developed to automate the extraction and post-processing of Tekla Structural Designer load outputs. The script eliminated repetitive manual work, reducing the task from several hours to approximately 15 minutes per design iteration — significantly accelerating the project programme and reducing the risk of manual transcription errors."
+        ],
+        "photos": [
+          { "src": "Withington-CDC-1.jpg", "alt": "Withington CDC photo 1" },
+          { "src": "Withington-CDC-2.jpg", "alt": "Withington CDC photo 2" },
+          { "src": "Withington-CDC-3.jpg", "alt": "Withington CDC photo 3" }
+        ]
+      }
+    },
+    {
+      "id": "chatwood", "active": true, "order": 8,
+      "sector": "Residential · Remediation", "value": "",
+      "name": "21 Chatwood Road — Subsidence & Underpinning",
+      "meta": "Manchester · 2025 · Completed",
+      "desc": "Victorian brick masonry terraced house with tree-root subsidence. Piled and mass concrete underpinning options developed. Mass concrete taken to full detailed design with NBS spec.",
+      "tags": ["Underpinning","Masonry","NBS Spec"],
+      "image": "21-Chatwoodroad-Main.jpg", "imageAlt": "21 Chatwood Road",
+      "url": "project-page.html?id=chatwood",
+      "prev": "withington", "next": "mri-plantroom",
+      "page": {
+        "sectorTag": "Residential · Remediation · Underpinning",
+        "heroTitle": "21 Chatwood Road —",
+        "heroSubtitle": "Subsidence & Underpinning",
+        "metaLocation": "Manchester, UK",
+        "metaYear": "2025",
+        "metaStatus": "Completed",
+        "metaEmployer": "CCS Consulting",
+        "metaClient": "Private Homeowner",
+        "metaContractor": "TBC",
+        "summaryParagraphs": [
+          "Structural investigation and underpinning design for a Victorian brick masonry terraced house suffering tree-root induced subsidence in Manchester. Both piled and mass concrete underpinning options were developed, with mass concrete taken through to full detailed design with NBS specification.",
+          "A site investigation was undertaken to establish the extent and cause of subsidence. Tree root intrusion into shallow clay soils was identified as the primary cause of differential settlement, with crack mapping and level surveys used to quantify movement across the structure.",
+          "Two underpinning options were developed and compared: a piled underpinning scheme and a traditional mass concrete approach. The mass concrete option was selected and taken to full detailed design, including a staged construction sequence to minimise risk to the existing structure and neighbouring properties. A full NBS specification was produced for contractor tender."
+        ],
+        "photos": [
+          { "src": "21-Chatwoodroad-1.jpg", "alt": "21 Chatwood Road photo 1" },
+          { "src": "21-Chatwoodroad-2.jpg", "alt": "21 Chatwood Road photo 2" },
+          { "src": "21-Chatwoodroad-3.jpg", "alt": "21 Chatwood Road photo 3" }
+        ]
+      }
+    },
+    {
+      "id": "mri-plantroom", "active": true, "order": 9,
+      "sector": "Healthcare · NHS", "value": "",
+      "name": "MRI Plantroom 2, 3 & 5 Refurbishment",
+      "meta": "Manchester Royal Infirmary · 2025–Ongoing · Stage 4",
+      "desc": "RAAC in steel-framed plantrooms. Structural frame assessment, natural frequency checks for MRI compatibility, RAAC replacement strategy and chiller upgrade design.",
+      "tags": ["Tekla TSD","Steel Design","RAAC"],
+      "image": "MRI-Plantroom-main.jpg", "imageAlt": "MRI Plantroom",
+      "url": "project-page.html?id=mri-plantroom",
+      "prev": "chatwood", "next": "",
+      "page": {
+        "sectorTag": "Healthcare · NHS · RIBA Stage 4",
+        "heroTitle": "MRI Plantroom 2, 3 & 5 —",
+        "heroSubtitle": "Refurbishment",
+        "metaLocation": "Manchester Royal Infirmary, UK",
+        "metaYear": "2025–Ongoing",
+        "metaStatus": "Ongoing",
+        "metaEmployer": "CCS Consulting",
+        "metaClient": "MFT NHS Trust",
+        "metaContractor": "TBC",
+        "summaryParagraphs": [
+          "Structural assessment and refurbishment design for three plant room structures at Manchester Royal Infirmary containing RAAC. The scope includes structural frame assessment, natural frequency checks for MRI scanner compatibility, RAAC replacement strategy, and chiller upgrade design.",
+          "The existing steel-framed plantroom structures were assessed for their structural adequacy under both existing and proposed loading from new mechanical plant. Natural frequency analysis was undertaken to verify compatibility with adjacent MRI scanners — a critical constraint given the sensitivity of MRI equipment to vibration.",
+          "A RAAC replacement strategy was developed for each plantroom, with phased replacement designed to maintain building envelope integrity during construction. New chiller support steelwork was designed and detailed, with connections to the existing frame checked and strengthened where required."
+        ],
+        "photos": [
+          { "src": "MRI-Plantroom-1.jpg", "alt": "MRI Plantroom photo 1" },
+          { "src": "MRI-Plantroom-2.jpg", "alt": "MRI Plantroom photo 2" },
+          { "src": "MRI-Plantroom-3.jpg", "alt": "MRI Plantroom photo 3" }
+        ]
+      }
+    }
+  ]
+}

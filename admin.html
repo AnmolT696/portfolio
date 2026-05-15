@@ -3,581 +3,820 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin — Anmol Tanwar Portfolio</title>
+<title>Admin Dashboard — Anmol Tanwar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --ink: #0f0f0f; --paper: #f4f1ec; --warm: #e8e3d9;
-    --accent: #b5813a; --accent-light: #d4a55a; --mid: #7a7670;
-    --border: #d6d0c6; --dark: #1a1814;
-  }
-  body { background: var(--paper); color: var(--ink); font-family: 'DM Mono', monospace; font-size: 12.5px; line-height: 1.7; }
-
-  /* HEADER */
-  header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 24px 52px; border-bottom: 1px solid var(--border);
-    background: rgba(244,241,236,0.96); position: sticky; top: 0; z-index: 10;
-  }
-  .logo { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 300; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--ink); }
-  .logo span { color: var(--accent); font-style: italic; }
-  .header-right { display: flex; align-items: center; gap: 16px; }
-  .badge-admin { font-size: 9px; letter-spacing: 0.14em; color: var(--accent); border: 1px solid var(--accent); padding: 4px 10px; text-transform: uppercase; }
-  .back-link { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--mid); transition: color 0.2s; }
-  .back-link:hover { color: var(--ink); }
-
-  /* MAIN LAYOUT */
-  main { max-width: 1100px; margin: 0 auto; padding: 52px; }
-
-  /* SETUP PANEL */
-  .setup-panel {
-    border: 1px solid var(--border); padding: 32px 36px; margin-bottom: 48px;
-    background: var(--warm);
-  }
-  .setup-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; margin-bottom: 8px; }
-  .setup-sub { font-size: 11px; color: var(--mid); line-height: 1.9; margin-bottom: 24px; }
-  .setup-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
-  .field-group { display: flex; flex-direction: column; gap: 6px; }
-  .field-group label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
-  .field-group input {
-    background: var(--paper); border: 1px solid var(--border); padding: 10px 14px;
-    font-family: 'DM Mono', monospace; font-size: 11px; color: var(--ink);
-    outline: none; width: 100%;
-  }
-  .field-group input:focus { border-color: var(--accent); }
-  .field-group input[type="password"] { letter-spacing: 0.1em; }
-  .setup-note { font-size: 10px; color: var(--mid); line-height: 1.8; padding: 12px 16px; border-left: 2px solid var(--accent); margin-bottom: 20px; }
-  .setup-note a { color: var(--accent); }
-  .btn-connect {
-    padding: 12px 28px; font-family: 'DM Mono', monospace;
-    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-    background: var(--ink); color: var(--paper); border: none; cursor: pointer;
-    transition: background 0.2s;
-  }
-  .btn-connect:hover { background: var(--accent); }
-  .btn-connect:disabled { background: var(--mid); cursor: not-allowed; }
-
-  /* STATUS BAR */
-  .status-bar {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 32px; padding: 16px 20px; border: 1px solid var(--border);
-  }
-  .status-left { display: flex; align-items: center; gap: 16px; }
-  .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--mid); }
-  .status-dot.connected { background: #5a9a5a; }
-  .status-dot.error { background: #c0392b; }
-  .status-text { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mid); }
-  .counter-pill {
-    font-size: 10px; letter-spacing: 0.12em; color: var(--accent);
-    border: 1px solid rgba(181,129,58,0.4); padding: 4px 12px;
-  }
-  .counter-pill.at-limit { background: rgba(181,129,58,0.1); }
-
-  /* SECTION HEADER */
-  .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
-  .section-num { font-size: 9px; letter-spacing: 0.22em; color: var(--accent); }
-  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; }
-  .section-rule { flex: 1; height: 1px; background: var(--border); }
-
-  /* PROJECTS GRID */
-  .projects-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 8px; background: transparent; margin-bottom: 48px;
-  }
-  .proj-card {
-    background: transparent; padding: 28px 24px;
-    position: relative; cursor: pointer;
-    transition: background 0.2s; user-select: none;
-    border: 1px dashed var(--border);
-  }
-  .proj-card:hover { background: var(--warm); border-style: solid; }
-  .proj-card.active { background: var(--dark); border: none; }
-  .proj-card.active:hover { background: #232019; }
-
-  /* Toggle indicator */
-  .proj-toggle {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 14px;
-  }
-  .toggle-track {
-    width: 32px; height: 18px; border-radius: 9px;
-    background: var(--border); position: relative;
-    transition: background 0.2s; flex-shrink: 0;
-  }
-  .proj-card.active .toggle-track { background: var(--accent); }
-  .toggle-thumb {
-    width: 12px; height: 12px; border-radius: 50%;
-    background: var(--mid); position: absolute;
-    top: 3px; left: 3px; transition: left 0.2s, background 0.2s;
-  }
-  .proj-card.active .toggle-thumb { left: 17px; background: #fff; }
-  .toggle-label { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mid); }
-  .proj-card.active .toggle-label { color: var(--accent); }
-
-  .proj-sector { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; display: block; opacity: 0.5; }
-  .proj-card.active .proj-sector { color: var(--accent-light); opacity: 1; }
-  .proj-name { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 400; line-height: 1.25; margin-bottom: 8px; color: var(--mid); transition: color 0.2s; }
-  .proj-card.active .proj-name { color: #fff; }
-  .proj-meta { font-size: 10px; color: var(--border); letter-spacing: 0.06em; }
-  .proj-card.active .proj-meta { color: rgba(255,255,255,0.35); }
-  .proj-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
-  .ptag { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid var(--border); padding: 2px 7px; color: var(--border); }
-  .proj-card.active .ptag { border-color: rgba(255,255,255,0.12); color: rgba(255,255,255,0.35); }
-
-  /* ORDER badge */
-  .order-badge {
-    position: absolute; top: 14px; right: 14px;
-    font-size: 9px; letter-spacing: 0.12em; width: 24px; height: 24px;
-    border: 1px solid var(--border); display: flex; align-items: center; justify-content:center;
-    color: var(--mid);
-  }
-  .proj-card.active .order-badge { border-color: rgba(181,129,58,0.4); color: var(--accent); }
-
-  /* ADD PROJECT CARD */
-  .add-card {
-    background: var(--paper); padding: 28px 24px;
-    border: 1px dashed var(--border); cursor: pointer;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 10px; min-height: 180px; transition: border-color 0.2s;
-  }
-  .add-card:hover { border-color: var(--accent); }
-  .add-icon { font-size: 24px; color: var(--border); }
-  .add-card:hover .add-icon { color: var(--accent); }
-  .add-text { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); }
-
-  /* ADD FORM */
-  .add-form-wrap { display: none; margin-bottom: 48px; border: 1px solid var(--accent); padding: 32px 36px; background: var(--warm); }
-  .add-form-wrap.open { display: block; }
-  .add-form-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; margin-bottom: 24px; }
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
-  .form-grid.full { grid-template-columns: 1fr; }
-  .fg { display: flex; flex-direction: column; gap: 6px; }
-  .fg label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
-  .fg input, .fg textarea {
-    background: var(--paper); border: 1px solid var(--border); padding: 10px 14px;
-    font-family: 'DM Mono', monospace; font-size: 11px; color: var(--ink);
-    outline: none; width: 100%; resize: vertical;
-  }
-  .fg input:focus, .fg textarea:focus { border-color: var(--accent); }
-  .form-actions { display: flex; gap: 12px; margin-top: 20px; }
-  .btn-add { padding: 10px 24px; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; background: var(--ink); color: var(--paper); border: none; cursor: pointer; transition: background 0.2s; }
-  .btn-add:hover { background: var(--accent); }
-  .btn-cancel { padding: 10px 24px; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; background: transparent; color: var(--mid); border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; }
-  .btn-cancel:hover { border-color: var(--ink); color: var(--ink); }
-
-  /* SAVE FOOTER */
-  .save-footer {
-    position: sticky; bottom: 0;
-    background: rgba(244,241,236,0.96); border-top: 1px solid var(--border);
-    padding: 20px 52px; display: flex; align-items: center; justify-content: space-between;
-    backdrop-filter: blur(12px);
-  }
-  .save-info { font-size: 11px; color: var(--mid); }
-  .save-info strong { color: var(--ink); }
-  .save-actions { display: flex; gap: 12px; align-items: center; }
-  .btn-save {
-    padding: 12px 32px; font-family: 'DM Mono', monospace;
-    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-    background: var(--ink); color: var(--paper); border: none; cursor: pointer;
-    transition: background 0.2s;
-  }
-  .btn-save:hover { background: var(--accent); }
-  .btn-save:disabled { background: var(--mid); cursor: not-allowed; }
-  .save-status { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); }
-  .save-status.ok { color: #5a9a5a; }
-  .save-status.err { color: #c0392b; }
-
-  /* TOAST */
-  .toast {
-    position: fixed; bottom: 80px; right: 32px;
-    background: var(--dark); color: rgba(255,255,255,0.85);
-    padding: 14px 20px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-    opacity: 0; pointer-events: none; transition: opacity 0.3s;
-    border-left: 2px solid var(--accent);
-  }
-  .toast.show { opacity: 1; }
-
-  @media (max-width: 860px) {
-    header { padding: 18px 24px; }
-    main { padding: 32px 24px; }
-    .projects-grid { grid-template-columns: 1fr 1fr; }
-    .setup-fields, .form-grid { grid-template-columns: 1fr; }
-    .save-footer { padding: 16px 24px; flex-direction: column; gap: 12px; align-items: flex-start; }
-  }
-  @media (max-width: 560px) {
-    .projects-grid { grid-template-columns: 1fr; }
-  }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--ink:#0f0f0f;--paper:#f4f1ec;--warm:#e8e3d9;--accent:#b5813a;--mid:#7a7670;--border:#d6d0c6;--dark:#1a1814;}
+body{background:var(--paper);color:var(--ink);font-family:'DM Mono',monospace;font-size:12.5px;line-height:1.7;}
+/* HEADER */
+header{display:flex;align-items:center;justify-content:space-between;padding:20px 48px;border-bottom:1px solid var(--border);background:rgba(244,241,236,0.97);position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);}
+.logo{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;color:var(--ink);}
+.logo span{color:var(--accent);font-style:italic;}
+.badge-admin{font-size:9px;letter-spacing:0.14em;color:var(--accent);border:1px solid var(--accent);padding:4px 10px;text-transform:uppercase;}
+.back-link{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;color:var(--mid);transition:color .2s;}
+.back-link:hover{color:var(--ink);}
+/* LAYOUT */
+.shell{display:flex;min-height:calc(100vh - 65px);}
+/* SIDEBAR */
+.sidebar{width:220px;flex-shrink:0;border-right:1px solid var(--border);position:sticky;top:65px;height:calc(100vh - 65px);overflow-y:auto;padding:28px 0;}
+.sb-label{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);padding:0 24px 10px;display:block;}
+.sb-label.mt{margin-top:20px;padding-top:16px;border-top:1px solid var(--border);}
+.sb-nav{list-style:none;}
+.sb-nav li a{display:block;padding:10px 24px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;color:var(--mid);transition:color .2s,background .2s;border-left:2px solid transparent;}
+.sb-nav li a:hover{color:var(--ink);background:var(--warm);}
+.sb-nav li a.active{color:var(--accent);border-left-color:var(--accent);background:var(--warm);}
+/* CONTENT */
+.content{flex:1;padding:48px 52px 120px;max-width:900px;}
+/* GITHUB */
+.setup-panel{border:1px solid var(--border);padding:32px 36px;margin-bottom:48px;background:var(--warm);}
+.setup-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:8px;}
+.setup-sub{font-size:11px;color:var(--mid);line-height:1.9;margin-bottom:24px;}
+.setup-fields{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+.setup-note{font-size:10px;color:var(--mid);line-height:1.8;padding:12px 16px;border-left:2px solid var(--accent);margin-bottom:20px;}
+.setup-note a{color:var(--accent);}
+/* STATUS */
+.status-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px;padding:14px 20px;border:1px solid var(--border);}
+.status-left{display:flex;align-items:center;gap:12px;}
+.status-dot{width:8px;height:8px;border-radius:50%;background:var(--mid);}
+.status-dot.connected{background:#5a9a5a;}
+.status-dot.error{background:#c0392b;}
+.status-text{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);}
+/* PANELS */
+.panel{display:none;}
+.panel.active{display:block;}
+.panel-title{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;margin-bottom:8px;}
+.panel-sub{font-size:11px;color:var(--mid);line-height:1.9;margin-bottom:36px;padding-bottom:24px;border-bottom:1px solid var(--border);}
+/* FORMS */
+.fg{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
+.fg label{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);}
+.fg input,.fg textarea,.fg select{background:var(--paper);border:1px solid var(--border);padding:10px 14px;font-family:'DM Mono',monospace;font-size:11px;color:var(--ink);outline:none;width:100%;resize:vertical;}
+.fg input:focus,.fg textarea:focus{border-color:var(--accent);}
+.hint{font-size:9.5px;color:var(--mid);margin-top:4px;line-height:1.6;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-row.cols3{grid-template-columns:1fr 1fr 1fr;}
+/* CARDS */
+.item-card{border:1px solid var(--border);padding:28px 28px 20px;margin-bottom:16px;background:var(--paper);position:relative;}
+.item-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;cursor:pointer;}
+.item-card-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:400;}
+.item-card-meta{font-size:10px;color:var(--mid);margin-top:2px;}
+.item-card-toggle{font-size:13px;color:var(--mid);transition:transform .2s;}
+.item-card.collapsed .item-card-toggle{transform:rotate(-90deg);}
+.item-card.collapsed .item-card-body{display:none;}
+.btn-remove{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;background:transparent;border:1px solid var(--border);padding:5px 12px;color:var(--mid);cursor:pointer;transition:all .2s;}
+.btn-remove:hover{border-color:#c0392b;color:#c0392b;}
+.btn-add-item{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:0.16em;text-transform:uppercase;background:transparent;border:1px dashed var(--border);padding:12px 20px;color:var(--mid);cursor:pointer;width:100%;margin-bottom:32px;transition:all .2s;}
+.btn-add-item:hover{border-color:var(--accent);color:var(--accent);}
+/* PROJECTS LIST */
+.proj-card{border:1px solid var(--border);padding:18px 20px;margin-bottom:8px;background:var(--paper);display:flex;align-items:center;gap:16px;transition:background .2s;}
+.proj-card.active-proj{background:var(--dark);border-color:transparent;}
+.toggle-track{width:32px;height:18px;border-radius:9px;background:var(--border);position:relative;transition:background .2s;flex-shrink:0;cursor:pointer;}
+.proj-card.active-proj .toggle-track{background:var(--accent);}
+.toggle-thumb{width:12px;height:12px;border-radius:50%;background:var(--mid);position:absolute;top:3px;left:3px;transition:all .2s;}
+.proj-card.active-proj .toggle-thumb{left:17px;background:#fff;}
+.proj-card-info{flex:1;}
+.proj-card-name{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--mid);}
+.proj-card.active-proj .proj-card-name{color:#fff;}
+.proj-card-meta{font-size:10px;color:var(--border);}
+.proj-card:not(.active-proj) .proj-card-meta{color:var(--mid);}
+.btn-edit-proj{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;background:transparent;border:1px solid var(--border);padding:6px 14px;color:var(--mid);cursor:pointer;transition:all .2s;flex-shrink:0;}
+.btn-edit-proj:hover{border-color:var(--accent);color:var(--accent);}
+/* PROJECT PAGE EDITOR */
+.proj-page-editor{display:none;}
+.proj-page-editor.open{display:block;}
+.proj-page-header{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;background:var(--dark);margin-bottom:28px;}
+.proj-page-header-title{font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;font-weight:300;}
+.btn-close-editor{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;background:transparent;border:1px solid rgba(255,255,255,0.2);padding:6px 14px;color:rgba(255,255,255,0.5);cursor:pointer;transition:all .2s;}
+.btn-close-editor:hover{border-color:var(--accent);color:var(--accent);}
+/* SKILLS */
+.skill-group-card{border:1px solid var(--border);padding:24px 24px 16px;margin-bottom:12px;background:var(--paper);}
+.skill-group-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.skill-items-list{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;}
+.skill-item-row{display:flex;gap:8px;align-items:center;}
+.skill-item-row input{flex:1;}
+.btn-remove-sm{background:transparent;border:1px solid var(--border);padding:4px 8px;font-size:10px;color:var(--mid);cursor:pointer;flex-shrink:0;transition:all .2s;}
+.btn-remove-sm:hover{border-color:#c0392b;color:#c0392b;}
+.btn-add-sm{background:transparent;border:1px dashed var(--border);padding:6px 14px;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);cursor:pointer;transition:all .2s;font-family:'DM Mono',monospace;}
+.btn-add-sm:hover{border-color:var(--accent);color:var(--accent);}
+/* BUTTONS */
+.btn{padding:11px 26px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;border:none;cursor:pointer;transition:background .2s;}
+.btn-primary{background:var(--ink);color:var(--paper);}
+.btn-primary:hover{background:var(--accent);}
+.btn-primary:disabled{background:var(--mid);cursor:not-allowed;}
+.btn-secondary{background:transparent;color:var(--mid);border:1px solid var(--border);}
+.btn-secondary:hover{border-color:var(--ink);color:var(--ink);}
+/* SAVE FOOTER */
+.save-footer{position:fixed;bottom:0;left:220px;right:0;background:rgba(244,241,236,0.97);border-top:1px solid var(--border);padding:16px 52px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(12px);z-index:50;}
+.save-info{font-size:11px;color:var(--mid);}
+.save-info strong{color:var(--ink);}
+.save-actions{display:flex;gap:12px;align-items:center;}
+.save-status{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);}
+.save-status.ok{color:#5a9a5a;}
+.save-status.err{color:#c0392b;}
+/* TOAST */
+.toast{position:fixed;bottom:80px;right:32px;background:var(--dark);color:rgba(255,255,255,0.85);padding:14px 20px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;opacity:0;pointer-events:none;transition:opacity .3s;border-left:2px solid var(--accent);z-index:999;}
+.toast.show{opacity:1;}
+.divider{height:1px;background:var(--border);margin:28px 0;}
+.sec-mini-label{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;}
+@media(max-width:860px){
+  .sidebar{display:none;}
+  .save-footer{left:0;}
+  .content{padding:32px 24px 120px;}
+  .form-row,.setup-fields{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
 
 <header>
   <a class="logo" href="index.html">Anmol <span>Tanwar</span></a>
-  <div class="header-right">
-    <span class="badge-admin">Admin Panel</span>
-    <a class="back-link" href="index.html">← Back to site</a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="badge-admin">Admin Dashboard</span>
+    <a class="back-link" href="index.html" target="_blank">← View Site</a>
   </div>
 </header>
 
-<main>
+<div class="shell">
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <span class="sb-label">Setup</span>
+    <ul class="sb-nav">
+      <li><a href="#" class="active" data-panel="github">⚙ GitHub Setup</a></li>
+    </ul>
+    <span class="sb-label mt">Index Page</span>
+    <ul class="sb-nav">
+      <li><a href="#" data-panel="meta">Meta &amp; Nav</a></li>
+      <li><a href="#" data-panel="hero">Hero</a></li>
+      <li><a href="#" data-panel="stats">Stats Bar</a></li>
+      <li><a href="#" data-panel="about">About</a></li>
+      <li><a href="#" data-panel="skills">Skills</a></li>
+      <li><a href="#" data-panel="experience">Experience</a></li>
+      <li><a href="#" data-panel="education">Education</a></li>
+      <li><a href="#" data-panel="leadership">Leadership</a></li>
+      <li><a href="#" data-panel="awards">Awards</a></li>
+      <li><a href="#" data-panel="contact">Contact</a></li>
+    </ul>
+    <span class="sb-label mt">Projects</span>
+    <ul class="sb-nav">
+      <li><a href="#" data-panel="projects">Cards &amp; Pages</a></li>
+    </ul>
+  </nav>
 
-  <!-- GITHUB SETUP -->
-  <div class="setup-panel" id="setup-panel">
-    <h2 class="setup-title">Connect to GitHub</h2>
-    <p class="setup-sub">Enter your GitHub details once. Your token is stored only in your browser (localStorage) and never sent anywhere except directly to GitHub's API.</p>
-    <div class="setup-fields">
-      <div class="field-group">
-        <label>GitHub Username</label>
-        <input type="text" id="gh-user" placeholder="e.g. anmoltanwar" />
-      </div>
-      <div class="field-group">
-        <label>Repository Name</label>
-        <input type="text" id="gh-repo" placeholder="e.g. portfolio" />
-      </div>
-      <div class="field-group">
-        <label>Branch</label>
-        <input type="text" id="gh-branch" placeholder="main" value="main" />
-      </div>
-      <div class="field-group">
-        <label>Personal Access Token</label>
-        <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxx" />
-      </div>
-    </div>
-    <p class="setup-note">
-      Create a token at <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a>.
-      Select <strong>Classic token</strong> → scope: <strong>repo</strong> (full control).
-      The token is saved in your browser and used only to update <code>projects.json</code> in your repo.
-    </p>
-    <button class="btn-connect" id="btn-connect" onclick="connectGitHub()">Connect & Load Projects</button>
-  </div>
+  <!-- MAIN CONTENT -->
+  <main class="content">
 
-  <!-- STATUS BAR -->
-  <div class="status-bar" id="status-bar" style="display:none;">
-    <div class="status-left">
-      <div class="status-dot" id="status-dot"></div>
-      <span class="status-text" id="status-text">Not connected</span>
-    </div>
-    <div style="display:flex;gap:12px;align-items:center;">
-      <span class="counter-pill" id="counter-pill">0 / 9 active</span>
+    <div class="status-bar" id="status-bar" style="display:none;">
+      <div class="status-left">
+        <div class="status-dot" id="status-dot"></div>
+        <span class="status-text" id="status-text">Not connected</span>
+      </div>
       <button onclick="disconnectGitHub()" style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;background:transparent;border:1px solid var(--border);padding:4px 10px;color:var(--mid);cursor:pointer;">Disconnect</button>
     </div>
-  </div>
 
-  <!-- SECTION HEADING -->
-  <div class="section-header">
-    <span class="section-num">01</span>
-    <h2 class="section-title">Manage Projects</h2>
-    <div class="section-rule"></div>
-  </div>
-
-  <!-- ADD NEW PROJECT FORM -->
-  <div class="add-form-wrap" id="add-form-wrap">
-    <h3 class="add-form-title">Add New Project</h3>
-    <div class="form-grid">
-      <div class="fg"><label>Project ID (no spaces)</label><input type="text" id="nf-id" placeholder="project-name" /></div>
-      <div class="fg"><label>Sector / Category</label><input type="text" id="nf-sector" placeholder="Healthcare · NHS" /></div>
-      <div class="fg"><label>Project Name</label><input type="text" id="nf-name" placeholder="Hospital Refurbishment" /></div>
-      <div class="fg"><label>Value (optional)</label><input type="text" id="nf-value" placeholder="≈ £2M GBP" /></div>
-      <div class="fg"><label>Meta (location · year · stage)</label><input type="text" id="nf-meta" placeholder="Manchester · 2025 · Stage 4" /></div>
-      <div class="fg"><label>Page URL</label><input type="text" id="nf-url" placeholder="project-name.html" /></div>
-      <div class="fg"><label>Image Filename</label><input type="text" id="nf-image" placeholder="project-main.jpg" /></div>
-      <div class="fg"><label>Image Alt Text</label><input type="text" id="nf-alt" placeholder="Project photo" /></div>
+    <!-- GITHUB -->
+    <div class="panel active" id="panel-github">
+      <div class="setup-panel" id="setup-panel">
+        <h2 class="setup-title">Connect to GitHub</h2>
+        <p class="setup-sub">Credentials are stored only in your browser's localStorage — never sent anywhere except directly to GitHub's API.</p>
+        <div class="setup-fields">
+          <div class="fg"><label>GitHub Username</label><input type="text" id="gh-user" placeholder="e.g. anmoltanwar"></div>
+          <div class="fg"><label>Repository Name</label><input type="text" id="gh-repo" placeholder="e.g. portfolio"></div>
+          <div class="fg"><label>Branch</label><input type="text" id="gh-branch" placeholder="main" value="main"></div>
+          <div class="fg"><label>Personal Access Token</label><input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxx"></div>
+        </div>
+        <p class="setup-note">Create a token at <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a>. Classic token → scope: <strong>repo</strong>.</p>
+        <button class="btn btn-primary" id="btn-connect" onclick="connectGitHub()">Connect &amp; Load Data</button>
+      </div>
+      <div style="display:none;" id="github-connected-msg">
+        <p style="font-size:11px;color:var(--mid);line-height:1.9;">Connected. Use the sidebar to navigate to any section and edit content. Click <strong style="color:var(--ink);">Save to GitHub</strong> to publish.</p>
+      </div>
     </div>
-    <div class="form-grid full">
-      <div class="fg"><label>Description</label><textarea id="nf-desc" rows="3" placeholder="Short project description..."></textarea></div>
-      <div class="fg"><label>Tags (comma-separated)</label><input type="text" id="nf-tags" placeholder="RAAC, Steel Frame, Eurocode" /></div>
+
+    <!-- META -->
+    <div class="panel" id="panel-meta">
+      <h2 class="panel-title">Meta &amp; Navigation</h2>
+      <p class="panel-sub">Site title, nav badge, and footer lines.</p>
+      <div class="fg"><label>Full Name</label><input type="text" id="meta-name"></div>
+      <div class="fg"><label>Browser Tab Title</label><input type="text" id="meta-title"></div>
+      <div class="fg"><label>Nav Badge Text</label><input type="text" id="meta-navBadge"></div>
+      <div class="divider"></div>
+      <p class="sec-mini-label">Footer</p>
+      <div class="form-row cols3">
+        <div class="fg"><label>Left</label><input type="text" id="meta-footerLeft"></div>
+        <div class="fg"><label>Centre</label><input type="text" id="meta-footerMid"></div>
+        <div class="fg"><label>Right</label><input type="text" id="meta-footerRight"></div>
+      </div>
     </div>
-    <div class="form-actions">
-      <button class="btn-add" onclick="addProject()">Add Project</button>
-      <button class="btn-cancel" onclick="closeAddForm()">Cancel</button>
+
+    <!-- HERO -->
+    <div class="panel" id="panel-hero">
+      <h2 class="panel-title">Hero Section</h2>
+      <p class="panel-sub">Top section — name, description, CTA buttons, credentials list.</p>
+      <div class="form-row">
+        <div class="fg"><label>Eyebrow Text</label><input type="text" id="hero-eyebrow"></div>
+        <div class="fg"><label>Photo Filename</label><input type="text" id="hero-photo"></div>
+      </div>
+      <div class="form-row">
+        <div class="fg"><label>First Name</label><input type="text" id="hero-firstName"></div>
+        <div class="fg"><label>Last Name</label><input type="text" id="hero-lastName"></div>
+      </div>
+      <div class="fg"><label>Description</label><textarea id="hero-desc" rows="3"></textarea></div>
+      <div class="form-row">
+        <div class="fg"><label>Primary CTA Label</label><input type="text" id="hero-cta1-label"></div>
+        <div class="fg"><label>Primary CTA Link</label><input type="text" id="hero-cta1-href"></div>
+      </div>
+      <div class="form-row">
+        <div class="fg"><label>Secondary CTA Label</label><input type="text" id="hero-cta2-label"></div>
+        <div class="fg"><label>Secondary CTA Link</label><input type="text" id="hero-cta2-href"></div>
+      </div>
+      <div class="divider"></div>
+      <p class="sec-mini-label">Credentials (right panel)</p>
+      <div id="hero-creds-list"></div>
+      <button class="btn-add-item" onclick="addHeroCred()">+ Add Credential</button>
+      <div class="divider"></div>
+      <p class="sec-mini-label">Award / Achievement Boxes</p>
+      <div id="hero-awards-list"></div>
+      <button class="btn-add-item" onclick="addHeroAward()">+ Add Award Box</button>
+    </div>
+
+    <!-- STATS -->
+    <div class="panel" id="panel-stats">
+      <h2 class="panel-title">Stats Bar</h2>
+      <p class="panel-sub">Numbers shown in the bar below the hero.</p>
+      <div id="stats-list"></div>
+      <button class="btn-add-item" onclick="addStat()">+ Add Stat</button>
+    </div>
+
+    <!-- PROJECTS — Cards + Pages combined -->
+    <div class="panel" id="panel-projects">
+      <h2 class="panel-title">Projects — Cards &amp; Pages</h2>
+      <p class="panel-sub">Toggle cards visible/hidden on the index. Click <strong>Edit Card</strong> to update the grid card. Click <strong>Edit Page</strong> to update the full project page content.</p>
+      <div id="projects-list"></div>
+      <button class="btn-add-item" onclick="addNewProject()">+ Add New Project</button>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="panel" id="panel-about">
+      <h2 class="panel-title">About</h2>
+      <p class="panel-sub">Photo and body paragraphs.</p>
+      <div class="fg"><label>Photo Filename</label><input type="text" id="about-photo"></div>
+      <div class="divider"></div>
+      <p class="sec-mini-label">Paragraphs</p>
+      <div id="about-paras-list"></div>
+      <button class="btn-add-item" onclick="addAboutPara()">+ Add Paragraph</button>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="panel" id="panel-skills">
+      <h2 class="panel-title">Technical Skills</h2>
+      <p class="panel-sub">Skill groups shown in the About section.</p>
+      <div id="skills-list"></div>
+      <button class="btn-add-item" onclick="addSkillGroup()">+ Add Skill Group</button>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div class="panel" id="panel-experience">
+      <h2 class="panel-title">Experience</h2>
+      <p class="panel-sub">Work history timeline.</p>
+      <div id="experience-list"></div>
+      <button class="btn-add-item" onclick="addExperience()">+ Add Experience</button>
+    </div>
+
+    <!-- EDUCATION -->
+    <div class="panel" id="panel-education">
+      <h2 class="panel-title">Education</h2>
+      <p class="panel-sub">Degrees and qualifications.</p>
+      <div id="education-list"></div>
+      <button class="btn-add-item" onclick="addEducation()">+ Add Education</button>
+    </div>
+
+    <!-- LEADERSHIP -->
+    <div class="panel" id="panel-leadership">
+      <h2 class="panel-title">Leadership &amp; Volunteering</h2>
+      <p class="panel-sub">Roles in professional organisations.</p>
+      <div id="leadership-list"></div>
+      <button class="btn-add-item" onclick="addLeadership()">+ Add Role</button>
+    </div>
+
+    <!-- AWARDS -->
+    <div class="panel" id="panel-awards">
+      <h2 class="panel-title">Awards</h2>
+      <p class="panel-sub">Awards strip at the bottom of the index page.</p>
+      <div id="awards-list"></div>
+      <button class="btn-add-item" onclick="addAward()">+ Add Award</button>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="panel" id="panel-contact">
+      <h2 class="panel-title">Contact Links</h2>
+      <p class="panel-sub">Email, LinkedIn, phone, CV downloads, etc.</p>
+      <div id="contact-list"></div>
+      <button class="btn-add-item" onclick="addContact()">+ Add Link</button>
+    </div>
+
+  </main>
+</div>
+
+<!-- ── PROJECT CARD MODAL ── -->
+<div id="card-modal" style="display:none;position:fixed;inset:0;background:rgba(15,15,15,0.5);z-index:200;align-items:center;justify-content:center;padding:24px;">
+  <div style="background:var(--paper);width:100%;max-width:700px;max-height:90vh;overflow-y:auto;padding:40px 44px;border:1px solid var(--border);position:relative;">
+    <button onclick="closeCardModal()" style="position:absolute;top:16px;right:20px;background:transparent;border:none;font-size:18px;color:var(--mid);cursor:pointer;">✕</button>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;margin-bottom:28px;" id="card-modal-title">Edit Project Card</h3>
+    <div class="form-row"><div class="fg"><label>Sector</label><input type="text" id="cm-sector"></div><div class="fg"><label>Value (optional)</label><input type="text" id="cm-value"></div></div>
+    <div class="fg"><label>Project Name</label><input type="text" id="cm-name"></div>
+    <div class="form-row"><div class="fg"><label>Meta line</label><input type="text" id="cm-meta"></div><div class="fg"><label>Page URL</label><input type="text" id="cm-url"></div></div>
+    <div class="fg"><label>Card Description</label><textarea id="cm-desc" rows="3"></textarea></div>
+    <div class="form-row"><div class="fg"><label>Image Filename</label><input type="text" id="cm-image"></div><div class="fg"><label>Image Alt Text</label><input type="text" id="cm-alt"></div></div>
+    <div class="fg"><label>Tags (comma-separated)</label><input type="text" id="cm-tags"></div>
+    <div class="form-row"><div class="fg"><label>Prev Project ID</label><input type="text" id="cm-prev" placeholder="e.g. eco-resort"></div><div class="fg"><label>Next Project ID</label><input type="text" id="cm-next" placeholder="e.g. wythenshawe"></div></div>
+    <div style="display:flex;gap:12px;margin-top:24px;">
+      <button class="btn btn-primary" onclick="saveCardModal()">Save Card</button>
+      <button class="btn btn-secondary" onclick="closeCardModal()">Cancel</button>
     </div>
   </div>
+</div>
 
-  <!-- PROJECTS GRID -->
-  <div class="projects-grid" id="projects-grid">
-    <div style="grid-column:1/-1;padding:48px;text-align:center;color:var(--mid);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;background:var(--paper);">
-      Connect to GitHub above to load your projects
+<!-- ── PROJECT PAGE MODAL ── -->
+<div id="page-modal" style="display:none;position:fixed;inset:0;background:rgba(15,15,15,0.5);z-index:200;align-items:center;justify-content:center;padding:24px;">
+  <div style="background:var(--paper);width:100%;max-width:780px;max-height:92vh;overflow-y:auto;padding:40px 44px;border:1px solid var(--border);position:relative;">
+    <button onclick="closePageModal()" style="position:absolute;top:16px;right:20px;background:transparent;border:none;font-size:18px;color:var(--mid);cursor:pointer;">✕</button>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;margin-bottom:6px;" id="page-modal-title">Edit Project Page</h3>
+    <p style="font-size:10px;color:var(--mid);margin-bottom:28px;">These fields control the individual project page content.</p>
+
+    <p class="sec-mini-label">Hero</p>
+    <div class="fg"><label>Sector Tag (top of hero)</label><input type="text" id="pm-sectorTag"></div>
+    <div class="form-row">
+      <div class="fg"><label>Hero Title (main line)</label><input type="text" id="pm-heroTitle"></div>
+      <div class="fg"><label>Hero Subtitle (italic line)</label><input type="text" id="pm-heroSubtitle"></div>
+    </div>
+
+    <div class="divider"></div>
+    <p class="sec-mini-label">Meta Strip</p>
+    <div class="form-row">
+      <div class="fg"><label>Location</label><input type="text" id="pm-metaLocation"></div>
+      <div class="fg"><label>Year</label><input type="text" id="pm-metaYear"></div>
+    </div>
+    <div class="form-row cols3">
+      <div class="fg"><label>Status</label><input type="text" id="pm-metaStatus"></div>
+      <div class="fg"><label>Employer</label><input type="text" id="pm-metaEmployer"></div>
+      <div class="fg"><label>Client</label><input type="text" id="pm-metaClient"></div>
+    </div>
+    <div class="fg"><label>Contractor</label><input type="text" id="pm-metaContractor"></div>
+
+    <div class="divider"></div>
+    <p class="sec-mini-label">Summary Paragraphs</p>
+    <div id="pm-paras-list"></div>
+    <button class="btn-add-item" onclick="addPagePara()" style="margin-bottom:16px;">+ Add Paragraph</button>
+
+    <div class="divider"></div>
+    <p class="sec-mini-label">Gallery Photos</p>
+    <div id="pm-photos-list"></div>
+    <button class="btn-add-item" onclick="addPagePhoto()" style="margin-bottom:16px;">+ Add Photo</button>
+
+    <div style="display:flex;gap:12px;margin-top:24px;">
+      <button class="btn btn-primary" onclick="savePageModal()">Save Page</button>
+      <button class="btn btn-secondary" onclick="closePageModal()">Cancel</button>
     </div>
   </div>
-
-  <!-- ADD CARD (rendered by JS after load) -->
-
-</main>
+</div>
 
 <!-- SAVE FOOTER -->
 <div class="save-footer">
   <p class="save-info" id="save-info">Connect to GitHub to start editing</p>
   <div class="save-actions">
     <span class="save-status" id="save-status"></span>
-    <button class="btn-save" id="btn-save" onclick="saveProjects()" disabled>Save to GitHub</button>
+    <button class="btn btn-primary" id="btn-save" onclick="saveToGitHub()" disabled>Save to GitHub</button>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ─── STATE ──────────────────────────────────────────────────────────────────
-let projects = [];
-let ghConfig = {};
-let fileSha = '';
-let isDirty = false;
-const MAX_ACTIVE = 9;
+// ── STATE ──────────────────────────────────────────────────────────────────
+let data = null, ghConfig = {}, fileSha = '', isDirty = false;
+let editingCardIdx = null, editingPageIdx = null;
+const FILE = 'site-data.json';
 
-// ─── INIT ────────────────────────────────────────────────────────────────────
+// ── INIT ───────────────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
-  const saved = localStorage.getItem('gh_config');
-  if (saved) {
-    ghConfig = JSON.parse(saved);
-    document.getElementById('gh-user').value = ghConfig.user || '';
-    document.getElementById('gh-repo').value = ghConfig.repo || '';
-    document.getElementById('gh-branch').value = ghConfig.branch || 'main';
-    document.getElementById('gh-token').value = ghConfig.token || '';
-    connectGitHub(true);
-  }
-});
-
-// ─── GITHUB CONNECTION ───────────────────────────────────────────────────────
-async function connectGitHub(silent = false) {
-  const user   = document.getElementById('gh-user').value.trim();
-  const repo   = document.getElementById('gh-repo').value.trim();
-  const branch = document.getElementById('gh-branch').value.trim() || 'main';
-  const token  = document.getElementById('gh-token').value.trim();
-
-  if (!user || !repo || !token) { showToast('Please fill in all GitHub fields'); return; }
-
-  ghConfig = { user, repo, branch, token };
-  localStorage.setItem('gh_config', JSON.stringify(ghConfig));
-
-  setStatus('loading', 'Connecting...');
-  document.getElementById('btn-connect').disabled = true;
-
-  try {
-    const res = await fetch(
-      `https://api.github.com/repos/${user}/${repo}/contents/projects.json?ref=${branch}`,
-      { headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' } }
-    );
-
-    if (!res.ok) {
-      const err = await res.json();
-      throw new Error(err.message || `HTTP ${res.status}`);
-    }
-
-    const data = await res.json();
-    fileSha = data.sha;
-    const bytes = Uint8Array.from(atob(data.content.replace(/\n/g, '')), c => c.charCodeAt(0));
-    projects = JSON.parse(new TextDecoder().decode(bytes));
-
-    document.getElementById('setup-panel').style.display = 'none';
-    document.getElementById('status-bar').style.display = 'flex';
-    setStatus('connected', `Connected to ${user}/${repo} (${branch})`);
-    document.getElementById('btn-save').disabled = false;
-    renderGrid();
-    if (!silent) showToast('Connected — projects loaded');
-  } catch (e) {
-    setStatus('error', `Error: ${e.message}`);
-    document.getElementById('btn-connect').disabled = false;
-    document.getElementById('setup-panel').style.display = 'block';
-    showToast(`Could not connect: ${e.message}`);
-  }
-}
-
-function disconnectGitHub() {
-  localStorage.removeItem('gh_config');
-  projects = []; fileSha = ''; ghConfig = {};
-  document.getElementById('setup-panel').style.display = 'block';
-  document.getElementById('status-bar').style.display = 'none';
-  document.getElementById('btn-save').disabled = true;
-  setStatus('idle', 'Not connected');
-  document.getElementById('projects-grid').innerHTML = `
-    <div style="grid-column:1/-1;padding:48px;text-align:center;color:var(--mid);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;background:var(--paper);">
-      Connect to GitHub above to load your projects
-    </div>`;
-  updateCounter();
-}
-
-// ─── RENDER GRID ─────────────────────────────────────────────────────────────
-function renderGrid() {
-  const grid = document.getElementById('projects-grid');
-  const activeProjs = projects.filter(p => p.active);
-  let order = 1;
-
-  grid.innerHTML = projects.map((p, idx) => {
-    const ord = p.active ? order++ : '';
-    return `
-    <div class="proj-card ${p.active ? 'active' : ''}" onclick="toggleProject(${idx})" id="card-${idx}">
-      ${p.active ? `<div class="order-badge">${ord}</div>` : ''}
-      <div class="proj-toggle">
-        <div class="toggle-track"><div class="toggle-thumb"></div></div>
-        <span class="toggle-label">${p.active ? 'Visible' : 'Hidden'}</span>
-      </div>
-      <span class="proj-sector">${esc(p.sector)}</span>
-      <h3 class="proj-name">${esc(p.name)}</h3>
-      <p class="proj-meta">${esc(p.meta)}</p>
-      <div class="proj-tags">${(p.tags||[]).map(t => `<span class="ptag">${esc(t)}</span>`).join('')}</div>
-    </div>`;
-  }).join('');
-
-  // Add the "+ Add Project" card at the end
-  grid.innerHTML += `
-    <div class="add-card" onclick="openAddForm()">
-      <span class="add-icon">+</span>
-      <span class="add-text">Add New Project</span>
-    </div>`;
-
-  updateCounter();
-  updateSaveInfo();
-}
-
-function toggleProject(idx) {
-  const activeCount = projects.filter(p => p.active).length;
-  if (!projects[idx].active && activeCount >= MAX_ACTIVE) {
-    showToast(`Max ${MAX_ACTIVE} projects can be shown. Deactivate one first.`);
-    return;
-  }
-  projects[idx].active = !projects[idx].active;
-  isDirty = true;
-  renderGrid();
-}
-
-function updateCounter() {
-  const count = projects.filter(p => p.active).length;
-  const pill = document.getElementById('counter-pill');
-  if (!pill) return;
-  pill.textContent = `${count} / ${MAX_ACTIVE} active`;
-  pill.className = 'counter-pill' + (count >= MAX_ACTIVE ? ' at-limit' : '');
-}
-
-function updateSaveInfo() {
-  const count = projects.filter(p => p.active).length;
-  document.getElementById('save-info').innerHTML =
-    `<strong>${count}</strong> of <strong>${MAX_ACTIVE}</strong> project slots used · ${projects.length} total projects`;
-}
-
-// ─── ADD NEW PROJECT ─────────────────────────────────────────────────────────
-function openAddForm() {
-  document.getElementById('add-form-wrap').classList.add('open');
-  document.getElementById('add-form-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function closeAddForm() {
-  document.getElementById('add-form-wrap').classList.remove('open');
-  ['nf-id','nf-sector','nf-name','nf-value','nf-meta','nf-url','nf-image','nf-alt','nf-desc','nf-tags']
-    .forEach(id => document.getElementById(id).value = '');
-}
-
-function addProject() {
-  const id = document.getElementById('nf-id').value.trim();
-  const name = document.getElementById('nf-name').value.trim();
-  if (!id || !name) { showToast('ID and Name are required'); return; }
-  if (projects.find(p => p.id === id)) { showToast('A project with this ID already exists'); return; }
-
-  const tags = document.getElementById('nf-tags').value.split(',').map(t => t.trim()).filter(Boolean);
-  const activeCount = projects.filter(p => p.active).length;
-
-  projects.push({
-    id,
-    active: activeCount < MAX_ACTIVE,
-    order: projects.length + 1,
-    sector: document.getElementById('nf-sector').value.trim(),
-    value: document.getElementById('nf-value').value.trim(),
-    name,
-    meta: document.getElementById('nf-meta').value.trim(),
-    desc: document.getElementById('nf-desc').value.trim(),
-    tags,
-    image: document.getElementById('nf-image').value.trim(),
-    imageAlt: document.getElementById('nf-alt').value.trim(),
-    url: document.getElementById('nf-url').value.trim()
+  // Sidebar nav
+  document.querySelectorAll('.sb-nav a[data-panel]').forEach(a => {
+    a.addEventListener('click', e => { e.preventDefault(); showPanel(a.dataset.panel, a); });
   });
-
-  isDirty = true;
-  closeAddForm();
-  renderGrid();
-  showToast(`"${name}" added`);
-}
-
-// ─── SAVE TO GITHUB ──────────────────────────────────────────────────────────
-async function saveProjects() {
-  const btn = document.getElementById('btn-save');
-  const status = document.getElementById('save-status');
-  btn.disabled = true;
-  btn.textContent = 'Saving...';
-  status.textContent = '';
-  status.className = 'save-status';
-
-  try {
-    const jsonStr = JSON.stringify(projects, null, 2);
-    const bytes = new TextEncoder().encode(jsonStr);
-    let binary = '';
-    for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
-    const content = btoa(binary);
-    const body = {
-      message: `Admin: update featured projects (${new Date().toISOString().slice(0,10)})`,
-      content,
-      sha: fileSha,
-      branch: ghConfig.branch
-    };
-
-    const res = await fetch(
-      `https://api.github.com/repos/${ghConfig.user}/${ghConfig.repo}/contents/projects.json`,
-      {
-        method: 'PUT',
-        headers: {
-          Authorization: `token ${ghConfig.token}`,
-          Accept: 'application/vnd.github.v3+json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body)
-      }
-    );
-
-    if (!res.ok) {
-      const err = await res.json();
-      throw new Error(err.message || `HTTP ${res.status}`);
-    }
-
-    const data = await res.json();
-    fileSha = data.content.sha;
-    isDirty = false;
-    status.textContent = '✓ Saved';
-    status.className = 'save-status ok';
-    showToast('projects.json saved to GitHub');
-  } catch (e) {
-    status.textContent = `✗ ${e.message}`;
-    status.className = 'save-status err';
-    showToast(`Save failed: ${e.message}`);
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Save to GitHub';
-  }
-}
-
-// ─── HELPERS ─────────────────────────────────────────────────────────────────
-function setStatus(type, text) {
-  const dot = document.getElementById('status-dot');
-  const txt = document.getElementById('status-text');
-  dot.className = 'status-dot' + (type === 'connected' ? ' connected' : type === 'error' ? ' error' : '');
-  txt.textContent = text;
-}
-
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
-}
-
-function esc(str) {
-  return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-window.addEventListener('beforeunload', e => {
-  if (isDirty) {
-    e.preventDefault();
-    e.returnValue = '';
-  }
+  // Auto-reconnect
+  const saved = localStorage.getItem('gh_config');
+  if(saved){ ghConfig = JSON.parse(saved); ['gh-user','gh-repo','gh-branch','gh-token'].forEach(id => { const k = id.replace('gh-',''); if(ghConfig[k]) document.getElementById(id).value = ghConfig[k]; }); connectGitHub(true); }
 });
+
+function showPanel(id, linkEl){
+  if(!data && id !== 'github'){ showToast('Connect to GitHub first'); return; }
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sb-nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  if(linkEl) linkEl.classList.add('active');
+}
+
+// ── GITHUB ─────────────────────────────────────────────────────────────────
+async function connectGitHub(silent=false){
+  const user = document.getElementById('gh-user').value.trim();
+  const repo = document.getElementById('gh-repo').value.trim();
+  const branch = document.getElementById('gh-branch').value.trim() || 'main';
+  const token = document.getElementById('gh-token').value.trim();
+  if(!user||!repo||!token){ showToast('Please fill in all fields'); return; }
+  ghConfig = {user,repo,branch,token};
+  localStorage.setItem('gh_config', JSON.stringify(ghConfig));
+  document.getElementById('btn-connect').disabled = true;
+  setStatus('loading','Connecting…');
+  try{
+    const res = await ghFetch('GET',`contents/${FILE}?ref=${branch}`);
+    if(!res.ok){ const e=await res.json(); throw new Error(e.message||`HTTP ${res.status}`); }
+    const raw = await res.json();
+    fileSha = raw.sha;
+    const bytes = Uint8Array.from(atob(raw.content.replace(/\n/g,'')), c=>c.charCodeAt(0));
+    data = JSON.parse(new TextDecoder().decode(bytes));
+    document.getElementById('setup-panel').style.display = 'none';
+    document.getElementById('github-connected-msg').style.display = 'block';
+    document.getElementById('status-bar').style.display = 'flex';
+    setStatus('connected',`${user}/${repo} (${branch})`);
+    document.getElementById('btn-save').disabled = false;
+    document.getElementById('save-info').innerHTML = `Connected to <strong>${user}/${repo}</strong>`;
+    populateAllPanels();
+    if(!silent) showToast('Connected — data loaded');
+  }catch(e){
+    setStatus('error',e.message);
+    document.getElementById('btn-connect').disabled = false;
+    showToast('Error: '+e.message);
+  }
+}
+function disconnectGitHub(){
+  localStorage.removeItem('gh_config'); data=null; fileSha=''; ghConfig={};
+  document.getElementById('setup-panel').style.display='block';
+  document.getElementById('github-connected-msg').style.display='none';
+  document.getElementById('status-bar').style.display='none';
+  document.getElementById('btn-save').disabled=true;
+  document.getElementById('btn-connect').disabled=false;
+  document.getElementById('save-info').textContent='Connect to GitHub to start editing';
+  showPanel('github', document.querySelector('[data-panel="github"]'));
+}
+function ghFetch(method,path,body){
+  const opts={method,headers:{Authorization:`token ${ghConfig.token}`,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'}};
+  if(body) opts.body=JSON.stringify(body);
+  return fetch(`https://api.github.com/repos/${ghConfig.user}/${ghConfig.repo}/${path}`,opts);
+}
+async function saveToGitHub(){
+  collectAllPanels();
+  const btn=document.getElementById('btn-save'),st=document.getElementById('save-status');
+  btn.disabled=true; btn.textContent='Saving…'; st.textContent=''; st.className='save-status';
+  try{
+    const jsonStr=JSON.stringify(data,null,2);
+    const bytes=new TextEncoder().encode(jsonStr);
+    let bin=''; for(let i=0;i<bytes.length;i++) bin+=String.fromCharCode(bytes[i]);
+    const res=await ghFetch('PUT',`contents/${FILE}`,{message:`Admin: update site content (${new Date().toISOString().slice(0,10)})`,content:btoa(bin),sha:fileSha,branch:ghConfig.branch});
+    if(!res.ok){const e=await res.json();throw new Error(e.message||`HTTP ${res.status}`);}
+    const saved=await res.json(); fileSha=saved.content.sha; isDirty=false;
+    st.textContent='✓ Saved'; st.className='save-status ok';
+    showToast('site-data.json saved to GitHub');
+  }catch(e){
+    st.textContent='✗ '+e.message; st.className='save-status err';
+    showToast('Save failed: '+e.message);
+  }finally{ btn.disabled=false; btn.textContent='Save to GitHub'; }
+}
+
+// ── POPULATE ALL ───────────────────────────────────────────────────────────
+function populateAllPanels(){ populateMeta();populateHero();populateStats();populateProjects();populateAbout();populateSkills();populateExperience();populateEducation();populateLeadership();populateAwards();populateContact(); }
+function collectAllPanels(){ collectMeta();collectHero();collectStats();collectAbout();collectSkills();collectExperience();collectEducation();collectLeadership();collectAwards();collectContact(); /* projects saved in-place */ }
+
+// ── META ───────────────────────────────────────────────────────────────────
+function populateMeta(){ const m=data.meta||{}; setVal('meta-name',m.name);setVal('meta-title',m.title);setVal('meta-navBadge',m.navBadge);setVal('meta-footerLeft',m.footerLeft);setVal('meta-footerMid',m.footerMid);setVal('meta-footerRight',m.footerRight); }
+function collectMeta(){ data.meta={name:getVal('meta-name'),title:getVal('meta-title'),navBadge:getVal('meta-navBadge'),footerLeft:getVal('meta-footerLeft'),footerMid:getVal('meta-footerMid'),footerRight:getVal('meta-footerRight')}; }
+
+// ── HERO ───────────────────────────────────────────────────────────────────
+function populateHero(){
+  const h=data.hero||{};
+  setVal('hero-eyebrow',h.eyebrow);setVal('hero-photo',h.photo);setVal('hero-firstName',h.firstName);setVal('hero-lastName',h.lastName);setVal('hero-desc',h.desc);
+  setVal('hero-cta1-label',(h.ctaPrimary||{}).label);setVal('hero-cta1-href',(h.ctaPrimary||{}).href);
+  setVal('hero-cta2-label',(h.ctaSecondary||{}).label);setVal('hero-cta2-href',(h.ctaSecondary||{}).href);
+  document.getElementById('hero-creds-list').innerHTML=(h.credentials||[]).map((c,i)=>`
+    <div class="item-card" id="hc-${i}">
+      <div class="item-card-header" onclick="toggleCard('hc-${i}')">
+        <div><div class="item-card-title">${esc(c.num)} — ${esc(c.sub)}</div></div>
+        <div style="display:flex;gap:10px;align-items:center;"><button class="btn-remove" onclick="event.stopPropagation();removeHeroCred(${i})">Remove</button><span class="item-card-toggle">▾</span></div>
+      </div>
+      <div class="item-card-body">
+        <div class="form-row"><div class="fg"><label>Number</label><input type="text" id="hc-num-${i}" value="${esc(c.num)}"></div><div class="fg"><label>Sub-label</label><input type="text" id="hc-sub-${i}" value="${esc(c.sub)}"></div></div>
+        <div class="fg"><label>Title Text</label><input type="text" id="hc-title-${i}" value="${esc(c.title)}"></div>
+      </div>
+    </div>`).join('');
+  document.getElementById('hero-awards-list').innerHTML=(h.awards||[]).map((a,i)=>`
+    <div class="item-card" id="ha-${i}">
+      <div class="item-card-header" onclick="toggleCard('ha-${i}')">
+        <div><div class="item-card-title">${esc(a.label)}</div></div>
+        <div style="display:flex;gap:10px;align-items:center;"><button class="btn-remove" onclick="event.stopPropagation();removeHeroAward(${i})">Remove</button><span class="item-card-toggle">▾</span></div>
+      </div>
+      <div class="item-card-body">
+        <div class="fg"><label>Label</label><input type="text" id="ha-label-${i}" value="${esc(a.label)}"></div>
+        <div class="fg"><label>Text</label><textarea id="ha-text-${i}" rows="2">${esc(a.text)}</textarea></div>
+      </div>
+    </div>`).join('');
+}
+function collectHero(){
+  const h=data.hero;
+  h.eyebrow=getVal('hero-eyebrow');h.photo=getVal('hero-photo');h.firstName=getVal('hero-firstName');h.lastName=getVal('hero-lastName');h.desc=getVal('hero-desc');
+  h.ctaPrimary={label:getVal('hero-cta1-label'),href:getVal('hero-cta1-href')};
+  h.ctaSecondary={label:getVal('hero-cta2-label'),href:getVal('hero-cta2-href')};
+  const n=document.querySelectorAll('[id^="hc-num-"]').length;
+  h.credentials=Array.from({length:n},(_,i)=>({num:getVal(`hc-num-${i}`),sub:getVal(`hc-sub-${i}`),title:getVal(`hc-title-${i}`)}));
+  const na=document.querySelectorAll('[id^="ha-label-"]').length;
+  h.awards=Array.from({length:na},(_,i)=>({label:getVal(`ha-label-${i}`),text:getVal(`ha-text-${i}`)}));
+}
+function addHeroCred(){ collectHero();data.hero.credentials.push({num:String(data.hero.credentials.length+1).padStart(2,'0'),title:'',sub:''});populateHero(); }
+function removeHeroCred(i){ collectHero();data.hero.credentials.splice(i,1);populateHero(); }
+function addHeroAward(){ collectHero();data.hero.awards.push({label:'🏆 New',text:''});populateHero(); }
+function removeHeroAward(i){ collectHero();data.hero.awards.splice(i,1);populateHero(); }
+
+// ── STATS ──────────────────────────────────────────────────────────────────
+function populateStats(){
+  document.getElementById('stats-list').innerHTML=(data.stats||[]).map((s,i)=>`
+    <div class="item-card" style="padding:20px 24px;">
+      <div style="display:flex;gap:14px;align-items:flex-end;">
+        <div class="fg" style="margin:0;flex:0 0 120px;"><label>Number / Value</label><input type="text" id="stat-n-${i}" value="${esc(s.n)}"></div>
+        <div class="fg" style="margin:0;flex:1;"><label>Label</label><input type="text" id="stat-l-${i}" value="${esc(s.label)}"></div>
+        <button class="btn-remove" onclick="removeStat(${i})">Remove</button>
+      </div>
+    </div>`).join('');
+}
+function collectStats(){ const n=document.querySelectorAll('[id^="stat-n-"]').length; data.stats=Array.from({length:n},(_,i)=>({n:getVal(`stat-n-${i}`),label:getVal(`stat-l-${i}`)})); }
+function addStat(){ collectStats();data.stats.push({n:'0',label:'New Stat'});populateStats(); }
+function removeStat(i){ collectStats();data.stats.splice(i,1);populateStats(); }
+
+// ── PROJECTS — combined card + page editor ─────────────────────────────────
+function populateProjects(){
+  document.getElementById('projects-list').innerHTML=(data.projects||[]).map((p,i)=>`
+    <div class="proj-card ${p.active?'active-proj':''}" id="proj-row-${i}">
+      <div class="toggle-track" onclick="toggleProj(${i})"><div class="toggle-thumb"></div></div>
+      <div class="proj-card-info">
+        <div class="proj-card-name">${esc(p.name)}</div>
+        <div class="proj-card-meta">${esc(p.sector)} · ${esc(p.meta)}</div>
+      </div>
+      <button class="btn-edit-proj" onclick="openCardModal(${i})" style="margin-right:6px;">Edit Card</button>
+      <button class="btn-edit-proj" onclick="openPageModal(${i})">Edit Page</button>
+    </div>`).join('');
+}
+function toggleProj(i){
+  const active=data.projects.filter(p=>p.active).length;
+  if(!data.projects[i].active&&active>=9){showToast('Max 9 shown. Deactivate one first.');return;}
+  data.projects[i].active=!data.projects[i].active; isDirty=true; populateProjects();
+}
+function addNewProject(){
+  data.projects.push({id:'project-'+Date.now(),active:false,order:data.projects.length+1,sector:'',value:'',name:'New Project',meta:'',desc:'',tags:[],image:'',imageAlt:'',url:'project-page.html?id=',prev:'',next:'',page:{sectorTag:'',heroTitle:'',heroSubtitle:'',metaLocation:'',metaYear:'',metaStatus:'',metaEmployer:'',metaClient:'',metaContractor:'',summaryParagraphs:[''],photos:[]}});
+  populateProjects(); openCardModal(data.projects.length-1);
+}
+
+// Card modal
+function openCardModal(i){
+  editingCardIdx=i; const p=data.projects[i];
+  document.getElementById('card-modal-title').textContent='Edit Card: '+(p.name||'New Project');
+  setVal('cm-sector',p.sector);setVal('cm-value',p.value);setVal('cm-name',p.name);setVal('cm-meta',p.meta);setVal('cm-url',p.url);setVal('cm-desc',p.desc);setVal('cm-image',p.image);setVal('cm-alt',p.imageAlt);setVal('cm-tags',(p.tags||[]).join(', '));setVal('cm-prev',p.prev||'');setVal('cm-next',p.next||'');
+  document.getElementById('card-modal').style.display='flex';
+}
+function saveCardModal(){
+  const i=editingCardIdx,p=data.projects[i];
+  p.sector=getVal('cm-sector');p.value=getVal('cm-value');p.name=getVal('cm-name');p.meta=getVal('cm-meta');p.url=getVal('cm-url');p.desc=getVal('cm-desc');p.image=getVal('cm-image');p.imageAlt=getVal('cm-alt');p.tags=getVal('cm-tags').split(',').map(t=>t.trim()).filter(Boolean);p.prev=getVal('cm-prev');p.next=getVal('cm-next');
+  isDirty=true; closeCardModal(); populateProjects(); showToast('Card saved');
+}
+function closeCardModal(){ document.getElementById('card-modal').style.display='none'; }
+
+// Page modal
+function openPageModal(i){
+  editingPageIdx=i; const pg=data.projects[i].page||{};
+  document.getElementById('page-modal-title').textContent='Edit Page: '+data.projects[i].name;
+  setVal('pm-sectorTag',pg.sectorTag);setVal('pm-heroTitle',pg.heroTitle);setVal('pm-heroSubtitle',pg.heroSubtitle);
+  setVal('pm-metaLocation',pg.metaLocation);setVal('pm-metaYear',pg.metaYear);setVal('pm-metaStatus',pg.metaStatus);setVal('pm-metaEmployer',pg.metaEmployer);setVal('pm-metaClient',pg.metaClient);setVal('pm-metaContractor',pg.metaContractor);
+  // Paragraphs
+  document.getElementById('pm-paras-list').innerHTML=(pg.summaryParagraphs||[]).map((p,pi)=>`
+    <div style="display:flex;gap:10px;margin-bottom:10px;">
+      <textarea id="pmp-${pi}" rows="3" style="flex:1;background:var(--paper);border:1px solid var(--border);padding:10px 14px;font-family:'DM Mono',monospace;font-size:11px;color:var(--ink);outline:none;resize:vertical;">${esc(p)}</textarea>
+      <button class="btn-remove" onclick="removePagePara(${pi})" style="align-self:flex-start;">✕</button>
+    </div>`).join('');
+  // Photos
+  document.getElementById('pm-photos-list').innerHTML=(pg.photos||[]).map((ph,pi)=>`
+    <div style="display:flex;gap:10px;align-items:flex-end;margin-bottom:8px;">
+      <div class="fg" style="margin:0;flex:1;"><label>Filename</label><input type="text" id="pmph-src-${pi}" value="${esc(ph.src)}"></div>
+      <div class="fg" style="margin:0;flex:1;"><label>Alt Text</label><input type="text" id="pmph-alt-${pi}" value="${esc(ph.alt)}"></div>
+      <button class="btn-remove" onclick="removePagePhoto(${pi})" style="margin-bottom:0;">✕</button>
+    </div>`).join('');
+  document.getElementById('page-modal').style.display='flex';
+}
+function savePageModal(){
+  const i=editingPageIdx;
+  if(!data.projects[i].page) data.projects[i].page={};
+  const pg=data.projects[i].page;
+  pg.sectorTag=getVal('pm-sectorTag');pg.heroTitle=getVal('pm-heroTitle');pg.heroSubtitle=getVal('pm-heroSubtitle');
+  pg.metaLocation=getVal('pm-metaLocation');pg.metaYear=getVal('pm-metaYear');pg.metaStatus=getVal('pm-metaStatus');pg.metaEmployer=getVal('pm-metaEmployer');pg.metaClient=getVal('pm-metaClient');pg.metaContractor=getVal('pm-metaContractor');
+  const np=document.querySelectorAll('[id^="pmp-"]').length;
+  pg.summaryParagraphs=Array.from({length:np},(_,pi)=>getVal(`pmp-${pi}`)).filter(Boolean);
+  const nph=document.querySelectorAll('[id^="pmph-src-"]').length;
+  pg.photos=Array.from({length:nph},(_,pi)=>({src:getVal(`pmph-src-${pi}`),alt:getVal(`pmph-alt-${pi}`)})).filter(ph=>ph.src);
+  isDirty=true; closePageModal(); showToast('Page saved');
+}
+function closePageModal(){ document.getElementById('page-modal').style.display='none'; }
+function addPagePara(){
+  const i=editingPageIdx,pg=data.projects[i].page;
+  savePageModal(); openPageModal(i);
+  // Add blank para first
+  const pg2=data.projects[i].page;
+  pg2.summaryParagraphs.push('New paragraph…');
+  openPageModal(i);
+}
+function removePagePara(pi){
+  const i=editingPageIdx,pg=data.projects[i].page;
+  const np=document.querySelectorAll('[id^="pmp-"]').length;
+  pg.summaryParagraphs=Array.from({length:np},(_,j)=>getVal(`pmp-${j}`)).filter(Boolean);
+  pg.summaryParagraphs.splice(pi,1);
+  openPageModal(i);
+}
+function addPagePhoto(){
+  const i=editingPageIdx;
+  if(!data.projects[i].page.photos) data.projects[i].page.photos=[];
+  const nph=document.querySelectorAll('[id^="pmph-src-"]').length;
+  data.projects[i].page.photos=Array.from({length:nph},(_,pi)=>({src:getVal(`pmph-src-${pi}`),alt:getVal(`pmph-alt-${pi}`)})).filter(ph=>ph.src);
+  data.projects[i].page.photos.push({src:'',alt:''});
+  openPageModal(i);
+}
+function removePagePhoto(pi){
+  const i=editingPageIdx;
+  const nph=document.querySelectorAll('[id^="pmph-src-"]').length;
+  data.projects[i].page.photos=Array.from({length:nph},(_,j)=>({src:getVal(`pmph-src-${j}`),alt:getVal(`pmph-alt-${j}`)})).filter(ph=>ph.src);
+  data.projects[i].page.photos.splice(pi,1);
+  openPageModal(i);
+}
+
+// ── ABOUT ──────────────────────────────────────────────────────────────────
+function populateAbout(){
+  setVal('about-photo',(data.about||{}).photo);
+  document.getElementById('about-paras-list').innerHTML=((data.about||{}).paragraphs||[]).map((p,i)=>`
+    <div style="display:flex;gap:10px;margin-bottom:10px;">
+      <textarea id="ap-${i}" rows="3" style="flex:1;background:var(--paper);border:1px solid var(--border);padding:10px 14px;font-family:'DM Mono',monospace;font-size:11px;color:var(--ink);outline:none;resize:vertical;">${esc(p)}</textarea>
+      <button class="btn-remove" onclick="removeAboutPara(${i})" style="align-self:flex-start;">✕</button>
+    </div>`).join('');
+}
+function collectAbout(){ const n=document.querySelectorAll('[id^="ap-"]').length; data.about.photo=getVal('about-photo'); data.about.paragraphs=Array.from({length:n},(_,i)=>getVal(`ap-${i}`)).filter(Boolean); }
+function addAboutPara(){ collectAbout();data.about.paragraphs.push('New paragraph…');populateAbout(); }
+function removeAboutPara(i){ collectAbout();data.about.paragraphs.splice(i,1);populateAbout(); }
+
+// ── SKILLS ─────────────────────────────────────────────────────────────────
+function populateSkills(){
+  document.getElementById('skills-list').innerHTML=((data.about||{}).skills||[]).map((sg,gi)=>`
+    <div class="skill-group-card">
+      <div class="skill-group-header">
+        <div class="fg" style="margin:0;flex:1;margin-right:14px;"><label>Group Name</label><input type="text" id="sg-name-${gi}" value="${esc(sg.group)}"></div>
+        <button class="btn-remove" onclick="removeSkillGroup(${gi})">Remove Group</button>
+      </div>
+      <div class="skill-items-list" id="sg-items-${gi}">
+        ${(sg.items||[]).map((item,ii)=>`<div class="skill-item-row"><input type="text" id="si-${gi}-${ii}" value="${esc(item)}"><button class="btn-remove-sm" onclick="removeSkillItem(${gi},${ii})">✕</button></div>`).join('')}
+      </div>
+      <button class="btn-add-sm" onclick="addSkillItem(${gi})">+ Add Item</button>
+    </div>`).join('');
+}
+function collectSkills(){
+  const gn=document.querySelectorAll('[id^="sg-name-"]').length;
+  data.about.skills=Array.from({length:gn},(_,gi)=>{
+    const items=[]; document.querySelectorAll(`[id^="si-${gi}-"]`).forEach(el=>{if(el.value)items.push(el.value);}); return{group:getVal(`sg-name-${gi}`),items};
+  });
+}
+function addSkillGroup(){ collectSkills();data.about.skills.push({group:'New Group',items:[]});populateSkills(); }
+function removeSkillGroup(gi){ collectSkills();data.about.skills.splice(gi,1);populateSkills(); }
+function addSkillItem(gi){ collectSkills();data.about.skills[gi].items.push('New skill');populateSkills(); }
+function removeSkillItem(gi,ii){ collectSkills();data.about.skills[gi].items.splice(ii,1);populateSkills(); }
+
+// ── EXPERIENCE ─────────────────────────────────────────────────────────────
+function populateExperience(){
+  document.getElementById('experience-list').innerHTML=(data.experience||[]).map((e,i)=>`
+    <div class="item-card" id="exp-${i}">
+      <div class="item-card-header" onclick="toggleCard('exp-${i}')">
+        <div><div class="item-card-title">${esc(e.role)}</div><div class="item-card-meta">${esc(e.org)} · ${esc(e.period)}</div></div>
+        <div style="display:flex;gap:10px;align-items:center;"><button class="btn-remove" onclick="event.stopPropagation();removeExperience(${i})">Remove</button><span class="item-card-toggle">▾</span></div>
+      </div>
+      <div class="item-card-body">
+        <div class="form-row"><div class="fg"><label>Period</label><input type="text" id="ex-period-${i}" value="${esc(e.period)}"></div><div class="fg"><label>Badge</label><input type="text" id="ex-badge-${i}" value="${esc(e.badge)}"></div></div>
+        <div class="form-row"><div class="fg"><label>Organisation</label><input type="text" id="ex-org-${i}" value="${esc(e.org)}"></div><div class="fg"><label>Location</label><input type="text" id="ex-loc-${i}" value="${esc(e.location)}"></div></div>
+        <div class="fg"><label>Role</label><input type="text" id="ex-role-${i}" value="${esc(e.role)}"></div>
+        <div class="fg"><label>Description</label><textarea id="ex-desc-${i}" rows="4">${esc(e.desc)}</textarea></div>
+        <div class="fg"><label>Key Projects (comma-separated)</label><input type="text" id="ex-projs-${i}" value="${esc((e.projects||[]).join(', '))}"></div>
+      </div>
+    </div>`).join('');
+}
+function collectExperience(){
+  const n=document.querySelectorAll('[id^="ex-period-"]').length;
+  data.experience=Array.from({length:n},(_,i)=>({period:getVal(`ex-period-${i}`),badge:getVal(`ex-badge-${i}`),org:getVal(`ex-org-${i}`),location:getVal(`ex-loc-${i}`),role:getVal(`ex-role-${i}`),desc:getVal(`ex-desc-${i}`),projects:getVal(`ex-projs-${i}`).split(',').map(p=>p.trim()).filter(Boolean)}));
+}
+function addExperience(){ collectExperience();data.experience.push({period:'',badge:'',org:'',location:'',role:'New Role',desc:'',projects:[]});populateExperience(); }
+function removeExperience(i){ collectExperience();data.experience.splice(i,1);populateExperience(); }
+
+// ── EDUCATION ──────────────────────────────────────────────────────────────
+function populateEducation(){
+  document.getElementById('education-list').innerHTML=(data.education||[]).map((e,i)=>`
+    <div class="item-card" id="edu-${i}">
+      <div class="item-card-header" onclick="toggleCard('edu-${i}')">
+        <div><div class="item-card-title">${esc(e.degree)}</div><div class="item-card-meta">${esc(e.uni)}</div></div>
+        <div style="display:flex;gap:10px;align-items:center;"><button class="btn-remove" onclick="event.stopPropagation();removeEducation(${i})">Remove</button><span class="item-card-toggle">▾</span></div>
+      </div>
+      <div class="item-card-body">
+        <div class="fg"><label>Degree</label><input type="text" id="edu-deg-${i}" value="${esc(e.degree)}"></div>
+        <div class="fg"><label>University</label><input type="text" id="edu-uni-${i}" value="${esc(e.uni)}"></div>
+        <div class="form-row"><div class="fg"><label>Year / Country</label><input type="text" id="edu-year-${i}" value="${esc(e.year)}"></div><div class="fg"><label>GPA</label><input type="text" id="edu-gpa-${i}" value="${esc(e.gpa)}"></div></div>
+        <div class="fg"><label>Highlight</label><textarea id="edu-hl-${i}" rows="3">${esc(e.highlight)}</textarea></div>
+      </div>
+    </div>`).join('');
+}
+function collectEducation(){
+  const n=document.querySelectorAll('[id^="edu-deg-"]').length;
+  data.education=Array.from({length:n},(_,i)=>({degree:getVal(`edu-deg-${i}`),uni:getVal(`edu-uni-${i}`),year:getVal(`edu-year-${i}`),gpa:getVal(`edu-gpa-${i}`),highlight:getVal(`edu-hl-${i}`)}));
+}
+function addEducation(){ collectEducation();data.education.push({degree:'New Degree',uni:'',year:'',gpa:'',highlight:''});populateEducation(); }
+function removeEducation(i){ collectEducation();data.education.splice(i,1);populateEducation(); }
+
+// ── LEADERSHIP ─────────────────────────────────────────────────────────────
+function populateLeadership(){
+  document.getElementById('leadership-list').innerHTML=(data.leadership||[]).map((l,i)=>`
+    <div class="item-card" id="ld-${i}">
+      <div class="item-card-header" onclick="toggleCard('ld-${i}')">
+        <div><div class="item-card-title">${esc(l.role)}</div><div class="item-card-meta">${esc(l.org)} · ${esc(l.period)}</div></div>
+        <div style="display:flex;gap:10px;align-items:center;"><button class="btn-remove" onclick="event.stopPropagation();removeLeadership(${i})">Remove</button><span class="item-card-toggle">▾</span></div>
+      </div>
+      <div class="item-card-body">
+        <div class="fg"><label>Organisation</label><input type="text" id="ld-org-${i}" value="${esc(l.org)}"></div>
+        <div class="fg"><label>Role</label><input type="text" id="ld-role-${i}" value="${esc(l.role)}"></div>
+        <div class="fg"><label>Period</label><input type="text" id="ld-period-${i}" value="${esc(l.period)}"></div>
+        <div class="fg"><label>Description</label><textarea id="ld-desc-${i}" rows="3">${esc(l.desc)}</textarea></div>
+      </div>
+    </div>`).join('');
+}
+function collectLeadership(){
+  const n=document.querySelectorAll('[id^="ld-org-"]').length;
+  data.leadership=Array.from({length:n},(_,i)=>({org:getVal(`ld-org-${i}`),role:getVal(`ld-role-${i}`),period:getVal(`ld-period-${i}`),desc:getVal(`ld-desc-${i}`)}));
+}
+function addLeadership(){ collectLeadership();data.leadership.push({org:'',role:'New Role',period:'',desc:''});populateLeadership(); }
+function removeLeadership(i){ collectLeadership();data.leadership.splice(i,1);populateLeadership(); }
+
+// ── AWARDS ─────────────────────────────────────────────────────────────────
+function populateAwards(){
+  document.getElementById('awards-list').innerHTML=(data.awards||[]).map((a,i)=>`
+    <div class="item-card" id="aw-${i}">
+      <div class="item-card-header" onclick="toggleCard('aw-${i}')">
+        <div><div class="item-card-title">${esc(a.icon)} ${esc(a.title)}</div><div class="item-card-meta">${esc(a.year)}</div></div>
+        <div style="display:flex;gap:10px;align-items:center;"><button class="btn-remove" onclick="event.stopPropagation();removeAward(${i})">Remove</button><span class="item-card-toggle">▾</span></div>
+      </div>
+      <div class="item-card-body">
+        <div class="form-row"><div class="fg"><label>Icon (emoji)</label><input type="text" id="aw-icon-${i}" value="${esc(a.icon)}"></div><div class="fg"><label>Year</label><input type="text" id="aw-year-${i}" value="${esc(a.year)}"></div></div>
+        <div class="fg"><label>Title</label><input type="text" id="aw-title-${i}" value="${esc(a.title)}"></div>
+        <div class="fg"><label>Body Text</label><textarea id="aw-body-${i}" rows="3">${esc(a.body)}</textarea></div>
+        <div class="fg"><label>Photo Filename (optional)</label><input type="text" id="aw-photo-${i}" value="${esc(a.photo||'')}"></div>
+        <div class="fg"><label>Background</label>
+          <select id="aw-dark-${i}" style="background:var(--paper);border:1px solid var(--border);padding:10px 14px;font-family:'DM Mono',monospace;font-size:11px;color:var(--ink);outline:none;">
+            <option value="true" ${a.dark?'selected':''}>Dark</option>
+            <option value="false" ${!a.dark?'selected':''}>Light</option>
+          </select>
+        </div>
+      </div>
+    </div>`).join('');
+}
+function collectAwards(){
+  const n=document.querySelectorAll('[id^="aw-icon-"]').length;
+  data.awards=Array.from({length:n},(_,i)=>({icon:getVal(`aw-icon-${i}`),year:getVal(`aw-year-${i}`),title:getVal(`aw-title-${i}`),body:getVal(`aw-body-${i}`),photo:getVal(`aw-photo-${i}`),dark:document.getElementById(`aw-dark-${i}`).value==='true'}));
+}
+function addAward(){ collectAwards();data.awards.push({icon:'🏆',year:'',title:'New Award',body:'',photo:'',dark:true});populateAwards(); }
+function removeAward(i){ collectAwards();data.awards.splice(i,1);populateAwards(); }
+
+// ── CONTACT ────────────────────────────────────────────────────────────────
+function populateContact(){
+  document.getElementById('contact-list').innerHTML=((data.contact||{}).links||[]).map((l,i)=>`
+    <div class="item-card" style="padding:20px 24px;margin-bottom:10px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr auto auto auto;gap:10px;align-items:flex-end;">
+        <div class="fg" style="margin:0;"><label>Label</label><input type="text" id="cl-label-${i}" value="${esc(l.label)}"></div>
+        <div class="fg" style="margin:0;"><label>Href</label><input type="text" id="cl-href-${i}" value="${esc(l.href)}"></div>
+        <div class="fg" style="margin:0;"><label>Arrow</label><input type="text" id="cl-arrow-${i}" value="${esc(l.arrow)}" style="width:48px;"></div>
+        <div class="fg" style="margin:0;"><label>Download filename</label><input type="text" id="cl-dl-${i}" value="${esc(l.download||'')}"></div>
+        <button class="btn-remove" onclick="removeContact(${i})">✕</button>
+      </div>
+    </div>`).join('');
+}
+function collectContact(){
+  const n=document.querySelectorAll('[id^="cl-label-"]').length;
+  data.contact={links:Array.from({length:n},(_,i)=>{const dl=getVal(`cl-dl-${i}`);return{label:getVal(`cl-label-${i}`),href:getVal(`cl-href-${i}`),arrow:getVal(`cl-arrow-${i}`),...(dl?{download:dl}:{})}; })};
+}
+function addContact(){ collectContact();data.contact.links.push({label:'New Link',href:'#',arrow:'↗'});populateContact(); }
+function removeContact(i){ collectContact();data.contact.links.splice(i,1);populateContact(); }
+
+// ── HELPERS ────────────────────────────────────────────────────────────────
+function toggleCard(id){ document.getElementById(id).classList.toggle('collapsed'); }
+function setVal(id,val){ const el=document.getElementById(id); if(el) el.value=val||''; }
+function getVal(id){ const el=document.getElementById(id); return el?el.value.trim():''; }
+function esc(s){ return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function setStatus(type,text){ document.getElementById('status-dot').className='status-dot'+(type==='connected'?' connected':type==='error'?' error':''); document.getElementById('status-text').textContent=text; }
+function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),3000); }
+window.addEventListener('beforeunload',e=>{ if(isDirty){e.preventDefault();e.returnValue='';} });
 </script>
 </body>
 </html>

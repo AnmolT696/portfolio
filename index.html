@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anmol Tanwar — Structural Engineer GIStructE</title>
+<title>Loading…</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
@@ -140,21 +140,17 @@
     letter-spacing: -0.04em;
     pointer-events: none;
   }
-  .credentials-list {
-    display: flex; flex-direction: column; gap: 0;
-  }
+  .credentials-list { display: flex; flex-direction: column; gap: 0; }
   .cred-item {
     display: flex; align-items: flex-start; gap: 20px;
     padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
   }
   .cred-item:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
   .cred-num { font-size: 9px; color: var(--accent); letter-spacing: 0.14em; min-width: 24px; }
-  .cred-text { }
   .cred-title { font-size: 11px; color: rgba(255,255,255,0.85); letter-spacing: 0.06em; }
   .cred-sub { font-size: 10px; color: rgba(255,255,255,0.35); margin-top: 2px; }
   .hero-award {
-    margin-top: 40px;
-    padding: 20px 24px;
+    margin-top: 40px; padding: 20px 24px;
     border: 1px solid rgba(181,129,58,0.35);
     background: rgba(181,129,58,0.07);
   }
@@ -242,7 +238,6 @@
   .proj-value {
     display: inline-block; margin-bottom: 10px;
     font-size: 9px; color: var(--accent); letter-spacing: 0.14em;
-    font-weight: 400;
   }
 
   /* ABOUT */
@@ -252,7 +247,6 @@
   }
   .about-text p { font-size: 12px; color: #444; line-height: 1.95; margin-bottom: 18px; }
   .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
-  .skill-group { }
   .sg-title {
     font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
     color: var(--accent); margin-bottom: 14px;
@@ -275,14 +269,12 @@
     border-bottom: 1px solid var(--border);
   }
   .tl-item:last-child { border-bottom: none; }
-  .tl-left { }
   .tl-period { font-size: 10px; color: var(--accent); letter-spacing: 0.12em; margin-bottom: 6px; }
   .tl-org {
     font-family: 'Cormorant Garamond', serif;
     font-size: 15px; color: var(--ink);
   }
   .tl-loc { font-size: 10px; color: var(--mid); margin-top: 3px; }
-  .tl-right { }
   .tl-role {
     font-family: 'Cormorant Garamond', serif;
     font-size: 22px; font-weight: 400; margin-bottom: 10px;
@@ -294,13 +286,9 @@
     padding: 3px 9px; margin-bottom: 14px;
   }
   .tl-desc { font-size: 11.5px; color: #4a4a4a; line-height: 1.9; }
-  .tl-projects { margin-top: 16px; }
-  .tl-proj-label { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mid); margin-bottom: 8px; }
+  .tl-proj-label { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mid); margin-bottom: 8px; margin-top: 16px; }
   .tl-proj-list { display: flex; flex-wrap: wrap; gap: 6px; }
-  .tl-proj-tag {
-    font-size: 9.5px; background: var(--warm);
-    padding: 4px 12px; color: var(--ink); letter-spacing: 0.06em;
-  }
+  .tl-proj-tag { font-size: 9.5px; background: var(--warm); padding: 4px 12px; color: var(--ink); letter-spacing: 0.06em; }
 
   /* EDUCATION */
   #education { border-bottom: 1px solid var(--border); }
@@ -335,31 +323,25 @@
   .lead-desc { font-size: 11px; color: #555; line-height: 1.85; }
 
   /* AWARDS */
-  .awards-strip { display:grid; grid-template-columns:repeat(3,1fr); border-bottom:1px solid var(--border); }
+  .awards-strip { display: grid; grid-template-columns: repeat(3,1fr); border-bottom: 1px solid var(--border); }
   .award-card {
     padding: 44px 52px; border-right: 1px solid var(--border);
     background: var(--dark);
   }
-  .award-card:last-child { border-right: none; background: var(--paper); }
+  .award-card.light { background: var(--paper); }
+  .award-card:last-child { border-right: none; }
   .award-icon { font-size: 28px; margin-bottom: 18px; }
   .award-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: 22px; font-weight: 300; color: #fff; margin-bottom: 10px;
   }
-  .award-card:last-child .award-title { color: var(--ink); }
+  .award-card.light .award-title { color: var(--ink); }
   .award-body { font-size: 11px; color: rgba(255,255,255,0.55); line-height: 1.85; }
-  .award-card:last-child .award-body { color: #555; }
+  .award-card.light .award-body { color: #555; }
   .award-year { font-size: 9px; color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 14px; }
 
   /* CONTACT */
   #contact { padding: 88px 52px; }
-  .contact-head {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(32px, 4vw, 54px); font-weight: 300;
-    line-height: 1.05; letter-spacing: -0.01em;
-  }
-  .contact-head em { font-style: italic; color: var(--accent); }
-  .contact-sub { font-size: 11.5px; color: #555; margin-top: 20px; line-height: 1.9; max-width: 380px; }
   .contact-links { display: flex; flex-direction: column; }
   .contact-link {
     display: flex; align-items: center; justify-content: space-between;
@@ -395,12 +377,12 @@
     .stats-bar { grid-template-columns: 1fr 1fr; }
     .stat { padding: 24px; }
     .projects-grid { grid-template-columns: 1fr; }
-    #about, #contact { padding: 88px 52px; }
+    #about { grid-template-columns: 1fr; gap: 40px; padding: 64px 24px; }
     .skills-grid { grid-template-columns: 1fr 1fr; }
     .tl-item { grid-template-columns: 1fr; gap: 8px; }
     .edu-grid { grid-template-columns: 1fr; }
     .lead-grid { grid-template-columns: 1fr; }
-    .awards-strip { display:grid; grid-template-columns:repeat(3,1fr); border-bottom:1px solid var(--border); } .awards-strip .award-card { border-right:none; }
+    .awards-strip { grid-template-columns: 1fr; }
     .award-card { border-right: none; border-bottom: 1px solid var(--border); }
     footer { flex-direction: column; gap: 6px; text-align: center; }
   }
@@ -409,10 +391,8 @@
 <body>
 
 <div id="cursor"></div>
-
-<!-- NAV -->
 <nav id="nav">
-  <a class="nav-logo" href="#">Anmol <span>Tanwar</span></a>
+  <a class="nav-logo" href="#" id="nav-logo-text">Loading…</a>
   <ul class="nav-links">
     <li><a href="#projects">Projects</a></li>
     <li><a href="#about">About</a></li>
@@ -421,465 +401,298 @@
     <li><a href="#contact">Contact</a></li>
     <li><a href="page-istructe.html">IStructE</a></li>
   </ul>
-  <span class="nav-badge">GIStructE · MIStructE in Progress</span>
+  <span class="nav-badge" id="nav-badge"></span>
 </nav>
 
-<!-- HERO -->
 <section id="hero">
-  <div class="hero-left">
-    <p class="hero-eyebrow">Structural Engineer</p>
-    <h1 class="hero-name">Anmol<em>Tanwar</em></h1>
-    <p class="hero-desc">
-      Structural engineer with 2+ years of UK experience delivering technically demanding structural projects across healthcare, commercial, and residential sectors in Greater Manchester. Available for structural engineer role.
-    </p>
-    <div class="hero-cta">
-      <a href="#projects" class="btn btn-solid">View Projects</a>
-      <a href="mailto:anmoltanwar12@outlook.com" class="btn btn-outline">Get in Touch</a>
-    </div>
-  </div>
-  <div class="hero-right">
-    <div style="display:flex;align-items:center;gap:18px;margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,0.07);">
-      <div style="width:72px;height:72px;border-radius:50%;border:2px solid rgba(181,129,58,0.5);overflow:hidden;flex-shrink:0;background:#2a2620;display:flex;align-items:center;justify-content:center;">
-        <img src="your-photo.jpg" alt="Anmol Tanwar"
-          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'font-family:Cormorant Garamond,serif;font-size:26px;font-weight:300;color:rgba(181,129,58,0.8);\'>AT</span>'"
-          style="width:100%;height:100%;object-fit:cover;object-position:top;">
-      </div>
-      <div>
-        <p style="font-family:Cormorant Garamond,serif;font-size:17px;font-weight:300;color:rgba(255,255,255,0.88);letter-spacing:0.04em;">Anmol Tanwar</p>
-        <p style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(181,129,58,0.8);margin-top:4px;">GIStructE</p>
-      </div>
-    </div>
-    <div class="credentials-list">
-      <div class="cred-item">
-        <span class="cred-num">01</span>
-        <div class="cred-text">
-          <p class="cred-title">Tekla Structural Designer · STAAD Pro · ETABS · Midas Gen</p>
-          <p class="cred-sub">FEM Software Expertise</p>
-        </div>
-      </div>
-      <div class="cred-item">
-        <span class="cred-num">02</span>
-        <div class="cred-text">
-          <p class="cred-title">BS-EN Eurocodes · British Standards · Indian Standards</p>
-          <p class="cred-sub">Design Code Proficiency</p>
-        </div>
-      </div>
-      <div class="cred-item">
-        <span class="cred-num">03</span>
-        <div class="cred-text">
-          <p class="cred-title">RIBA Stage 1–5 · NHS Live Environments · Temporary Works</p>
-          <p class="cred-sub">Project Delivery</p>
-        </div>
-      </div>
-      <div class="cred-item">
-        <span class="cred-num">04</span>
-        <div class="cred-text">
-          <p class="cred-title">Python · MATLAB · AutoCAD · BIM Workflows</p>
-          <p class="cred-sub">Computational & Digital Tools</p>
-        </div>
-      </div>
-      <div class="cred-item">
-        <span class="cred-num">05</span>
-        <div class="cred-text">
-          <p class="cred-title">IStructE Chair, NW Young Members Group · CROSS UK Volunteer</p>
-          <p class="cred-sub">Professional Leadership</p>
-        </div>
-      </div>
-    </div><!-- /credentials-list -->
-    <div class="hero-award">
-      <p class="award-label">🏆 Recognition</p>
-      <p class="award-text">Invited to IStructE Hot Pot Supper &amp; received prize from Mohamed Al-Dah, President of the Institution of Structural Engineers, following a technical presentation at the Young Members Presentation Event — November 2024.</p>
-    </div>
-    <div class="hero-award" style="margin-top:12px;">
-      <p class="award-label">⭐ Recent Achievement</p>
-      <p class="award-text">IStructE Chartership Examination — Passed — April 2026</p>
-    </div>
-  </div>
+  <div class="hero-left" id="hero-left"></div>
+  <div class="hero-right" id="hero-right"></div>
 </section>
 
-<!-- STATS -->
-<div class="stats-bar">
-  <div class="stat fade"><div class="stat-n">2+</div><div class="stat-l">Years UK Experience</div></div>
-  <div class="stat fade" style="transition-delay:.08s"><div class="stat-n">£15M+</div><div class="stat-l">Project Value Delivered</div></div>
-  <div class="stat fade" style="transition-delay:.16s"><div class="stat-n">10+</div><div class="stat-l">Major Projects</div></div>
-  <div class="stat fade" style="transition-delay:.24s"><div class="stat-n">5</div><div class="stat-l">FEM Tools</div></div>
-  <div class="stat fade" style="transition-delay:.32s"><div class="stat-n">NHS</div><div class="stat-l">Healthcare Specialist</div></div>
-</div>
+<div class="stats-bar" id="stats-bar"></div>
 
-<!-- PROJECTS -->
 <section id="projects">
   <div class="sec-header">
     <span class="sec-n">01</span>
     <h2 class="sec-title">Selected Projects</h2>
     <div class="sec-rule"></div>
   </div>
-  <div class="projects-grid" id="projects-grid">
-    <!-- Projects are loaded dynamically from projects.json -->
-  </div>
+  <div class="projects-grid" id="projects-grid"></div>
 </section>
 
-<script>
-(function loadProjects() {
-  const grid = document.getElementById('projects-grid');
-
-  fetch('projects.json?v=' + Date.now())
-    .then(function(res) {
-      if (!res.ok) throw new Error('Could not load projects.json');
-      return res.json();
-    })
-    .then(function(allProjects) {
-      const active = allProjects
-        .filter(function(p) { return p.active; })
-        .slice(0, 9);
-
-      if (active.length === 0) {
-        grid.innerHTML = '<p style="padding:48px;color:var(--mid);font-size:11px;">No projects to display.</p>';
-        return;
-      }
-
-      const delays = [0, 0.08, 0.16, 0, 0.08, 0.16, 0, 0.08, 0.16];
-      grid.innerHTML = active.map(function(p, i) {
-        var delay = delays[i] || 0;
-        var tags = (p.tags || []).map(function(t) {
-          return '<span class="ptag">' + esc(t) + '</span>';
-        }).join('');
-        var valueHtml = p.value ? '<span class="proj-value">' + esc(p.value) + '</span>' : '';
-        var imageHtml = p.image
-          ? '<div style="width:100%;aspect-ratio:1/1;overflow:hidden;background:transparent;margin:-36px -32px 22px;display:flex;align-items:center;justify-content:center;">'
-            + '<img src="' + esc(p.image) + '" alt="' + esc(p.imageAlt) + '" onload="this.parentElement.style.background=\'var(--warm)\'" onerror="this.parentElement.style.display=\'none\'" style="width:100%;height:100%;object-fit:cover;display:block;">'
-            + '</div>'
-          : '';
-        return '<div class="proj fade" onclick="location.href=\'' + esc(p.url) + '\'" style="cursor:pointer;' + (delay ? 'transition-delay:' + delay + 's' : '') + '">'
-          + imageHtml
-          + '<span class="proj-sector">' + esc(p.sector) + '</span>'
-          + valueHtml
-          + '<h3 class="proj-name">' + esc(p.name) + '</h3>'
-          + '<p class="proj-meta">' + esc(p.meta) + '</p>'
-          + '<p class="proj-desc">' + esc(p.desc) + '</p>'
-          + '<div class="proj-tags">' + tags + '</div>'
-          + '<span class="proj-arrow">↗</span>'
-          + '</div>';
-      }).join('');
-
-      // Re-run fade observer for newly created elements
-      const obs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('in'); });
-      }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
-      grid.querySelectorAll('.fade').forEach(function(el) {
-        obs.observe(el);
-        if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('in');
-      });
-
-      // Re-apply cursor hover to new project cards
-      grid.querySelectorAll('.proj').forEach(function(el) {
-        el.addEventListener('mouseenter', function() { document.getElementById('cursor').classList.add('big'); });
-        el.addEventListener('mouseleave', function() { document.getElementById('cursor').classList.remove('big'); });
-      });
-    })
-    .catch(function(err) {
-      console.warn('projects.json load error:', err);
-      grid.innerHTML = '<p style="padding:48px;color:var(--mid);font-size:11px;letter-spacing:0.1em;">Projects unavailable — please check projects.json</p>';
-    });
-
-  function esc(str) {
-    return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-})();
-</script>
-
-<!-- ABOUT -->
-<section id="about">
+<section id="about" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;border-bottom:1px solid var(--border);">
   <div>
     <div class="sec-header">
       <span class="sec-n">02</span>
       <h2 class="sec-title">About</h2>
       <div class="sec-rule"></div>
     </div>
-    <div class="about-text fade">
-      <div style="margin-bottom:28px;overflow:hidden;">
-        <img src="anmol-professional.jpg" alt="Anmol Tanwar"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
-          style="width:50%;height:auto;display:block;margin:0;">
-        <div style="display:none;width:50%;height:100px;background:var(--warm);align-items:center;justify-content:center;margin:0;">
-          <span style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);">Add photo → anmol-professional.jpg</span>
-        </div>
-      </div>
-      <p>I am a Structural Engineer (GIStructE) with over two years of UK consultancy experience at CCS Consulting, Manchester, where I have delivered structural designs from concept to construction across NHS healthcare, commercial, and residential sectors.</p>
-      <p>My work spans concrete, steel, timber, and masonry design to BS-EN Eurocodes and British Standards, with specialist experience in RAAC survey and remediation across live NHS hospitals in North West England — one of the most technically and logistically demanding environments in the industry.</p>
-      <p>Beyond engineering design, I develop Python automation tools to streamline workflows, and I actively contribute to the profession as Chair of the IStructE Northwest Young Members Group and as a CROSS UK Safety Report volunteer.</p>
-      <p>I am actively progressing toward MIStructE chartership and am open to roles that combine structural engineering rigour with innovative, high-impact projects.</p>
-    </div>
+    <div class="about-text fade" id="about-text"></div>
   </div>
   <div class="fade" style="transition-delay:.15s">
-    <div class="sec-header" style="margin-top: 0;">
+    <div class="sec-header" style="margin-top:0;">
       <span class="sec-n">&nbsp;</span>
       <h2 class="sec-title" style="font-size:22px;">Technical Skills</h2>
       <div class="sec-rule"></div>
     </div>
-    <div class="skills-grid">
-      <div class="skill-group">
-        <p class="sg-title">Structural Software</p>
-        <ul class="sg-list">
-          <li>Tekla Structural Designer</li>
-          <li>STAAD Pro</li>
-          <li>ETABS</li>
-          <li>Midas Gen</li>
-          <li>Ansys / Robot (exposure)</li>
-          <li>Tekla Tedds</li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <p class="sg-title">Design Codes</p>
-        <ul class="sg-list">
-          <li>BS-EN Eurocodes</li>
-          <li>British Standards</li>
-          <li>Indian Standards (IS)</li>
-          <li>RIBA Stage 1–5</li>
-          <li>NBS Specifications</li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <p class="sg-title">BIM & CAD</p>
-        <ul class="sg-list">
-          <li>AutoCAD (Proficient)</li>
-          <li>Revit Structure</li>
-          <li>BIM360 / ACC</li>
-          <li>Dynamo (Awareness)</li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <p class="sg-title">Computational</p>
-        <ul class="sg-list">
-          <li>Python (Working)</li>
-          <li>MATLAB (Proficient)</li>
-          <li>LabVIEW / NI myRIO</li>
-          <li>MS Excel / VBA</li>
-        </ul>
-      </div>
-    </div>
+    <div class="skills-grid" id="skills-grid"></div>
   </div>
 </section>
 
-<!-- EXPERIENCE -->
 <section id="experience">
   <div class="sec-header">
     <span class="sec-n">03</span>
     <h2 class="sec-title">Experience</h2>
     <div class="sec-rule"></div>
   </div>
-  <div class="timeline">
-
-    <div class="tl-item fade">
-      <div class="tl-left">
-        <p class="tl-period">Jan 2024 – Jan 2026</p>
-        <p class="tl-org">CCS Consulting</p>
-        <p class="tl-loc">Manchester, UK</p>
-      </div>
-      <div class="tl-right">
-        <h3 class="tl-role">Graduate Structural Engineer</h3>
-        <span class="tl-badge">GIStructE</span>
-        <p class="tl-desc">Delivered structural design from RIBA Stage 1 to Stage 5 across NHS hospitals, industrial, and residential projects in Greater Manchester — working within live operational facilities throughout all construction phases. Produced designs in concrete, steel, timber, and masonry to Eurocodes. Conducted embodied carbon calculations, produced engineering reports, attended design team meetings and site visits. Developed Python automation tools to streamline engineering workflows and delivered internal CPD sessions.</p>
-        <div class="tl-projects">
-          <p class="tl-proj-label">Key Projects</p>
-          <div class="tl-proj-list">
-            <span class="tl-proj-tag">Wythenshawe Hospital</span>
-            <span class="tl-proj-tag">Manchester Royal Infirmary</span>
-            <span class="tl-proj-tag">North Manchester General</span>
-            <span class="tl-proj-tag">Withington CDC</span>
-            <span class="tl-proj-tag">TGH 12-14 Extension</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tl-item fade">
-      <div class="tl-left">
-        <p class="tl-period">Aug – Dec 2023</p>
-        <p class="tl-org">CCS Consulting</p>
-        <p class="tl-loc">Manchester, UK</p>
-      </div>
-      <div class="tl-right">
-        <h3 class="tl-role">Intern Structural Engineer</h3>
-        <span class="tl-badge">Internship</span>
-        <p class="tl-desc">Conducted structural surveys of existing and listed buildings, performed hand calculations to BS-EN Eurocodes for concrete, steel, timber, and masonry. Prepared drawings across RIBA Stages 1–5 in AutoCAD, assisted with technical report writing, and produced stability calculations for temporary demountable structures.</p>
-      </div>
-    </div>
-
-    <div class="tl-item fade">
-      <div class="tl-left">
-        <p class="tl-period">Jan – Jul 2022</p>
-        <p class="tl-org">P.C. Ragtah & Associates</p>
-        <p class="tl-loc">India</p>
-      </div>
-      <div class="tl-right">
-        <h3 class="tl-role">Intern Structural Engineer</h3>
-        <span class="tl-badge">Internship</span>
-        <p class="tl-desc">Modelled and analysed structures using STAAD Pro and ETABS, assisting with design of RC foundations, retaining walls, beams, columns, slabs, and staircases. Prepared Stage 4 and Stage 5 design and construction documents.</p>
-      </div>
-    </div>
-
-    <div class="tl-item fade">
-      <div class="tl-left">
-        <p class="tl-period">Jun – Jul 2018</p>
-        <p class="tl-org">Municipal Corporation of Delhi</p>
-        <p class="tl-loc">Delhi, India</p>
-      </div>
-      <div class="tl-right">
-        <h3 class="tl-role">Quality Check Trainee</h3>
-        <span class="tl-badge">Training</span>
-        <p class="tl-desc">Conducted material testing on an active 100-bed construction site, verifying compliance of concrete and structural materials against Indian Standard codes.</p>
-      </div>
-    </div>
-
-  </div>
+  <div class="timeline" id="timeline"></div>
 </section>
 
-<!-- EDUCATION -->
 <section id="education">
   <div class="sec-header">
     <span class="sec-n">04</span>
     <h2 class="sec-title">Education</h2>
     <div class="sec-rule"></div>
   </div>
-  <div class="edu-grid">
-    <div class="edu-card fade">
-      <h3 class="edu-degree">MSc Structural Engineering</h3>
-      <p class="edu-uni">The University of Manchester</p>
-      <p class="edu-year">2022 – 2023 · United Kingdom</p>
-      <p class="edu-gpa">GPA: 2.59 / 4.00</p>
-      <p class="edu-highlight">Dynamic behaviour of steel and concrete structures, earthquake and fire engineering. Dynamic study on Merchants Bridge using NI myRIO and LabVIEW/MATLAB — scored 77.5/100. Concrete Centre competition — scored 84.2/100. Won Best Structural Design Award.</p>
-    </div>
-    <div class="edu-card fade" style="transition-delay:.1s">
-      <h3 class="edu-degree">B.Tech Civil Engineering</h3>
-      <p class="edu-uni">SGT University, India</p>
-      <p class="edu-year">2018 – 2022 · India</p>
-      <p class="edu-gpa">GPA: 3.15 / 4.00</p>
-      <p class="edu-highlight">Structural analysis and design of concrete and steel structures, sustainable development. Major project: 6-month industrial training and design of G+4 residential building. Experimented with Abaqus FE software under loading conditions.</p>
-    </div>
-    <div class="edu-card fade" style="transition-delay:.2s">
-      <h3 class="edu-degree">Diploma in Civil Engineering</h3>
-      <p class="edu-uni">Chhotu Ram Rural Institute of Technology</p>
-      <p class="edu-year">2015 – 2018 · India</p>
-      <p class="edu-gpa">GPA: 3.20 / 4.00</p>
-      <p class="edu-highlight">Foundation in civil engineering principles and construction practice.</p>
-    </div>
-  </div>
+  <div class="edu-grid" id="edu-grid"></div>
 </section>
 
-<!-- LEADERSHIP -->
 <section id="leadership">
   <div class="sec-header">
     <span class="sec-n">05</span>
     <h2 class="sec-title">Leadership & Volunteering</h2>
     <div class="sec-rule"></div>
   </div>
-  <div class="lead-grid">
-    <div class="lead-card fade">
-      <p class="lead-org">IStructE — Institution of Structural Engineers</p>
-      <h3 class="lead-role">Chair, Northwest Young Members Group</h3>
-      <p class="lead-period">January 2026 – Present</p>
-      <p class="lead-desc">Setting strategic direction and fostering professional development for emerging structural engineers across the Northwest region. Chairing monthly committee meetings, planning and coordinating professional events and site visits, managing logistics and regional communications.</p>
-    </div>
-    <div class="lead-card fade" style="transition-delay:.1s">
-      <p class="lead-org">IStructE — Institution of Structural Engineers</p>
-      <h3 class="lead-role">Vice Chair, Northwest Young Members Group</h3>
-      <p class="lead-period">January – December 2025</p>
-      <p class="lead-desc">Collaborated with Prof. Jonathan Hayes at the University of Salford to contribute to development of a structural behaviour course for undergraduate and postgraduate students. Supported delivery of professional events and site visits.</p>
-    </div>
-    <div class="lead-card fade">
-      <p class="lead-org">CROSS UK</p>
-      <h3 class="lead-role">Early Career Volunteer</h3>
-      <p class="lead-period">April 2026 – Present</p>
-      <p class="lead-desc">Attending expert panel quarterly meetings and contributing to the production of CROSS Safety Reports. Preparing communication materials and presentation to expert panels to improve structural safety awareness across the profession.</p>
-    </div>
-    <div class="lead-card fade" style="transition-delay:.1s">
-      <p class="lead-org">University of Manchester / IStructE YMG</p>
-      <h3 class="lead-role">Student Representative</h3>
-      <p class="lead-period">2022 – Present</p>
-      <p class="lead-desc">Served as MSc Structural Engineering Student Representative at the University of Manchester. Led a 6-member team in the Concrete Centre Design Competition.</p>
-    </div>
-  </div>
+  <div class="lead-grid" id="lead-grid"></div>
 </section>
 
-<!-- AWARDS -->
-<div class="awards-strip">
+<div class="awards-strip" id="awards-strip"></div>
 
-  <!-- Award 1: IStructE Prize — dark background, photo full natural size -->
-  <div class="award-card fade">
-    <div class="award-icon">🏆</div>
-    <div style="margin-bottom:18px;overflow:hidden;">
-      <img src="istruct-event.png" alt="IStructE Prize Presentation"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
-        style="width:100%;height:auto;display:block;opacity:0.9;">
-      <div style="display:none;width:100%;height:100px;background:rgba(255,255,255,0.04);align-items:center;justify-content:center;">
-        <span style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.2);">Add photo → istruct-event.png</span>
-      </div>
-    </div>
-    <h3 class="award-title">IStructE Young Members Presentation — Prize Winner</h3>
-    <p class="award-body">Recognised for the quality of a technical paper at the Institution of Structural Engineers Young Members Presentation event. Invited to attend the IStructE Hot Pot Supper and received a prize of recognition from Mohamed Al-Dah, President of the Institution of Structural Engineers.</p>
-    <p class="award-year">November 2024</p>
-  </div>
-
-  <!-- Award 2: Best Structural Design — light background, photo no dark overlay -->
-  <div class="award-card fade" style="transition-delay:.1s;background:var(--paper);">
-    <div class="award-icon" style="color:var(--accent)">★</div>
-    <div style="margin-bottom:16px;overflow:hidden;">
-      <img src="best-design-award.jpg" alt="Best Structural Design Award"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
-        style="width:100%;height:auto;display:block;">
-      <div style="display:none;width:100%;height:100px;background:var(--warm);align-items:center;justify-content:center;">
-        <span style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--mid);">Add photo → best-design-award.jpg</span>
-      </div>
-    </div>
-    <h3 class="award-title" style="color:var(--ink);">Best Structural Design — University of Manchester</h3>
-    <p class="award-body" style="color:#555;">Awarded Best Structural Design during MSc Structural Engineering at The University of Manchester for leading a 6-member interdisciplinary team to design a 6-storey precast elliptical office building. Concrete Centre competition score: 84.2/100.</p>
-    <p class="award-year" style="color:var(--accent)">2023</p>
-  </div>
-
-  <!-- Award 3: IStructE Chartership — light background, no photo -->
-  <div class="award-card fade" style="transition-delay:.2s;background:var(--paper);">
-    <div class="award-icon" style="color:var(--accent)">📋</div>
-    <h3 class="award-title" style="color:var(--ink);">IStructE Chartership Examination — Passed</h3>
-    <p class="award-body" style="color:#555;">Passed the IStructE Chartered Membership (MIStructE) examination, demonstrating technical competence, professional experience, and commitment to the highest standards in structural engineering practice.</p>
-    <p class="award-year" style="color:var(--accent)">April 2026</p>
-  </div>
-
-</div>
-
-<!-- CONTACT -->
 <section id="contact">
   <div class="fade" style="transition-delay:.15s">
-    <div class="contact-links">
-      <a href="mailto:anmoltanwar12@outlook.com" class="contact-link">anmoltanwar12@outlook.com <span class="arrow">↗</span></a>
-      <a href="https://www.linkedin.com/in/anmol-tanwar/" target="_blank" class="contact-link">
-        LinkedIn Profile <span class="arrow">↗</span>
-      </a>
-      <a href="tel:+917011035039" class="contact-link">
-        +91 70110 35039 <span class="arrow">↗</span>
-      </a>
-      <a href="Anmol_Tanwar_CV.pdf" download="Anmol_Tanwar_CV.pdf" class="contact-link">Download CV (PDF) <span class="arrow">↓</span></a>
-      <a href="Anmol_Tanwar_Portfolio.pdf" download="Anmol_Tanwar_Portfolio.pdf" class="contact-link">Download Portfolio (PDF) <span class="arrow">↓</span></a>
-    </div>
+    <div class="contact-links" id="contact-links"></div>
   </div>
 </section>
 
-<footer>
-  <span>© 2026 Anmol Tanwar GIStructE</span>
-  <span>Graduate Structural Engineer · Manchester, UK</span>
-  <span>MIStructE in Progress</span>
-</footer>
+<footer id="site-footer"></footer>
+
 <script>
-  const c=document.getElementById('cursor');
-  document.addEventListener('mousemove',e=>{c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';});
-  document.querySelectorAll('a,button,.proj,.stat,.edu-card,.lead-card').forEach(el=>{
-    el.addEventListener('mouseenter',()=>c.classList.add('big'));
-    el.addEventListener('mouseleave',()=>c.classList.remove('big'));
-  });
-  const nav=document.getElementById('nav');
-  window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40);});
-  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:0.08,rootMargin:'0px 0px -20px 0px'});
-  document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
-  window.addEventListener('load',()=>{document.querySelectorAll('.fade').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight)el.classList.add('in');});});
+(function() {
+  function esc(s) {
+    return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  fetch('site-data.json?v=' + Date.now())
+    .then(r => { if (!r.ok) throw new Error('Could not load site-data.json'); return r.json(); })
+    .then(d => {
+      renderMeta(d.meta);
+      renderHero(d.hero);
+      renderStats(d.stats);
+      renderProjects(d.projects);
+      renderAbout(d.about);
+      renderExperience(d.experience);
+      renderEducation(d.education);
+      renderLeadership(d.leadership);
+      renderAwards(d.awards);
+      renderContact(d.contact);
+      renderFooter(d.meta);
+      initInteractions();
+    })
+    .catch(err => {
+      document.body.innerHTML = '<p style="padding:48px;font-family:monospace;color:#c0392b;">Error loading site-data.json: ' + err.message + '</p>';
+    });
+
+  function renderMeta(m) {
+    document.title = m.title;
+    const logo = document.getElementById('nav-logo-text');
+    const parts = m.name.split(' ');
+    logo.innerHTML = parts[0] + ' <span>' + parts.slice(1).join(' ') + '</span>';
+    document.getElementById('nav-badge').textContent = m.navBadge;
+  }
+
+  function renderHero(h) {
+    // Left panel
+    document.getElementById('hero-left').innerHTML = `
+      <p class="hero-eyebrow">${esc(h.eyebrow)}</p>
+      <h1 class="hero-name">${esc(h.firstName)}<em>${esc(h.lastName)}</em></h1>
+      <p class="hero-desc">${esc(h.desc)}</p>
+      <div class="hero-cta">
+        <a href="${esc(h.ctaPrimary.href)}" class="btn btn-solid">${esc(h.ctaPrimary.label)}</a>
+        <a href="${esc(h.ctaSecondary.href)}" class="btn btn-outline">${esc(h.ctaSecondary.label)}</a>
+      </div>`;
+
+    // Right panel
+    const creds = (h.credentials||[]).map(c => `
+      <div class="cred-item">
+        <span class="cred-num">${esc(c.num)}</span>
+        <div><p class="cred-title">${esc(c.title)}</p><p class="cred-sub">${esc(c.sub)}</p></div>
+      </div>`).join('');
+
+    const awards = (h.awards||[]).map((a,i) => `
+      <div class="hero-award"${i>0?' style="margin-top:12px;"':''}>
+        <p class="award-label">${esc(a.label)}</p>
+        <p class="award-text">${esc(a.text)}</p>
+      </div>`).join('');
+
+    const photoHtml = h.photo ? `
+      <div style="display:flex;align-items:center;gap:18px;margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,0.07);">
+        <div style="width:72px;height:72px;border-radius:50%;border:2px solid rgba(181,129,58,0.5);overflow:hidden;flex-shrink:0;background:#2a2620;display:flex;align-items:center;justify-content:center;">
+          <img src="${esc(h.photo)}" alt="${esc(h.firstName+' '+h.lastName)}"
+            onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\\'font-family:Cormorant Garamond,serif;font-size:26px;font-weight:300;color:rgba(181,129,58,0.8);\\'>AT</span>'"
+            style="width:100%;height:100%;object-fit:cover;object-position:top;">
+        </div>
+        <div>
+          <p style="font-family:Cormorant Garamond,serif;font-size:17px;font-weight:300;color:rgba(255,255,255,0.88);letter-spacing:0.04em;">${esc(h.firstName+' '+h.lastName)}</p>
+          <p style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(181,129,58,0.8);margin-top:4px;">GIStructE</p>
+        </div>
+      </div>` : '';
+
+    document.getElementById('hero-right').innerHTML = photoHtml +
+      `<div class="credentials-list">${creds}</div>${awards}`;
+  }
+
+  function renderStats(stats) {
+    document.getElementById('stats-bar').innerHTML = (stats||[]).map((s,i) =>
+      `<div class="stat fade" style="${i>0?'transition-delay:'+(i*0.08)+'s':''}">
+        <div class="stat-n">${esc(s.n)}</div>
+        <div class="stat-l">${esc(s.label)}</div>
+      </div>`
+    ).join('');
+  }
+
+  function renderProjects(projects) {
+    const grid = document.getElementById('projects-grid');
+    const active = (projects||[]).filter(p => p.active).slice(0,9);
+    if (!active.length) { grid.innerHTML = '<p style="padding:48px;color:var(--mid);font-size:11px;">No projects to display.</p>'; return; }
+    const delays = [0,0.08,0.16,0,0.08,0.16,0,0.08,0.16];
+    grid.innerHTML = active.map((p,i) => {
+      const tags = (p.tags||[]).map(t => `<span class="ptag">${esc(t)}</span>`).join('');
+      const valueHtml = p.value ? `<span class="proj-value">${esc(p.value)}</span>` : '';
+      const imgHtml = p.image
+        ? `<div style="width:100%;aspect-ratio:1/1;overflow:hidden;margin:-36px -32px 22px;"><img src="${esc(p.image)}" alt="${esc(p.imageAlt)}" onerror="this.parentElement.style.display='none'" style="width:100%;height:100%;object-fit:cover;display:block;"></div>`
+        : '';
+      return `<div class="proj fade" onclick="location.href='${esc(p.url)}'" style="cursor:pointer;${delays[i]?'transition-delay:'+delays[i]+'s':''}">
+        ${imgHtml}<span class="proj-sector">${esc(p.sector)}</span>${valueHtml}
+        <h3 class="proj-name">${esc(p.name)}</h3>
+        <p class="proj-meta">${esc(p.meta)}</p>
+        <p class="proj-desc">${esc(p.desc)}</p>
+        <div class="proj-tags">${tags}</div>
+        <span class="proj-arrow">↗</span>
+      </div>`;
+    }).join('');
+  }
+
+  function renderAbout(a) {
+    const photoHtml = a.photo ? `
+      <div style="margin-bottom:28px;overflow:hidden;">
+        <img src="${esc(a.photo)}" alt="Photo"
+          onerror="this.style.display='none'"
+          style="width:50%;height:auto;display:block;">
+      </div>` : '';
+    document.getElementById('about-text').innerHTML =
+      photoHtml + (a.paragraphs||[]).map(p => `<p>${esc(p)}</p>`).join('');
+
+    document.getElementById('skills-grid').innerHTML = (a.skills||[]).map(sg => `
+      <div class="skill-group">
+        <p class="sg-title">${esc(sg.group)}</p>
+        <ul class="sg-list">${(sg.items||[]).map(i => `<li>${esc(i)}</li>`).join('')}</ul>
+      </div>`).join('');
+  }
+
+  function renderExperience(exp) {
+    document.getElementById('timeline').innerHTML = (exp||[]).map((e,i) => {
+      const projs = e.projects && e.projects.length
+        ? `<p class="tl-proj-label">Key Projects</p>
+           <div class="tl-proj-list">${e.projects.map(p => `<span class="tl-proj-tag">${esc(p)}</span>`).join('')}</div>`
+        : '';
+      return `<div class="tl-item fade" style="${i>0?'transition-delay:'+(i*0.1)+'s':''}">
+        <div>
+          <p class="tl-period">${esc(e.period)}</p>
+          <p class="tl-org">${esc(e.org)}</p>
+          <p class="tl-loc">${esc(e.location)}</p>
+        </div>
+        <div>
+          <h3 class="tl-role">${esc(e.role)}</h3>
+          <span class="tl-badge">${esc(e.badge)}</span>
+          <p class="tl-desc">${esc(e.desc)}</p>
+          ${projs}
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function renderEducation(edu) {
+    document.getElementById('edu-grid').innerHTML = (edu||[]).map((e,i) => `
+      <div class="edu-card fade" style="${i>0?'transition-delay:'+(i*0.1)+'s':''}">
+        <h3 class="edu-degree">${esc(e.degree)}</h3>
+        <p class="edu-uni">${esc(e.uni)}</p>
+        <p class="edu-year">${esc(e.year)}</p>
+        <p class="edu-gpa">${esc(e.gpa)}</p>
+        <p class="edu-highlight">${esc(e.highlight)}</p>
+      </div>`).join('');
+  }
+
+  function renderLeadership(lead) {
+    document.getElementById('lead-grid').innerHTML = (lead||[]).map((l,i) => `
+      <div class="lead-card fade" style="${i%2!==0?'transition-delay:0.1s':''}">
+        <p class="lead-org">${esc(l.org)}</p>
+        <h3 class="lead-role">${esc(l.role)}</h3>
+        <p class="lead-period">${esc(l.period)}</p>
+        <p class="lead-desc">${esc(l.desc)}</p>
+      </div>`).join('');
+  }
+
+  function renderAwards(awards) {
+    document.getElementById('awards-strip').innerHTML = (awards||[]).map((a,i) => {
+      const isDark = a.dark !== false && i === 0; // first is dark by default, unless explicitly false
+      const dark = a.dark;
+      const photoHtml = a.photo
+        ? `<div style="margin-bottom:18px;overflow:hidden;">
+             <img src="${esc(a.photo)}" alt="${esc(a.title)}" onerror="this.style.display='none'" style="width:100%;height:auto;display:block;${dark?'opacity:0.9':''}">
+           </div>` : '';
+      return `<div class="award-card fade ${dark?'':'light'}" style="${i>0?'transition-delay:'+(i*0.1)+'s':''}">
+        <div class="award-icon" style="${!dark?'color:var(--accent)':''}">${esc(a.icon)}</div>
+        ${photoHtml}
+        <h3 class="award-title">${esc(a.title)}</h3>
+        <p class="award-body">${esc(a.body)}</p>
+        <p class="award-year">${esc(a.year)}</p>
+      </div>`;
+    }).join('');
+  }
+
+  function renderContact(c) {
+    document.getElementById('contact-links').innerHTML = (c.links||[]).map(l => {
+      const dl = l.download ? ` download="${esc(l.download)}"` : '';
+      return `<a href="${esc(l.href)}" class="contact-link"${dl}${l.href.startsWith('http')?' target="_blank"':''}>
+        ${esc(l.label)} <span class="arrow">${esc(l.arrow)}</span>
+      </a>`;
+    }).join('');
+  }
+
+  function renderFooter(m) {
+    document.getElementById('site-footer').innerHTML =
+      `<span>${esc(m.footerLeft)}</span><span>${esc(m.footerMid)}</span><span>${esc(m.footerRight)}</span>`;
+  }
+
+  function initInteractions() {
+    const c = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => { c.style.left = e.clientX+'px'; c.style.top = e.clientY+'px'; });
+    document.querySelectorAll('a,button,.proj,.stat,.edu-card,.lead-card,.award-card').forEach(el => {
+      el.addEventListener('mouseenter', () => c.classList.add('big'));
+      el.addEventListener('mouseleave', () => c.classList.remove('big'));
+    });
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
+    const obs = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }),
+      { threshold: 0.08, rootMargin: '0px 0px -20px 0px' }
+    );
+    document.querySelectorAll('.fade').forEach(el => {
+      obs.observe(el);
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('in');
+    });
+  }
+})();
 </script>
 </body>
 </html>
