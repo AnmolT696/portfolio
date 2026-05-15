@@ -61,7 +61,7 @@
   },
   "stats": [
     {
-      "n": "2+",
+      "n": "2.5",
       "label": "Years UK Experience"
     },
     {
@@ -84,7 +84,7 @@
   "about": {
     "photo": "anmol-professional.jpg",
     "paragraphs": [
-      "I am a Graduate Structural Engineer (GIStructE) with over two years of UK consultancy experience at CCS Consulting, Manchester, where I have delivered structural designs from concept to construction across NHS healthcare, commercial, and residential sectors.",
+      "I am a Structural Engineer (GIStructE) with over two years of UK consultancy experience at CCS Consulting, Manchester, where I have delivered structural designs from concept to construction across healthcare, commercial, and residential sectors.",
       "My work spans concrete, steel, timber, and masonry design to BS-EN Eurocodes and British Standards, with specialist experience in RAAC survey and remediation across live NHS hospitals in North West England — one of the most technically and logistically demanding environments in the industry.",
       "Beyond engineering design, I develop Python automation tools to streamline workflows, and I actively contribute to the profession as Chair of the IStructE Northwest Young Members Group and as a CROSS UK Safety Report volunteer.",
       "I am actively progressing toward MIStructE chartership and am open to roles that combine structural engineering rigour with innovative, high-impact projects."
@@ -138,12 +138,12 @@
       "org": "CCS Consulting",
       "location": "Manchester, UK",
       "role": "Graduate Structural Engineer",
-      "desc": "Delivered structural design from RIBA Stage 1 to Stage 5 across NHS hospitals, industrial, and residential projects in Greater Manchester — working within live operational facilities throughout all construction phases. Produced designs in concrete, steel, timber, and masonry to Eurocodes. Conducted embodied carbon calculations, produced engineering reports, attended design team meetings and site visits. Developed Python automation tools to streamline engineering workflows and delivered internal CPD sessions.",
+      "desc": "Delivered structural design from RIBA Stage 1 to Stage 5 across healthcare, industrial, and residential projects in Greater Manchester — working within live operational facilities throughout all construction phases. Produced designs in concrete, steel, timber, and masonry to Eurocodes. Conducted embodied carbon calculations, produced engineering reports, attended design team meetings and site visits. Developed Python automation tools to streamline engineering workflows and delivered internal CPD sessions.",
       "projects": [
-        "Wythenshawe Hospital",
+        "Hospital Ward Refurbishment",
         "Manchester Royal Infirmary",
         "North Manchester General",
-        "Withington CDC",
+        "G+1 Construction",
         "TGH 12-14 Extension"
       ]
     },
